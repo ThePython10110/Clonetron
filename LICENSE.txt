@@ -1,3 +1,8 @@
+Clonetron: a port of Digtron for MineClone 2 by ThePython10110 (ThePython).
+Digtron is originally by FaceDeer.
+
+
+
 Modular Tunnel Boring Machine:
 The Almighty Digtron
 ====================
