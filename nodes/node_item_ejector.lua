@@ -28,7 +28,7 @@ local ejector_formspec = function(pos, meta)
 			"tooltip[nonpipe;" .. S("When checked, will eject items even if there's no pipe to accept it") .. "]"
 	end
 	return return_string .. "checkbox[0,0;autoeject;"..S("Automatic")..";"..meta:get_string("autoeject").."]" ..
-		"tooltip[autoeject;" .. S("When checked, will eject items automatically with every Digtron cycle.\nItem ejectors can always be operated manually by punching them.") .. "]"
+		"tooltip[autoeject;" .. S("When checked, will eject items automatically with every clonetron cycle.\nItem ejectors can always be operated manually by punching them.") .. "]"
 end
 
 local function eject_items(pos, node, player, eject_even_without_pipeworks, layout)
@@ -55,7 +55,7 @@ local function eject_items(pos, node, player, eject_even_without_pipeworks, layo
 	end	
 
 	if layout == nil then
-		layout = DigtronLayout.create(pos, player)
+		layout = clonetronLayout.create(pos, player)
 	end
 
 	-- Build a list of all the items that builder nodes want to use.
@@ -109,15 +109,15 @@ local function eject_items(pos, node, player, eject_even_without_pipeworks, layo
 	return false
 end
 
-minetest.register_node("digtron:inventory_ejector", {
-	description = S("Digtron Inventory Ejector"),
-	_doc_items_longdesc = digtron.doc.inventory_ejector_longdesc,
-    _doc_items_usagehelp = digtron.doc.inventory_ejector_usagehelp,
-	_digtron_formspec = ejector_formspec,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 9, tubedevice = 1},
-	tiles = {"digtron_plate.png", "digtron_plate.png", "digtron_plate.png", "digtron_plate.png", "digtron_plate.png^digtron_output.png", "digtron_plate.png^digtron_output_back.png"},
+minetest.register_node("clonetron:inventory_ejector", {
+	description = S("clonetron Inventory Ejector"),
+	_doc_items_longdesc = clonetron.doc.inventory_ejector_longdesc,
+    _doc_items_usagehelp = clonetron.doc.inventory_ejector_usagehelp,
+	_clonetron_formspec = ejector_formspec,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 9, tubedevice = 1},
+	tiles = {"clonetron_plate.png", "clonetron_plate.png", "clonetron_plate.png", "clonetron_plate.png", "clonetron_plate.png^clonetron_output.png", "clonetron_plate.png^clonetron_output_back.png"},
 	drawtype = "nodebox",
-	sounds = digtron.metal_sounds,
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = false,

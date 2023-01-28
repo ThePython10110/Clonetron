@@ -1,24 +1,24 @@
--- re-applies the "_digtron_formspec" property from all digtron node defs to the digtron node's metadata.
+-- re-applies the "_clonetron_formspec" property from all clonetron node defs to the clonetron node's metadata.
 minetest.register_lbm({
-	name = "digtron:generic_formspec_sanitizer",
-	nodenames = {"group:digtron"},
+	name = "clonetron:generic_formspec_sanitizer",
+	nodenames = {"group:clonetron"},
 	action = function(pos, node)
 		local node_def = minetest.registered_nodes[node.name]
-		if node_def._digtron_formspec then
+		if node_def._clonetron_formspec then
 			local meta = minetest.get_meta(pos)
-			meta:set_string("formspec", node_def._digtron_formspec(pos, meta))
+			meta:set_string("formspec", node_def._clonetron_formspec(pos, meta))
 		end
 	end
 })
 
 minetest.register_lbm({
-	name = "digtron:sand_digger_upgrade",
-	nodenames = {"digtron:sand_digger"},
+	name = "clonetron:sand_digger_upgrade",
+	nodenames = {"clonetron:sand_digger"},
 	action = function(pos, node)
 		local meta = minetest.get_meta(pos)
 		local offset = meta:get_string("offset")
 		local period = meta:get_string("period")
-		minetest.set_node(pos, {name = "digtron:soft_digger",
+		minetest.set_node(pos, {name = "clonetron:soft_digger",
 			param2 = node.param2})
 		meta:set_string("offset", offset)
 		meta:set_string("period", period)
@@ -26,8 +26,8 @@ minetest.register_lbm({
 })
 
 minetest.register_lbm({
-	name = "digtron:fuelstore_upgrade",
-	nodenames = {"digtron:fuelstore"},
+	name = "clonetron:fuelstore_upgrade",
+	nodenames = {"clonetron:fuelstore"},
 	action = function(pos, node)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
@@ -38,8 +38,8 @@ minetest.register_lbm({
 })
 
 minetest.register_lbm({
-	name = "digtron:autocontroller_lateral_upgrade",
-	nodenames = {"digtron:auto_controller"},
+	name = "clonetron:autocontroller_lateral_upgrade",
+	nodenames = {"clonetron:auto_controller"},
 	action = function(pos, node)
 		local meta = minetest.get_meta(pos)
 		local cycles = meta:get_int("offset")
@@ -50,8 +50,8 @@ minetest.register_lbm({
 })
 
 minetest.register_lbm({
-	name = "digtron:builder_extrusion_upgrade",
-	nodenames = {"digtron:builder"},
+	name = "clonetron:builder_extrusion_upgrade",
+	nodenames = {"clonetron:builder"},
 	action = function(pos, node)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("extrusion", 1)

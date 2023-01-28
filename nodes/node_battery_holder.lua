@@ -4,7 +4,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 
 -- Battery storage. Controller node draws electrical power from here.
--- Note that batttery boxes are digtron group 7.
+-- Note that batttery boxes are clonetron group 7.
 
 local battery_holder_formspec_string = "size[8,9.3]" ..
 	default.gui_bg ..
@@ -22,21 +22,21 @@ local battery_holder_formspec = function(pos, meta)
 	return battery_holder_formspec_string
 end
 
-local holder_groups = {cracky = 3,  oddly_breakable_by_hand = 3, digtron = 7, tubedevice = 1, tubedevice_receiver = 1}
+local holder_groups = {cracky = 3,  oddly_breakable_by_hand = 3, clonetron = 7, tubedevice = 1, tubedevice_receiver = 1}
 if not minetest.get_modpath("technic") then
 	-- if technic isn't installed there's no point in offering battery holders.
 	-- leave them registered, though, in case technic is being removed from an existing server.
 	holder_groups.not_in_creative_inventory = 1
 end
 	
-minetest.register_node("digtron:battery_holder", {
-	description = S("Digtron Battery Holder"),
-	_doc_items_longdesc = digtron.doc.battery_holder_longdesc,
-	_doc_items_usagehelp = digtron.doc.battery_holder_usagehelp,
-	_digtron_formspec = battery_holder_formspec,
+minetest.register_node("clonetron:battery_holder", {
+	description = S("clonetron Battery Holder"),
+	_doc_items_longdesc = clonetron.doc.battery_holder_longdesc,
+	_doc_items_usagehelp = clonetron.doc.battery_holder_usagehelp,
+	_clonetron_formspec = battery_holder_formspec,
 	groups = holder_groups,
-	drop = "digtron:battery_holder",
-	sounds = digtron.metal_sounds,
+	drop = "clonetron:battery_holder",
+	sounds = clonetron.metal_sounds,
 	paramtype2= "facedir",
 	drawtype = "nodebox",
 	node_box = {
@@ -48,12 +48,12 @@ minetest.register_node("digtron:battery_holder", {
 	paramtype = "light",
 	is_ground_content = false,
 	tiles = {
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_battery.png^digtron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_battery.png^clonetron_storage.png",
 		},
 
 	on_construct = function(pos)

@@ -2,24 +2,24 @@
 local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP.."/intllib.lua")
 
-minetest.register_node("digtron:axle", {
-	description = S("Digtron Rotation Axle"),
-	_doc_items_longdesc = digtron.doc.axle_longdesc,
-    _doc_items_usagehelp = digtron.doc.axle_usagehelp,
-	groups = {cracky = 3, oddly_breakable_by_hand=3, digtron = 1},
-	drop = "digtron:axle",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:axle", {
+	description = S("clonetron Rotation Axle"),
+	_doc_items_longdesc = clonetron.doc.axle_longdesc,
+    _doc_items_usagehelp = clonetron.doc.axle_usagehelp,
+	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 1},
+	drop = "clonetron:axle",
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^digtron_axel_top.png",
-		"digtron_plate.png^digtron_axel_top.png",
-		"digtron_plate.png^digtron_axel_side.png",
-		"digtron_plate.png^digtron_axel_side.png",
-		"digtron_plate.png^digtron_axel_side.png",
-		"digtron_plate.png^digtron_axel_side.png",
+		"clonetron_plate.png^clonetron_axel_top.png",
+		"clonetron_plate.png^clonetron_axel_top.png",
+		"clonetron_plate.png^clonetron_axel_side.png",
+		"clonetron_plate.png^clonetron_axel_side.png",
+		"clonetron_plate.png^clonetron_axel_side.png",
+		"clonetron_plate.png^clonetron_axel_side.png",
 	},
 	
 	drawtype = "nodebox",
@@ -45,8 +45,8 @@ minetest.register_node("digtron:axle", {
 		local now = minetest.get_gametime()
 		local last_time = tonumber(meta:get_string("last_time")) or 0
 		-- if meta:get_string("waiting") == "true" then
-		if last_time + digtron.config.cycle_time*2 > now then
-			-- Been too soon since last time the digtron rotated.
+		if last_time + clonetron.config.cycle_time*2 > now then
+			-- Been too soon since last time the clonetron rotated.
 
 		        -- added for clarity
 		        meta:set_string("infotext", S("repetition delay"))
@@ -54,7 +54,7 @@ minetest.register_node("digtron:axle", {
 			return
 		end
 
-		local image = DigtronLayout.create(pos, clicker)
+		local image = clonetronLayout.create(pos, clicker)
 		if image:rotate_layout_image(node.param2) == false then
 			-- This should be impossible, but if self-validation fails abort.
 			return
@@ -65,7 +65,7 @@ minetest.register_node("digtron:axle", {
 				meta = minetest.get_meta(pos)
 				meta:set_string("waiting", "true")
 				meta:set_string("infotext", nil)
-				-- minetest.get_node_timer(pos):start(digtron.config.cycle_time*2)
+				-- minetest.get_node_timer(pos):start(clonetron.config.cycle_time*2)
 				-- new delay code
 				meta:set_string("last_time",tostring(minetest.get_gametime()))
 			else
@@ -73,7 +73,7 @@ minetest.register_node("digtron:axle", {
 			end
 		else
 			minetest.sound_play("buzzer", {gain=1.0, pos=pos})
-			meta:set_string("infotext", S("Digtron is obstructed."))
+			meta:set_string("infotext", S("clonetron is obstructed."))
 		end
 	end,
 	

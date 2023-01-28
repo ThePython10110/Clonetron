@@ -4,7 +4,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 local size = 3/16
 
-local max_dig_cost = math.max(digtron.config.dig_cost_cracky, digtron.config.dig_cost_crumbly, digtron.config.dig_cost_choppy, digtron.config.dig_cost_default)
+local max_dig_cost = math.max(clonetron.config.dig_cost_cracky, clonetron.config.dig_cost_crumbly, clonetron.config.dig_cost_choppy, clonetron.config.dig_cost_default)
 
 local get_formspec_string = function(current_val, current_max)
 	return "size[4.5,0.6]" ..
@@ -17,24 +17,24 @@ local get_formspec_string = function(current_val, current_max)
 		"button[3.5,0;1,1;refresh;" .. S("Refresh\nMax") .."]"
 end
 
-local connector_groups = {cracky = 3, oddly_breakable_by_hand=3, digtron = 8, technic_machine=1, technic_hv=1}
+local connector_groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 8, technic_machine=1, technic_hv=1}
 if not minetest.get_modpath("technic") then
 	-- Technic is not installed, hide this away.
 	connector_groups.not_in_creative_inventory = 1
 end
 
-minetest.register_node("digtron:power_connector", {
-	description = S("Digtron HV Power Connector"),
-	_doc_items_longdesc = digtron.doc.power_connector_longdesc,
-    _doc_items_usagehelp = digtron.doc.power_connector_usagehelp,
+minetest.register_node("clonetron:power_connector", {
+	description = S("clonetron HV Power Connector"),
+	_doc_items_longdesc = clonetron.doc.power_connector_longdesc,
+    _doc_items_usagehelp = clonetron.doc.power_connector_usagehelp,
 	groups = connector_groups,
-	tiles = {"digtron_plate.png^digtron_power_connector_top.png^digtron_digger_yb_frame.png", "digtron_plate.png^digtron_digger_yb_frame.png",
-		"digtron_plate.png^digtron_digger_yb_frame.png^digtron_power_connector_side.png", "digtron_plate.png^digtron_digger_yb_frame.png^digtron_power_connector_side.png",
-		"digtron_plate.png^digtron_digger_yb_frame.png^digtron_power_connector_side.png", "digtron_plate.png^digtron_digger_yb_frame.png^digtron_power_connector_side.png",
+	tiles = {"clonetron_plate.png^clonetron_power_connector_top.png^clonetron_digger_yb_frame.png", "clonetron_plate.png^clonetron_digger_yb_frame.png",
+		"clonetron_plate.png^clonetron_digger_yb_frame.png^clonetron_power_connector_side.png", "clonetron_plate.png^clonetron_digger_yb_frame.png^clonetron_power_connector_side.png",
+		"clonetron_plate.png^clonetron_digger_yb_frame.png^clonetron_power_connector_side.png", "clonetron_plate.png^clonetron_digger_yb_frame.png^clonetron_power_connector_side.png",
 		},
 	connect_sides = {"bottom", "top", "left", "right", "front", "back"},
 	drawtype = "nodebox",
-	sounds = digtron.metal_sounds,
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = false,
@@ -63,15 +63,15 @@ minetest.register_node("digtron:power_connector", {
 		local meta = minetest.get_meta(pos)
 		local eu_input = meta:get_int("HV_EU_input")
 		local demand = meta:get_int("HV_EU_demand")
-		meta:set_string("infotext", S("Digtron Power @1/@2", eu_input, demand))
+		meta:set_string("infotext", S("clonetron Power @1/@2", eu_input, demand))
 	end,
 	
 	on_receive_fields = function(pos, formname, fields, sender)
-		local layout = DigtronLayout.create(pos, sender)
+		local layout = clonetronLayout.create(pos, sender)
 		local max_cost = 0
 		if layout.builders ~= nil then
 			for _, node_image in pairs(layout.builders) do
-				max_cost = max_cost + (digtron.config.build_cost * (node_image.meta.fields.extrusion or 1))
+				max_cost = max_cost + (clonetron.config.build_cost * (node_image.meta.fields.extrusion or 1))
 			end 
 		end
 		if layout.diggers ~= nil then
@@ -79,7 +79,7 @@ minetest.register_node("digtron:power_connector", {
 				max_cost = max_cost + max_dig_cost
 			end
 		end
-		local current_max = max_cost * digtron.config.power_ratio
+		local current_max = max_cost * clonetron.config.power_ratio
 	
 		local meta = minetest.get_meta(pos)
 		
@@ -96,5 +96,5 @@ minetest.register_node("digtron:power_connector", {
 })
 
 if minetest.get_modpath("technic") then
-	technic.register_machine("HV", "digtron:power_connector", technic.receiver)
+	technic.register_machine("HV", "clonetron:power_connector", technic.receiver)
 end

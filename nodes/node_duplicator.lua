@@ -7,7 +7,7 @@ local inventory_formspec_string =
 	default.gui_bg ..
 	default.gui_bg_img ..
 	default.gui_slots ..
-	"label[0,0;" .. S("Digtron components") .. "]" ..
+	"label[0,0;" .. S("clonetron components") .. "]" ..
 	"list[current_name;main;0,0.6;8,4;]" ..
 	"list[current_player;main;0,5.15;8,1;]" ..
 	"list[current_player;main;0,6.38;8,3;8]" ..
@@ -15,7 +15,7 @@ local inventory_formspec_string =
 	"listring[current_player;main]" ..
 	default.get_hotbar_bg(0,5.15)..
 	"button_exit[8,3.5;1,1;duplicate;"..S("Duplicate").."]" ..
-	"tooltip[duplicate;" .. S("Puts a copy of the adjacent Digtron into an empty crate\nlocated at the output side of the duplicator,\nusing components from the duplicator's inventory.") .. "]"
+	"tooltip[duplicate;" .. S("Puts a copy of the adjacent clonetron into an empty crate\nlocated at the output side of the duplicator,\nusing components from the duplicator's inventory.") .. "]"
 
 if minetest.get_modpath("doc") then
 	inventory_formspec_string = inventory_formspec_string ..
@@ -23,18 +23,18 @@ if minetest.get_modpath("doc") then
 		"tooltip[help;" .. S("Show documentation about this block") .. "]"
 end
 
-minetest.register_node("digtron:duplicator", {
-	description = S("Digtron Duplicator"),
-	_doc_items_longdesc = digtron.doc.duplicator_longdesc,
-    _doc_items_usagehelp = digtron.doc.duplicator_usagehelp,
+minetest.register_node("clonetron:duplicator", {
+	description = S("clonetron Duplicator"),
+	_doc_items_longdesc = clonetron.doc.duplicator_longdesc,
+    _doc_items_usagehelp = clonetron.doc.duplicator_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3},
-	sounds = digtron.metal_sounds,
-	tiles = {"digtron_plate.png^(digtron_axel_side.png^[transformR90)",
-		"digtron_plate.png^(digtron_axel_side.png^[transformR270)",
-		"digtron_plate.png^digtron_axel_side.png",
-		"digtron_plate.png^(digtron_axel_side.png^[transformR180)",
-		"digtron_plate.png^digtron_builder.png",
-		"digtron_plate.png",
+	sounds = clonetron.metal_sounds,
+	tiles = {"clonetron_plate.png^(clonetron_axel_side.png^[transformR90)",
+		"clonetron_plate.png^(clonetron_axel_side.png^[transformR270)",
+		"clonetron_plate.png^clonetron_axel_side.png",
+		"clonetron_plate.png^(clonetron_axel_side.png^[transformR180)",
+		"clonetron_plate.png^clonetron_builder.png",
+		"clonetron_plate.png",
 	},
 	paramtype = "light",
 	paramtype2= "facedir",
@@ -75,7 +75,7 @@ minetest.register_node("digtron:duplicator", {
 	end,
 
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		if minetest.get_item_group(stack:get_name(), "digtron") > 0 then
+		if minetest.get_item_group(stack:get_name(), "clonetron") > 0 then
 			return stack:get_count()
 		else
 			return 0
@@ -85,7 +85,7 @@ minetest.register_node("digtron:duplicator", {
 	on_receive_fields = function(pos, formname, fields, sender)
 		local player_name = sender:get_player_name()
 		if fields.help then
-			minetest.after(0.5, doc.show_entry, player_name, "nodes", "digtron:duplicator", true)
+			minetest.after(0.5, doc.show_entry, player_name, "nodes", "clonetron:duplicator", true)
 			return
 		end
 
@@ -97,15 +97,15 @@ minetest.register_node("digtron:duplicator", {
 			local target_node = minetest.get_node(target_pos)
 			local target_name
 
-			if target_node.name == "digtron:empty_crate" then
-				target_name = "digtron:loaded_crate"
-			elseif target_node.name == "digtron:empty_locked_crate" then
+			if target_node.name == "clonetron:empty_crate" then
+				target_name = "clonetron:loaded_crate"
+			elseif target_node.name == "clonetron:empty_locked_crate" then
 				if minetest.get_meta(target_pos):get_string("owner") ~= player_name then
 					minetest.sound_play("buzzer", {gain=0.5, pos=pos})
 					meta:set_string("infotext", S("The empty locked crate needs to be owned by you."))
 					return
 				end
-				target_name = "digtron:loaded_locked_crate"
+				target_name = "clonetron:loaded_locked_crate"
 			end
 			if not target_name then
 				minetest.sound_play("buzzer", {gain=0.5, pos=pos})
@@ -113,17 +113,17 @@ minetest.register_node("digtron:duplicator", {
 				return
 			end
 
-			local layout = DigtronLayout.create(pos, sender)
+			local layout = clonetronLayout.create(pos, sender)
 
 			if layout.contains_protected_node then
 				minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-				meta:set_string("infotext", S("Digtron can't be duplicated, it contains protected blocks"))
+				meta:set_string("infotext", S("clonetron can't be duplicated, it contains protected blocks"))
 				return
 			end
 
 			if #layout.all == 1 then
 				minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-				meta:set_string("infotext", S("No Digtron components adjacent to duplicate"))
+				meta:set_string("infotext", S("No clonetron components adjacent to duplicate"))
 				return
 			end
 
@@ -192,9 +192,9 @@ minetest.register_node("digtron:duplicator", {
 			local target_meta = minetest.get_meta(target_pos)
 			target_meta:set_string("crated_layout", layout_string)
 
-			local titlestring = S("Crated @1-block Digtron", tostring(#layout.all-1))
+			local titlestring = S("Crated @1-block clonetron", tostring(#layout.all-1))
 			target_meta:set_string("title", titlestring)
-			if target_name == "digtron:loaded_locked_crate" then
+			if target_name == "clonetron:loaded_locked_crate" then
 				target_meta:set_string("owner", player_name)
 				target_meta:set_string("infotext", titlestring .. "\n" .. S("Owned by @1", player_name))
 			else

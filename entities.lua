@@ -1,8 +1,8 @@
-minetest.register_entity("digtron:marker", {
+minetest.register_entity("clonetron:marker", {
 	initial_properties = {
 		visual = "cube",
 		visual_size = {x=1.05, y=1.05},
-		textures = {"digtron_marker_side.png","digtron_marker_side.png","digtron_marker.png","digtron_marker.png","digtron_marker_side.png","digtron_marker_side.png"},
+		textures = {"clonetron_marker_side.png","clonetron_marker_side.png","clonetron_marker.png","clonetron_marker.png","clonetron_marker_side.png","clonetron_marker_side.png"},
 		collisionbox = {-0.525, -0.525, -0.525, 0.525, 0.525, 0.525},
 		physical = false,
 	},
@@ -24,11 +24,11 @@ minetest.register_entity("digtron:marker", {
 	end,
 })
 
-minetest.register_entity("digtron:marker_vertical", {
+minetest.register_entity("clonetron:marker_vertical", {
 	initial_properties = {
 		visual = "cube",
 		visual_size = {x=1.05, y=1.05},
-		textures = {"digtron_marker.png","digtron_marker.png","digtron_marker_side.png^[transformR90","digtron_marker_side.png^[transformR90","digtron_marker_side.png^[transformR90","digtron_marker_side.png^[transformR90"},
+		textures = {"clonetron_marker.png","clonetron_marker.png","clonetron_marker_side.png^[transformR90","clonetron_marker_side.png^[transformR90","clonetron_marker_side.png^[transformR90","clonetron_marker_side.png^[transformR90"},
 		collisionbox = {-0.525, -0.525, -0.525, 0.525, 0.525, 0.525},
 		physical = false,
 	},
@@ -50,17 +50,17 @@ minetest.register_entity("digtron:marker_vertical", {
 	end,
 })
 
-minetest.register_entity("digtron:marker_crate_good", {
+minetest.register_entity("clonetron:marker_crate_good", {
 	initial_properties = {
 		visual = "cube",
 		visual_size = {x=1.05, y=1.05},
-		textures = {"digtron_crate.png", "digtron_crate.png", "digtron_crate.png", "digtron_crate.png", "digtron_crate.png", "digtron_crate.png"},
+		textures = {"clonetron_crate.png", "clonetron_crate.png", "clonetron_crate.png", "clonetron_crate.png", "clonetron_crate.png", "clonetron_crate.png"},
 		collisionbox = {-0.525, -0.525, -0.525, 0.525, 0.525, 0.525},
 		physical = false,
 	},
 
 	on_activate = function(self, staticdata)
-		minetest.after(digtron.config.marker_crate_good_duration, 
+		minetest.after(clonetron.config.marker_crate_good_duration, 
 			function(self) 
 				self.object:remove()
 			end,
@@ -76,17 +76,17 @@ minetest.register_entity("digtron:marker_crate_good", {
 	end,
 })
 
-minetest.register_entity("digtron:marker_crate_bad", {
+minetest.register_entity("clonetron:marker_crate_bad", {
 	initial_properties = {
 		visual = "cube",
 		visual_size = {x=1.05, y=1.05},
-		textures = {"digtron_no_entry.png", "digtron_no_entry.png", "digtron_no_entry.png", "digtron_no_entry.png", "digtron_no_entry.png", "digtron_no_entry.png"},
+		textures = {"clonetron_no_entry.png", "clonetron_no_entry.png", "clonetron_no_entry.png", "clonetron_no_entry.png", "clonetron_no_entry.png", "clonetron_no_entry.png"},
 		collisionbox = {-0.525, -0.525, -0.525, 0.525, 0.525, 0.525},
 		physical = false,
 	},
 
 	on_activate = function(self, staticdata)
-		minetest.after(digtron.config.marker_crate_bad_duration, 
+		minetest.after(clonetron.config.marker_crate_bad_duration, 
 			function(self) 
 				self.object:remove()
 			end,
@@ -102,7 +102,7 @@ minetest.register_entity("digtron:marker_crate_bad", {
 	end,
 })
 
-minetest.register_entity("digtron:builder_item", {
+minetest.register_entity("clonetron:builder_item", {
 
 	initial_properties = {
 		hp_max = 1,
@@ -120,17 +120,17 @@ minetest.register_entity("digtron:builder_item", {
 		if staticdata ~= nil and staticdata ~= "" then
 			local pos = self.object:get_pos()
 			local node = minetest.get_node(pos)
-			if minetest.get_item_group(node.name, "digtron") ~= 4 then
+			if minetest.get_item_group(node.name, "clonetron") ~= 4 then
 				-- We were reactivated without a builder node on our location, self-destruct
 				self.object:remove()
 				return
 			end
 			props.textures = {staticdata}
 			self.object:set_properties(props)
-		elseif digtron.create_builder_item ~= nil then
-			props.textures = {digtron.create_builder_item}
+		elseif clonetron.create_builder_item ~= nil then
+			props.textures = {clonetron.create_builder_item}
 			self.object:set_properties(props)
-			digtron.create_builder_item = nil
+			clonetron.create_builder_item = nil
 		else
 			self.object:remove()
 		end		

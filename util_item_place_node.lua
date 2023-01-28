@@ -19,7 +19,7 @@
 --https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 
 -- Mapping from facedir value to index in facedir_to_dir.
-digtron.facedir_to_dir_map = {
+clonetron.facedir_to_dir_map = {
 	[0]=1, 2, 3, 4,
 	5, 2, 6, 4,
 	6, 2, 5, 4,
@@ -32,16 +32,16 @@ local function has_prefix(str, prefix)
 	return str:sub(1, string.len(prefix)) == prefix
 end
 
-digtron.whitelisted_on_place = function (item_name)
-	for listed_item, value in pairs(digtron.builder_on_place_items) do
+clonetron.whitelisted_on_place = function (item_name)
+	for listed_item, value in pairs(clonetron.builder_on_place_items) do
 		if item_name == listed_item then return value end
 	end
 	
-	for prefix, value in pairs(digtron.builder_on_place_prefixes) do
+	for prefix, value in pairs(clonetron.builder_on_place_prefixes) do
 		if has_prefix(item_name, prefix) then return value end
 	end
 	
-	if minetest.get_item_group(item_name, "digtron_on_place") > 0 then return true end
+	if minetest.get_item_group(item_name, "clonetron_on_place") > 0 then return true end
 	
 	return false
 end
@@ -75,7 +75,7 @@ local function check_attached_node(p, n)
 	return true
 end
 
-digtron.item_place_node = function(itemstack, placer, place_to, param2)
+clonetron.item_place_node = function(itemstack, placer, place_to, param2)
 	local item_name = itemstack:get_name()
 	local def = itemstack:get_definition()
 	if (not def) or (param2 < 0) or (def.paramtype2 == "wallmounted" and param2 > 5) or (param2 > 23) then -- validate parameters
@@ -88,7 +88,7 @@ digtron.item_place_node = function(itemstack, placer, place_to, param2)
 	pointed_thing.under = {x=place_to.x, y=place_to.y - 1, z=place_to.z}
 	
 	-- Handle node-specific on_place calls as best we can.
-	if def.on_place and def.on_place ~= minetest.nodedef_default.on_place and digtron.whitelisted_on_place(item_name) then
+	if def.on_place and def.on_place ~= minetest.nodedef_default.on_place and clonetron.whitelisted_on_place(item_name) then
 		if def.paramtype2 == "facedir" then
 			pointed_thing.under = vector.add(place_to, minetest.facedir_to_dir(param2))
 		elseif def.paramtype2 == "wallmounted" then
@@ -96,13 +96,13 @@ digtron.item_place_node = function(itemstack, placer, place_to, param2)
 		end
 	
 		-- pass a copy of the item stack parameter because on_place might modify it directly and then we can't tell if we succeeded or not
-		-- though note that some mods do "creative_mode" handling within their own on_place methods, which makes it impossible for Digtron
-		-- to know what to do in that case - if you're in creative_mode Digtron will place such items but it will think it failed and not
-		-- deduct them from inventory no matter what Digtron's settings are. Unfortunate, but not very harmful and I have no workaround.
+		-- though note that some mods do "creative_mode" handling within their own on_place methods, which makes it impossible for clonetron
+		-- to know what to do in that case - if you're in creative_mode clonetron will place such items but it will think it failed and not
+		-- deduct them from inventory no matter what clonetron's settings are. Unfortunate, but not very harmful and I have no workaround.
 		local returnstack, success = def.on_place(ItemStack(itemstack), placer, pointed_thing)
 		if returnstack and returnstack:get_count() < itemstack:get_count() then success = true end -- some mods neglect to return a success condition
 		if success then
-			-- Override the param2 value to force it to be what Digtron wants
+			-- Override the param2 value to force it to be what clonetron wants
 			local placed_node = minetest.get_node(place_to)
 			placed_node.param2 = param2
 			minetest.set_node(place_to, placed_node)
@@ -121,11 +121,11 @@ digtron.item_place_node = function(itemstack, placer, place_to, param2)
 	
 	local oldnode = minetest.get_node_or_nil(place_to)
 
-	--this should never happen, digtron is testing for adjacent unloaded nodes before getting here.
+	--this should never happen, clonetron is testing for adjacent unloaded nodes before getting here.
 	if not oldnode then
 		minetest.log("info", placer:get_player_name() .. " tried to place"
 			.. " node in unloaded position " .. minetest.pos_to_string(place_to)
-			.. " using a digtron.")
+			.. " using a clonetron.")
 		return itemstack, false
 	end
 
@@ -159,8 +159,8 @@ digtron.item_place_node = function(itemstack, placer, place_to, param2)
 	end
 
 	-- Run script hook, using fake_player to take the blame.
-	-- Note that fake_player:update is called in the DigtronLayout class's "create" function,
-	-- which is called before Digtron does any of this building stuff, so it's not necessary
+	-- Note that fake_player:update is called in the clonetronLayout class's "create" function,
+	-- which is called before clonetron does any of this building stuff, so it's not necessary
 	-- to update it here.
 	local _, callback
 	for _, callback in ipairs(minetest.registered_on_placenodes) do
@@ -169,7 +169,7 @@ digtron.item_place_node = function(itemstack, placer, place_to, param2)
 		local newnode_copy = {name=newnode.name, param1=newnode.param1, param2=newnode.param2}
 		local oldnode_copy = {name=oldnode.name, param1=oldnode.param1, param2=oldnode.param2}
 		local pointed_thing_copy = copy_pointed_thing(pointed_thing)
-		if callback(place_to_copy, newnode_copy, digtron.fake_player, oldnode_copy, itemstack, pointed_thing_copy) then
+		if callback(place_to_copy, newnode_copy, clonetron.fake_player, oldnode_copy, itemstack, pointed_thing_copy) then
 			take_item = false
 		end
 	end

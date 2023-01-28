@@ -1,5 +1,5 @@
-DigtronLayout = {}
-DigtronLayout.__index = DigtronLayout
+clonetronLayout = {}
+clonetronLayout.__index = clonetronLayout
 
 local modpath_awards = minetest.get_modpath("awards")
 
@@ -12,18 +12,18 @@ local get_node_image = function(pos, node)
 	node_image.paramtype2 = node_def.paramtype2
 	local meta = minetest.get_meta(pos)
 	node_image.meta = meta:to_table()
-	if node_image.meta ~= nil and node_def._digtron_formspec ~= nil then
-		node_image.meta.fields.formspec = node_def._digtron_formspec(pos, meta) -- causes formspec to be automatically upgraded whenever Digtron moves
+	if node_image.meta ~= nil and node_def._clonetron_formspec ~= nil then
+		node_image.meta.fields.formspec = node_def._clonetron_formspec(pos, meta) -- causes formspec to be automatically upgraded whenever clonetron moves
 	end
 	
-	local group = minetest.get_item_group(node.name, "digtron")
+	local group = minetest.get_item_group(node.name, "clonetron")
 	-- group 1 has no special metadata
 	if group > 1 and group < 10 then
-		assert(node_image ~= nil and node_image.meta ~= nil, "[Digtron] Digtron failed to get a metadata table for a Digtron node in group "
+		assert(node_image ~= nil and node_image.meta ~= nil, "[clonetron] clonetron failed to get a metadata table for a clonetron node in group "
 			.. tostring(group) .. ". This error should not be possible. Please see https://github.com/minetest/minetest/issues/8067")
 		-- These groups have inventories
 		if group == 2 or (group > 3 and group < 8) then
-			assert(node_image.meta.inventory ~= nil, "[Digtron] Digtron failed to get a metadata inventory table for a Digtron node in group "
+			assert(node_image.meta.inventory ~= nil, "[clonetron] clonetron failed to get a metadata inventory table for a clonetron node in group "
 			.. tostring(group) .. ". This error should not be possible. Please see https://github.com/minetest/minetest/issues/8067")
 		end
 	end
@@ -48,19 +48,19 @@ end
 local to_test = Pointset.create()
 local tested = Pointset.create()
 
-function DigtronLayout.create(pos, player)
+function clonetronLayout.create(pos, player)
 	local self = {}
-	setmetatable(self, DigtronLayout)
+	setmetatable(self, clonetronLayout)
 
-	--initialize. We're assuming that the start position is a controller digtron, should be a safe assumption since only the controller node should call this
+	--initialize. We're assuming that the start position is a controller clonetron, should be a safe assumption since only the controller node should call this
 	self.traction = 0
 	self.all = {}
 	self.water_touching = false
 	self.lava_touching = false
 	self.protected = Pointset.create() -- if any nodes we look at are protected, make note of that. That way we don't need to keep re-testing protection state later.
-	self.old_pos_pointset = Pointset.create() -- For tracking original location of nodes if we do transformations on the Digtron
+	self.old_pos_pointset = Pointset.create() -- For tracking original location of nodes if we do transformations on the clonetron
 	self.nodes_dug = Pointset.create() -- For tracking adjacent nodes that will have been dug by digger heads in future
-	self.contains_protected_node = false -- used to indicate if at least one node in this digtron array is protected from the player.
+	self.contains_protected_node = false -- used to indicate if at least one node in this clonetron array is protected from the player.
 	self.controller = {x=pos.x, y=pos.y, z=pos.z} 	--Make a deep copy of the pos parameter just in case the calling code wants to play silly buggers with it
 
 	table.insert(self.all, get_node_image(pos, minetest.get_node(pos))) -- We never visit the source node, so insert it into the all table a priori. Revisit this design decision if a controller node is created that contains fuel or inventory or whatever.
@@ -85,7 +85,7 @@ function DigtronLayout.create(pos, player)
 		self.contains_protected_node = true
 	end
 	
-	-- Do a loop on to_test positions, adding new to_test positions as we find digtron nodes. This is a flood fill operation
+	-- Do a loop on to_test positions, adding new to_test positions as we find clonetron nodes. This is a flood fill operation
 	-- that follows node faces (no diagonals)
 	local testpos, _ = to_test:pop()
 	while testpos ~= nil do
@@ -93,7 +93,7 @@ function DigtronLayout.create(pos, player)
 		local node = minetest.get_node(testpos)
 
 		if node.name == "ignore" then
-			--digtron array is next to unloaded nodes, too dangerous to do anything. Abort.
+			--clonetron array is next to unloaded nodes, too dangerous to do anything. Abort.
 			self.ignore_touching = true
 		end
 		
@@ -101,7 +101,7 @@ function DigtronLayout.create(pos, player)
 			self.water_touching = true
 		elseif minetest.get_item_group(node.name, "lava") ~= 0 then
 			self.lava_touching = true
-			if digtron.config.lava_impassible then
+			if clonetron.config.lava_impassible then
 				self.protected:set(testpos.x, testpos.y, testpos.z, true)
 			end
 		end
@@ -112,9 +112,9 @@ function DigtronLayout.create(pos, player)
 			is_protected = true
 		end
 		
-		local group_number = minetest.get_item_group(node.name, "digtron")
+		local group_number = minetest.get_item_group(node.name, "clonetron")
 		if group_number > 0 then
-			--found one. Add it to the digtrons output
+			--found one. Add it to the clonetrons output
 			local node_image = get_node_image(testpos, node)
 			
 			table.insert(self.all, node_image)
@@ -160,7 +160,7 @@ function DigtronLayout.create(pos, player)
 			self.extents_max_z = math.max(self.extents_max_z, testpos.z)
 			self.extents_min_z = math.min(self.extents_min_z, testpos.z)
 			
-			--queue up potential new test points adjacent to this digtron node
+			--queue up potential new test points adjacent to this clonetron node
 			to_test:set_if_not_in(tested, testpos.x + 1, testpos.y, testpos.z, true)
 			to_test:set_if_not_in(tested, testpos.x - 1, testpos.y, testpos.z, true)
 			to_test:set_if_not_in(tested, testpos.x, testpos.y + 1, testpos.z, true)
@@ -168,7 +168,7 @@ function DigtronLayout.create(pos, player)
 			to_test:set_if_not_in(tested, testpos.x, testpos.y, testpos.z + 1, true)
 			to_test:set_if_not_in(tested, testpos.x, testpos.y, testpos.z - 1, true)
 		elseif not minetest.registered_nodes[node.name] or minetest.registered_nodes[node.name].buildable_to ~= true then
-			-- Tracks whether the digtron is hovering in mid-air. If any part of the digtron array touches something solid it gains traction.
+			-- Tracks whether the clonetron is hovering in mid-air. If any part of the clonetron array touches something solid it gains traction.
 			-- Allowing unknown nodes to provide traction, since they're not buildable_to either
 			self.traction = self.traction + 1
 		end
@@ -176,7 +176,7 @@ function DigtronLayout.create(pos, player)
 		testpos, _ = to_test:pop()
 	end
 	
-	digtron.award_layout(self, player) -- hook for achievements mod
+	clonetron.award_layout(self, player) -- hook for achievements mod
 	
 	to_test:clear()
 	tested:clear()
@@ -311,7 +311,7 @@ local top = {
 	{axis="y", dir=1},
 }
 -- Rotates 90 degrees widdershins around the axis defined by facedir (which in this case is pointing out the front of the node, so it needs to be converted into an upward-pointing axis internally)
-function DigtronLayout.rotate_layout_image(self, facedir)
+function clonetronLayout.rotate_layout_image(self, facedir)
 
 	if self == nil or self.all == nil or self.controller == nil or self.old_pos_pointset == nil then
 		-- this should not be possible, but if it is then abort.
@@ -337,7 +337,7 @@ end
 -----------------------------------------------------------------------------------------------
 -- Translation
 
-function DigtronLayout.move_layout_image(self, dir)
+function clonetronLayout.move_layout_image(self, dir)
 	self.extents_max_x = self.extents_max_x + dir.x
 	self.extents_min_x = self.extents_min_x + dir.x
 	self.extents_max_y = self.extents_max_y + dir.y
@@ -348,20 +348,20 @@ function DigtronLayout.move_layout_image(self, dir)
 	for k, node_image in pairs(self.all) do
 		self.old_pos_pointset:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, true)
 		node_image.pos = add_in_place(node_image.pos, dir)
-		self.nodes_dug:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, false) -- we've moved a digtron node into this space, mark it so that we don't dig it.
+		self.nodes_dug:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, false) -- we've moved a clonetron node into this space, mark it so that we don't dig it.
 	end
 end
 
 -----------------------------------------------------------------------------------------------
 -- Writing to world
 
-function DigtronLayout.can_write_layout_image(self)
+function clonetronLayout.can_write_layout_image(self)
 	for k, node_image in pairs(self.all) do
 		--check if we're moving into a protected node
 		if self.protected:get(node_image.pos.x, node_image.pos.y, node_image.pos.z) then
 			return false
 		end
-		-- check if the target node is buildable_to or is marked as part of the digtron that's moving
+		-- check if the target node is buildable_to or is marked as part of the clonetron that's moving
 		if not (
 			self.old_pos_pointset:get(node_image.pos.x, node_image.pos.y, node_image.pos.z)
 			or minetest.registered_nodes[minetest.get_node(node_image.pos).name].buildable_to
@@ -373,9 +373,9 @@ function DigtronLayout.can_write_layout_image(self)
 end
 
 -- We need to call on_dignode and on_placenode for dug and placed nodes,
--- but that triggers falling nodes (sand and whatnot) and destroys Digtrons
+-- but that triggers falling nodes (sand and whatnot) and destroys clonetrons
 -- if done during mid-write. So we need to defer the calls until after the
--- Digtron has been fully written.
+-- clonetron has been fully written.
 
 -- using local counters and shared tables like this allows us to avoid some needless allocating and garbage-collecting of tables
 local dug_nodes_count = 0
@@ -399,7 +399,7 @@ local node_callbacks = function(player)
 				-- Copy pos and node because callback can modify them
 				local pos_copy = {x=old_pos.x, y=old_pos.y, z=old_pos.z}
 				local oldnode_copy = {name=old_node.name, param1=old_node.param1, param2=old_node.param2}
-				callback(pos_copy, oldnode_copy, digtron.fake_player)
+				callback(pos_copy, oldnode_copy, clonetron.fake_player)
 			end
 	
 			local old_def = minetest.registered_nodes[old_node.name]
@@ -420,7 +420,7 @@ local node_callbacks = function(player)
 				local pos_copy = {x=new_pos.x, y=new_pos.y, z=new_pos.z}
 				local oldnode_copy = {name=old_node.name, param1=old_node.param1, param2=old_node.param2}
 				local newnode_copy = {name=new_node.name, param1=new_node.param1, param2=new_node.param2}
-				callback(pos_copy, newnode_copy, digtron.fake_player, oldnode_copy)
+				callback(pos_copy, newnode_copy, clonetron.fake_player, oldnode_copy)
 			end
 	
 			local new_def = minetest.registered_nodes[new_node.name]
@@ -452,15 +452,15 @@ local set_meta_with_retry = function(meta, meta_table)
 end
 
 local air_node = {name="air"}
-function DigtronLayout.write_layout_image(self, player)
-	-- destroy the old digtron
+function clonetronLayout.write_layout_image(self, player)
+	-- destroy the old clonetron
 	local oldpos, _ = self.old_pos_pointset:pop()
 	while oldpos ~= nil do
 		local old_node = minetest.get_node(oldpos)
 		local old_meta = minetest.get_meta(oldpos):to_table()
 
 		if not set_node_with_retry(oldpos, air_node) then
-			minetest.log("error", "DigtronLayout.write_layout_image failed to destroy old Digtron node, aborting write.")
+			minetest.log("error", "clonetronLayout.write_layout_image failed to destroy old clonetron node, aborting write.")
 			return false
 		end
 
@@ -478,7 +478,7 @@ function DigtronLayout.write_layout_image(self, player)
 		local old_node = minetest.get_node(new_pos)
 
 		if not (set_node_with_retry(new_pos, new_node) and set_meta_with_retry(minetest.get_meta(new_pos), node_image.meta)) then
-			minetest.log("error", "DigtronLayout.write_layout_image failed to write a Digtron node, aborting write.")
+			minetest.log("error", "clonetronLayout.write_layout_image failed to write a clonetron node, aborting write.")
 			return false
 		end
 		
@@ -489,8 +489,8 @@ function DigtronLayout.write_layout_image(self, player)
 	end
 	
 	-- fake_player will be passed to callbacks to prevent actual player from "taking the blame" for this action.
-	-- For example, the hunger mod shouldn't be making the player hungry when he moves Digtron.
-	digtron.fake_player:update(self.controller, player:get_player_name())
+	-- For example, the hunger mod shouldn't be making the player hungry when he moves clonetron.
+	clonetron.fake_player:update(self.controller, player:get_player_name())
 	-- note that the actual player is still passed to the per-node after_place_node and after_dig_node, should they exist.
 	node_callbacks(player)
 	dug_nodes_count = 0
@@ -502,7 +502,7 @@ end
 ---------------------------------------------------------------------------------------------
 -- Serialization. Currently only serializes the data that is needed by the crate, upgrade this function if more is needed
 
-function DigtronLayout.serialize(self)
+function clonetronLayout.serialize(self)
 	-- serialize can't handle ItemStack objects, convert them to strings.
 	for _, node_image in pairs(self.all) do
 		for k, inv in pairs(node_image.meta.inventory) do
@@ -515,9 +515,9 @@ function DigtronLayout.serialize(self)
 	return minetest.serialize({controller=self.controller, all=self.all})
 end
 
-function DigtronLayout.deserialize(layout_string)
+function clonetronLayout.deserialize(layout_string)
 	local self = {}
-	setmetatable(self, DigtronLayout)
+	setmetatable(self, clonetronLayout)
 	
 	if not layout_string or layout_string == "" then
 		return nil

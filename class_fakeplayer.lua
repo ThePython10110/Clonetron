@@ -9,8 +9,8 @@
 -- I'm trying to patch holes in bad mod programming, essentially. If a mod is so badly
 -- programmed that it crashes anyway there's not a lot else I can do on my end of things.
 
-DigtronFakePlayer = {}
-DigtronFakePlayer.__index = DigtronFakePlayer
+clonetronFakePlayer = {}
+clonetronFakePlayer.__index = clonetronFakePlayer
 
 local function return_value(x)
 	return (function() return x end)
@@ -32,16 +32,16 @@ local function return_empty_table()
 	return {}
 end
 
-function DigtronFakePlayer.update(self, pos, player_name)
-	self.is_fake_player = ":digtron " .. player_name
+function clonetronFakePlayer.update(self, pos, player_name)
+	self.is_fake_player = ":clonetron " .. player_name
 	self.get_pos = return_value(pos)
 end
 
-function DigtronFakePlayer.create(pos, player_name)
+function clonetronFakePlayer.create(pos, player_name)
 	local self = {}
-	setmetatable(self, DigtronFakePlayer)
+	setmetatable(self, clonetronFakePlayer)
 	
-	self.is_fake_player = ":digtron " .. player_name
+	self.is_fake_player = ":clonetron " .. player_name
 
 	-- ObjectRef	
 	self.get_pos = return_value(pos)

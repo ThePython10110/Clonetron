@@ -2,90 +2,90 @@
 local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP.."/intllib.lua")
 
-minetest.register_craftitem("digtron:digtron_core", {
-	description = S("Digtron Core"),
-	inventory_image = "digtron_core.png",
-	_doc_items_longdesc = digtron.doc.core_longdesc,
-    _doc_items_usagehelp = digtron.doc.core_usagehelp,
+minetest.register_craftitem("clonetron:clonetron_core", {
+	description = S("clonetron Core"),
+	inventory_image = "clonetron_core.png",
+	_doc_items_longdesc = clonetron.doc.core_longdesc,
+    _doc_items_usagehelp = clonetron.doc.core_usagehelp,
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"","default:steel_ingot",""},
-			{"default:steel_ingot","default:mese_crystal_fragment","default:steel_ingot"},
-			{"","default:steel_ingot",""}
+			{"","mcl_core:iron_ingot",""},
+			{"mcl_core:iron_ingot","default:mese_crystal_fragment","mcl_core:iron_ingot"},
+			{"","mcl_core:iron_ingot",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:controller",
+	output = "clonetron:controller",
 	recipe = {
 			{"","default:mese_crystal",""},
-			{"default:mese_crystal","digtron:digtron_core","default:mese_crystal"},
+			{"default:mese_crystal","clonetron:clonetron_core","default:mese_crystal"},
 			{"","default:mese_crystal",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:auto_controller",
+	output = "clonetron:auto_controller",
 	recipe = {
 			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"},
-			{"default:mese_crystal","digtron:digtron_core","default:mese_crystal"},
+			{"default:mese_crystal","clonetron:clonetron_core","default:mese_crystal"},
 			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:builder",
+	output = "clonetron:builder",
 	recipe = {
 			{"","default:mese_crystal_fragment",""},
-			{"default:mese_crystal_fragment","digtron:digtron_core","default:mese_crystal_fragment"},
+			{"default:mese_crystal_fragment","clonetron:clonetron_core","default:mese_crystal_fragment"},
 			{"","default:mese_crystal_fragment",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:light",
+	output = "clonetron:light",
 	recipe = {
 			{"","default:torch",""},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digger",
+	output = "clonetron:digger",
 	recipe = {
 			{"","default:diamond",""},
-			{"default:diamond","digtron:digtron_core","default:diamond"},
+			{"default:diamond","clonetron:clonetron_core","default:diamond"},
 			{"","default:diamond",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:soft_digger",
+	output = "clonetron:soft_digger",
 	recipe = {
-			{"","default:steel_ingot",""},
-			{"default:steel_ingot","digtron:digtron_core","default:steel_ingot"},
-			{"","default:steel_ingot",""}
+			{"","mcl_core:iron_ingot",""},
+			{"mcl_core:iron_ingot","clonetron:clonetron_core","mcl_core:iron_ingot"},
+			{"","mcl_core:iron_ingot",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:inventory",
+	output = "clonetron:inventory",
 	recipe = {
 			{"","default:chest",""},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:fuelstore",
+	output = "clonetron:fuelstore",
 	recipe = {
 			{"","default:furnace",""},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
 })
@@ -93,242 +93,242 @@ minetest.register_craft({
 if minetest.get_modpath("technic") then
 	-- no need for this recipe if technic is not installed, avoid cluttering crafting guides
 	minetest.register_craft({
-		output = "digtron:battery_holder",
+		output = "clonetron:battery_holder",
 		recipe = {
 				{"","default:chest",""},
-				{"","digtron:digtron_core",""},
-				{"","default:steel_ingot",""}
+				{"","clonetron:clonetron_core",""},
+				{"","mcl_core:iron_ingot",""}
 				}
 	})
 	
 	minetest.register_craft({
-		output = "digtron:power_connector",
+		output = "clonetron:power_connector",
 		recipe = {
 				{"","technic:hv_cable",""},
-				{"technic:hv_cable","digtron:digtron_core","technic:hv_cable"},
+				{"technic:hv_cable","clonetron:clonetron_core","technic:hv_cable"},
 				{"","technic:hv_cable",""}
 				}
 	})
 end
 
 minetest.register_craft({
-	output = "digtron:combined_storage",
+	output = "clonetron:combined_storage",
 	recipe = {
 			{"","default:furnace",""},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"","default:chest",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:pusher",
+	output = "clonetron:pusher",
 	recipe = {
 			{"","default:coal_lump",""},
-			{"default:coal_lump","digtron:digtron_core","default:coal_lump"},
+			{"default:coal_lump","clonetron:clonetron_core","default:coal_lump"},
 			{"","default:coal_lump",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:axle",
+	output = "clonetron:axle",
 	recipe = {
 			{"default:coal_lump","default:coal_lump","default:coal_lump"},
-			{"default:coal_lump","digtron:digtron_core","default:coal_lump"},
+			{"default:coal_lump","clonetron:clonetron_core","default:coal_lump"},
 			{"default:coal_lump","default:coal_lump","default:coal_lump"}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:empty_crate",
+	output = "clonetron:empty_crate",
 	recipe = {
 			{"","default:chest",""},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"","default:mese_crystal",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:empty_locked_crate",
+	output = "clonetron:empty_locked_crate",
 	type = "shapeless",
-	recipe = {"default:steel_ingot", "digtron:empty_crate"},
+	recipe = {"mcl_core:iron_ingot", "clonetron:empty_crate"},
 })
 
 minetest.register_craft({
-	output = "digtron:empty_crate",
+	output = "clonetron:empty_crate",
 	type = "shapeless",
-	recipe = {"digtron:empty_locked_crate"},
+	recipe = {"clonetron:empty_locked_crate"},
 })
 
 minetest.register_craft({
-	output = "digtron:duplicator",
+	output = "clonetron:duplicator",
 	recipe = {
 			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"},
-			{"default:chest","digtron:digtron_core","default:chest"},
+			{"default:chest","clonetron:clonetron_core","default:chest"},
 			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:inventory_ejector",
+	output = "clonetron:inventory_ejector",
 	recipe = {
-			{"default:steel_ingot","default:steel_ingot","default:steel_ingot"},
-			{"","digtron:digtron_core",""},
-			{"","default:steel_ingot",""}
+			{"mcl_core:iron_ingot","mcl_core:iron_ingot","mcl_core:iron_ingot"},
+			{"","clonetron:clonetron_core",""},
+			{"","mcl_core:iron_ingot",""}
 			}
 })
 
 -- Structural
 
 minetest.register_craft({
-	output = "digtron:structure",
+	output = "clonetron:structure",
 	recipe = {
 			{"group:stick","","group:stick"},
-			{"","digtron:digtron_core",""},
+			{"","clonetron:clonetron_core",""},
 			{"group:stick","","group:stick"}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:panel",
+	output = "clonetron:panel",
 	recipe = {
 			{"","",""},
-			{"","digtron:digtron_core",""},
-			{"","default:steel_ingot",""}
+			{"","clonetron:clonetron_core",""},
+			{"","mcl_core:iron_ingot",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:edge_panel",
+	output = "clonetron:edge_panel",
 	recipe = {
 			{"","",""},
-			{"","digtron:digtron_core","default:steel_ingot"},
-			{"","default:steel_ingot",""}
+			{"","clonetron:clonetron_core","mcl_core:iron_ingot"},
+			{"","mcl_core:iron_ingot",""}
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:corner_panel",
+	output = "clonetron:corner_panel",
 	recipe = {
 			{"","",""},
-			{"","digtron:digtron_core","default:steel_ingot"},
-			{"","default:steel_ingot","default:steel_ingot"}
+			{"","clonetron:clonetron_core","mcl_core:iron_ingot"},
+			{"","mcl_core:iron_ingot","mcl_core:iron_ingot"}
 			}
 })
 
 -- For swapping digger types
 minetest.register_craft({
-	output = "digtron:digger",
+	output = "clonetron:digger",
 	recipe = {
-			{"digtron:intermittent_digger"},
+			{"clonetron:intermittent_digger"},
 			}
 })
 minetest.register_craft({
-	output = "digtron:intermittent_digger",
+	output = "clonetron:intermittent_digger",
 	recipe = {
-			{"digtron:digger"},
+			{"clonetron:digger"},
 			}
 })
 minetest.register_craft({
-	output = "digtron:soft_digger",
+	output = "clonetron:soft_digger",
 	recipe = {
-			{"digtron:intermittent_soft_digger"},
+			{"clonetron:intermittent_soft_digger"},
 			}
 })
 minetest.register_craft({
-	output = "digtron:intermittent_soft_digger",
+	output = "clonetron:intermittent_soft_digger",
 	recipe = {
-			{"digtron:soft_digger"},
+			{"clonetron:soft_digger"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:dual_soft_digger",
+	output = "clonetron:dual_soft_digger",
 	type = "shapeless",
-	recipe = {"digtron:soft_digger", "digtron:soft_digger"},
+	recipe = {"clonetron:soft_digger", "clonetron:soft_digger"},
 })
 minetest.register_craft({
-	output = "digtron:dual_digger",
+	output = "clonetron:dual_digger",
 	type = "shapeless",
-	recipe = {"digtron:digger", "digtron:digger"},
+	recipe = {"clonetron:digger", "clonetron:digger"},
 })
 minetest.register_craft({
-	output = "digtron:soft_digger 2",
+	output = "clonetron:soft_digger 2",
 	recipe = {
-			{"digtron:dual_soft_digger"},
+			{"clonetron:dual_soft_digger"},
 			}
 })
 minetest.register_craft({
-	output = "digtron:digger 2",
+	output = "clonetron:digger 2",
 	recipe = {
-			{"digtron:dual_digger"},
-			}
-})
-
--- And some recycling reactions to get digtron cores out of the "cheap" parts:
-
-minetest.register_craft({
-	output = "digtron:digtron_core",
-	recipe = {
-			{"digtron:structure"},
-			}
-})
-minetest.register_craft({
-	output = "digtron:digtron_core",
-	recipe = {
-			{"digtron:panel"},
-			}
-})
-minetest.register_craft({
-	output = "digtron:digtron_core",
-	recipe = {
-			{"digtron:corner_panel"},
-			}
-})
-minetest.register_craft({
-	output = "digtron:digtron_core",
-	recipe = {
-			{"digtron:edge_panel"},
+			{"clonetron:dual_digger"},
 			}
 })
 
+-- And some recycling reactions to get clonetron cores out of the "cheap" parts:
+
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:inventory"},
+			{"clonetron:structure"},
+			}
+})
+minetest.register_craft({
+	output = "clonetron:clonetron_core",
+	recipe = {
+			{"clonetron:panel"},
+			}
+})
+minetest.register_craft({
+	output = "clonetron:clonetron_core",
+	recipe = {
+			{"clonetron:corner_panel"},
+			}
+})
+minetest.register_craft({
+	output = "clonetron:clonetron_core",
+	recipe = {
+			{"clonetron:edge_panel"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:fuelstore"},
+			{"clonetron:inventory"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:combined_storage"},
+			{"clonetron:fuelstore"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:light"},
+			{"clonetron:combined_storage"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:pusher"},
+			{"clonetron:light"},
 			}
 })
 
 minetest.register_craft({
-	output = "digtron:digtron_core",
+	output = "clonetron:clonetron_core",
 	recipe = {
-			{"digtron:axle"},
+			{"clonetron:pusher"},
+			}
+})
+
+minetest.register_craft({
+	output = "clonetron:clonetron_core",
+	recipe = {
+			{"clonetron:axle"},
 			}
 })

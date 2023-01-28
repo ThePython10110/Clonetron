@@ -22,15 +22,15 @@ local inventory_formspec = function(pos, meta)
 end
 
 -- Storage buffer. Builder nodes draw from this inventory and digger nodes deposit into it.
--- Note that inventories are digtron group 2.
-minetest.register_node("digtron:inventory", {
-	description = S("Digtron Inventory Storage"),
-	_doc_items_longdesc = digtron.doc.inventory_longdesc,
-	_doc_items_usagehelp = digtron.doc.inventory_usagehelp,
-	_digtron_formspec = inventory_formspec,
-	groups = {cracky = 3, oddly_breakable_by_hand=3, digtron = 2, tubedevice = 1, tubedevice_receiver = 1},
-	drop = "digtron:inventory",
-	sounds = digtron.metal_sounds,
+-- Note that inventories are clonetron group 2.
+minetest.register_node("clonetron:inventory", {
+	description = S("clonetron Inventory Storage"),
+	_doc_items_longdesc = clonetron.doc.inventory_longdesc,
+	_doc_items_usagehelp = clonetron.doc.inventory_usagehelp,
+	_clonetron_formspec = inventory_formspec,
+	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 2, tubedevice = 1, tubedevice_receiver = 1},
+	drop = "clonetron:inventory",
+	sounds = clonetron.metal_sounds,
 	paramtype2= "facedir",
 	drawtype = "nodebox",
 	node_box = {
@@ -42,12 +42,12 @@ minetest.register_node("digtron:inventory", {
 	paramtype = "light",
 	is_ground_content = false,
 	tiles = {
-		"digtron_plate.png^digtron_crossbrace.png",
-		"digtron_plate.png^digtron_crossbrace.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png",
+		"clonetron_plate.png^clonetron_crossbrace.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_storage.png",
 		},
 
 	on_construct = function(pos)
@@ -103,15 +103,15 @@ local fuelstore_formspec = function(pos, meta)
 end
 	
 -- Fuel storage. Controller node draws fuel from here.
--- Note that fuel stores are digtron group 5.
-minetest.register_node("digtron:fuelstore", {
-	description = S("Digtron Fuel Storage"),
-	_doc_items_longdesc = digtron.doc.fuelstore_longdesc,
-	_doc_items_usagehelp = digtron.doc.fuelstore_usagehelp,
-	_digtron_formspec = fuelstore_formspec,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 5, tubedevice = 1, tubedevice_receiver = 1},
-	drop = "digtron:fuelstore",
-	sounds = digtron.metal_sounds,
+-- Note that fuel stores are clonetron group 5.
+minetest.register_node("clonetron:fuelstore", {
+	description = S("clonetron Fuel Storage"),
+	_doc_items_longdesc = clonetron.doc.fuelstore_longdesc,
+	_doc_items_usagehelp = clonetron.doc.fuelstore_usagehelp,
+	_clonetron_formspec = fuelstore_formspec,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 5, tubedevice = 1, tubedevice_receiver = 1},
+	drop = "clonetron:fuelstore",
+	sounds = clonetron.metal_sounds,
 	paramtype2= "facedir",
 	drawtype = "nodebox",
 	node_box = {
@@ -123,12 +123,12 @@ minetest.register_node("digtron:fuelstore", {
 	paramtype = "light",
 	is_ground_content = false,
 	tiles = {
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable.png^digtron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable.png^clonetron_storage.png",
 		},
 
 	on_construct = function(pos)
@@ -204,14 +204,14 @@ local combined_storage_formspec = function(pos, meta)
 end
 
 -- Combined storage. Group 6 has both an inventory and a fuel store
-minetest.register_node("digtron:combined_storage", {
-	description = S("Digtron Combined Storage"),
-	_doc_items_longdesc = digtron.doc.combined_storage_longdesc,
-    _doc_items_usagehelp = digtron.doc.combined_storage_usagehelp,
-	_digtron_formspec = combined_storage_formspec,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 6, tubedevice = 1, tubedevice_receiver = 1},
-	drop = "digtron:combined_storage",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:combined_storage", {
+	description = S("clonetron Combined Storage"),
+	_doc_items_longdesc = clonetron.doc.combined_storage_longdesc,
+    _doc_items_usagehelp = clonetron.doc.combined_storage_usagehelp,
+	_clonetron_formspec = combined_storage_formspec,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 6, tubedevice = 1, tubedevice_receiver = 1},
+	drop = "clonetron:combined_storage",
+	sounds = clonetron.metal_sounds,
 	paramtype2= "facedir",
 	drawtype = "nodebox",
 	node_box = {
@@ -223,11 +223,11 @@ minetest.register_node("digtron:combined_storage", {
 	paramtype = "light",
 	is_ground_content = false,
 	tiles = {
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^[transformR180^digtron_flammable_small.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^[transformR180^digtron_flammable_small.png",		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^digtron_storage.png",
-		"digtron_plate.png^digtron_crossbrace.png^digtron_flammable_small.png^digtron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^[transformR180^clonetron_flammable_small.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^[transformR180^clonetron_flammable_small.png",		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^clonetron_storage.png",
+		"clonetron_plate.png^clonetron_crossbrace.png^clonetron_flammable_small.png^clonetron_storage.png",
 		},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -299,16 +299,16 @@ minetest.register_node("digtron:combined_storage", {
 -- Hopper compatibility
 if minetest.get_modpath("hopper") and hopper ~= nil and hopper.add_container ~= nil then
 	hopper:add_container({
-		{"top", "digtron:inventory", "main"},
-		{"bottom", "digtron:inventory", "main"},
-		{"side", "digtron:inventory", "main"},
+		{"top", "clonetron:inventory", "main"},
+		{"bottom", "clonetron:inventory", "main"},
+		{"side", "clonetron:inventory", "main"},
 
-		{"top", "digtron:fuelstore", "fuel"},
-		{"bottom", "digtron:fuelstore", "fuel"},
-		{"side", "digtron:fuelstore", "fuel"},
+		{"top", "clonetron:fuelstore", "fuel"},
+		{"bottom", "clonetron:fuelstore", "fuel"},
+		{"side", "clonetron:fuelstore", "fuel"},
 	
-		{"top", "digtron:combined_storage", "main"},
-		{"bottom", "digtron:combined_storage", "main"},
-		{"side", "digtron:combined_storage", "fuel"},
+		{"top", "clonetron:combined_storage", "main"},
+		{"bottom", "clonetron:combined_storage", "main"},
+		{"side", "clonetron:combined_storage", "fuel"},
 	})
 end

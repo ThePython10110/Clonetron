@@ -4,7 +4,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 -- Note: diggers go in group 3 and have an execute_dig method.
 
-local damage_hp = digtron.config.damage_hp
+local damage_hp = clonetron.config.damage_hp
 local damage_hp_half = damage_hp/2
 
 local digger_nodebox = {
@@ -62,7 +62,7 @@ end
 
 local intermittent_on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 	local item_def = itemstack:get_definition()
-	if item_def.type == "node" and minetest.get_item_group(itemstack:get_name(), "digtron") > 0 then
+	if item_def.type == "node" and minetest.get_item_group(itemstack:get_name(), "clonetron") > 0 then
 		local returnstack, success = minetest.item_place_node(itemstack, clicker, pointed_thing)
 		if success and item_def.sounds and item_def.sounds.place and item_def.sounds.place.name then
 			minetest.sound_play(item_def.sounds.place, {pos = pos})
@@ -71,14 +71,14 @@ local intermittent_on_rightclick = function(pos, node, clicker, itemstack, point
 	end
 	local meta = minetest.get_meta(pos)	
 	minetest.show_formspec(clicker:get_player_name(),
-		"digtron:intermittent_digger"..minetest.pos_to_string(pos),
+		"clonetron:intermittent_digger"..minetest.pos_to_string(pos),
 		intermittent_formspec(pos, meta))
 end
 
 local use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "opaque" or nil
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname:sub(1, 27) == "digtron:intermittent_digger" then
+	if formname:sub(1, 27) == "clonetron:intermittent_digger" then
 		local pos = minetest.string_to_pos(formname:sub(28, -1))
 	    local meta = minetest.get_meta(pos)
 		local period = tonumber(fields.period)
@@ -94,7 +94,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			minetest.after(0.5, doc.show_entry, player:get_player_name(), "nodes", node_name, true)
 		end
 		if fields.set then
-			digtron.show_offset_markers(pos, offset, period)
+			clonetron.show_offset_markers(pos, offset, period)
 		end
 		return true
 	end
@@ -102,13 +102,13 @@ end)
 
 
 -- Digs out nodes that are "in front" of the digger head.
-minetest.register_node("digtron:digger", {
-	description = S("Digtron Digger Head"),
-	_doc_items_longdesc = digtron.doc.digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.digger_usagehelp,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:digger", {
+	description = S("clonetron Digger Head"),
+	_doc_items_longdesc = clonetron.doc.digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.digger_usagehelp,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:digger",
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,	
@@ -120,12 +120,12 @@ minetest.register_node("digtron:digger", {
 	
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90",
-		"digtron_plate.png^[transformR270",
-		"digtron_plate.png",
-		"digtron_plate.png^[transformR180",
+		"clonetron_plate.png^[transformR90",
+		"clonetron_plate.png^[transformR270",
+		"clonetron_plate.png",
+		"clonetron_plate.png^[transformR180",
 		{
-			name = "digtron_digger_yb.png",
+			name = "clonetron_digger_yb.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -133,36 +133,36 @@ minetest.register_node("digtron:digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_motor.png",
+		"clonetron_plate.png^clonetron_motor.png",
 	},
 
 	-- returns fuel_cost, item_produced
 	execute_dig = function(pos, protected_nodes, nodes_dug, controlling_coordinate, lateral_dig, player)
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
 
 		if protected_nodes:get(digpos.x, digpos.y, digpos.z) then
 			return 0
 		end
 		
-		return digtron.mark_diggable(digpos, nodes_dug, player)
+		return clonetron.mark_diggable(digpos, nodes_dug, player)
 	end,
 	
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local facing = minetest.get_node(pos).param2
-		digtron.damage_creatures(player, pos, digtron.find_new_pos(pos, facing), damage_hp, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos(pos, facing), damage_hp, items_dropped)
 	end,
 })
 
 -- Digs out nodes that are "in front" of the digger head.
-minetest.register_node("digtron:intermittent_digger", {
-	description = S("Digtron Intermittent Digger Head"),
-	_doc_items_longdesc = digtron.doc.intermittent_digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.intermittent_digger_usagehelp,
-	_digtron_formspec = intermittent_formspec,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:intermittent_digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:intermittent_digger", {
+	description = S("clonetron Intermittent Digger Head"),
+	_doc_items_longdesc = clonetron.doc.intermittent_digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.intermittent_digger_usagehelp,
+	_clonetron_formspec = intermittent_formspec,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:intermittent_digger",
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,	
@@ -174,12 +174,12 @@ minetest.register_node("digtron:intermittent_digger", {
 	
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90",
-		"digtron_plate.png^[transformR270",
-		"digtron_plate.png",
-		"digtron_plate.png^[transformR180",
+		"clonetron_plate.png^[transformR90",
+		"clonetron_plate.png^[transformR270",
+		"clonetron_plate.png",
+		"clonetron_plate.png^[transformR180",
 		{
-			name = "digtron_digger_yb.png",
+			name = "clonetron_digger_yb.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -187,7 +187,7 @@ minetest.register_node("digtron:intermittent_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_intermittent.png^digtron_motor.png",
+		"clonetron_plate.png^clonetron_intermittent.png^clonetron_motor.png",
 	},
 	
 	on_construct = intermittent_on_construct,
@@ -201,7 +201,7 @@ minetest.register_node("digtron:intermittent_digger", {
 		end
 
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
 
 		if protected_nodes:get(digpos.x, digpos.y, digpos.z) then
 			return 0
@@ -212,27 +212,27 @@ minetest.register_node("digtron:intermittent_digger", {
 			return 0
 		end
 		
-		return digtron.mark_diggable(digpos, nodes_dug, player)
+		return clonetron.mark_diggable(digpos, nodes_dug, player)
 	end,
 	
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local facing = minetest.get_node(pos).param2
-		local targetpos = digtron.find_new_pos(pos, facing)
+		local targetpos = clonetron.find_new_pos(pos, facing)
 		local meta = minetest.get_meta(pos)
 		if (targetpos[controlling_coordinate] + meta:get_int("offset")) % meta:get_int("period") == 0 then
-			digtron.damage_creatures(player, pos, targetpos, damage_hp, items_dropped)
+			clonetron.damage_creatures(player, pos, targetpos, damage_hp, items_dropped)
 		end
 	end
 })
 
 -- A special-purpose digger to deal with stuff like sand and gravel in the ceiling. It always digs (no periodicity or offset), but it only digs falling_block nodes
-minetest.register_node("digtron:soft_digger", {
-	description = S("Digtron Soft Material Digger Head"),
-	_doc_items_longdesc = digtron.doc.soft_digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.soft_digger_usagehelp,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:soft_digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:soft_digger", {
+	description = S("clonetron Soft Material Digger Head"),
+	_doc_items_longdesc = clonetron.doc.soft_digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.soft_digger_usagehelp,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:soft_digger",
+	sounds = clonetron.metal_sounds,
 	use_texture_alpha = use_texture_alpha,
 	paramtype = "light",
 	paramtype2= "facedir",
@@ -245,12 +245,12 @@ minetest.register_node("digtron:soft_digger", {
 	
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[transformR270^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[transformR180^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR90^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR270^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR180^[colorize:" .. clonetron.soft_digger_colorize,
 		{
-			name = "digtron_digger_yb.png^[colorize:" .. digtron.soft_digger_colorize,
+			name = "clonetron_digger_yb.png^[colorize:" .. clonetron.soft_digger_colorize,
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -258,19 +258,19 @@ minetest.register_node("digtron:soft_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_motor.png^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^clonetron_motor.png^[colorize:" .. clonetron.soft_digger_colorize,
 	},
 	
 	execute_dig = function(pos, protected_nodes, nodes_dug, controlling_coordinate, lateral_dig, player)
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
 		
 		if protected_nodes:get(digpos.x, digpos.y, digpos.z) then
 			return 0
 		end
 			
-		if digtron.is_soft_material(digpos) then
-			return digtron.mark_diggable(digpos, nodes_dug, player)
+		if clonetron.is_soft_material(digpos) then
+			return clonetron.mark_diggable(digpos, nodes_dug, player)
 		end
 		
 		return 0
@@ -278,18 +278,18 @@ minetest.register_node("digtron:soft_digger", {
 
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local facing = minetest.get_node(pos).param2
-		digtron.damage_creatures(player, pos, digtron.find_new_pos(pos, facing), damage_hp_half, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos(pos, facing), damage_hp_half, items_dropped)
 	end,
 })
 
-minetest.register_node("digtron:intermittent_soft_digger", {
-	description = S("Digtron Intermittent Soft Material Digger Head"),
-	_doc_items_longdesc = digtron.doc.intermittent_soft_digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.intermittent_soft_digger_usagehelp,
-	_digtron_formspec = intermittent_formspec,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:intermittent_soft_digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:intermittent_soft_digger", {
+	description = S("clonetron Intermittent Soft Material Digger Head"),
+	_doc_items_longdesc = clonetron.doc.intermittent_soft_digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.intermittent_soft_digger_usagehelp,
+	_clonetron_formspec = intermittent_formspec,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:intermittent_soft_digger",
+	sounds = clonetron.metal_sounds,
 	use_texture_alpha = use_texture_alpha,
 	paramtype = "light",
 	paramtype2= "facedir",
@@ -302,12 +302,12 @@ minetest.register_node("digtron:intermittent_soft_digger", {
 	
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[transformR270^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[transformR180^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR90^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR270^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR180^[colorize:" .. clonetron.soft_digger_colorize,
 		{
-			name = "digtron_digger_yb.png^[colorize:" .. digtron.soft_digger_colorize,
+			name = "clonetron_digger_yb.png^[colorize:" .. clonetron.soft_digger_colorize,
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -315,7 +315,7 @@ minetest.register_node("digtron:intermittent_soft_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_intermittent.png^digtron_motor.png^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^clonetron_intermittent.png^clonetron_motor.png^[colorize:" .. clonetron.soft_digger_colorize,
 	},
 	
 	on_construct = intermittent_on_construct,
@@ -328,7 +328,7 @@ minetest.register_node("digtron:intermittent_soft_digger", {
 		end
 
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
 		
 		if protected_nodes:get(digpos.x, digpos.y, digpos.z) then
 			return 0
@@ -339,8 +339,8 @@ minetest.register_node("digtron:intermittent_soft_digger", {
 			return 0
 		end
 		
-		if digtron.is_soft_material(digpos) then
-			return digtron.mark_diggable(digpos, nodes_dug, player)
+		if clonetron.is_soft_material(digpos) then
+			return clonetron.mark_diggable(digpos, nodes_dug, player)
 		end
 		
 		return 0
@@ -349,21 +349,21 @@ minetest.register_node("digtron:intermittent_soft_digger", {
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local meta = minetest.get_meta(pos)
 		local facing = minetest.get_node(pos).param2
-		local targetpos = digtron.find_new_pos(pos, facing)		
+		local targetpos = clonetron.find_new_pos(pos, facing)		
 		if (targetpos[controlling_coordinate] + meta:get_int("offset")) % meta:get_int("period") == 0 then
-			digtron.damage_creatures(player, pos, targetpos, damage_hp_half, items_dropped)
+			clonetron.damage_creatures(player, pos, targetpos, damage_hp_half, items_dropped)
 		end
 	end,
 })
 
 -- Digs out nodes that are "in front" of the digger head and "below" the digger head (can be rotated).
-minetest.register_node("digtron:dual_digger", {
-	description = S("Digtron Dual Digger Head"),
-	_doc_items_longdesc = digtron.doc.dual_digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.dual_digger_usagehelp,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:dual_digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:dual_digger", {
+	description = S("clonetron Dual Digger Head"),
+	_doc_items_longdesc = clonetron.doc.dual_digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.dual_digger_usagehelp,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:dual_digger",
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,	
@@ -375,9 +375,9 @@ minetest.register_node("digtron:dual_digger", {
 	
 	-- Aims in the +Z and -Y direction by default
 	tiles = {
-		"digtron_plate.png^digtron_motor.png",
+		"clonetron_plate.png^clonetron_motor.png",
 		{
-			name = "digtron_digger_yb.png",
+			name = "clonetron_digger_yb.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -385,10 +385,10 @@ minetest.register_node("digtron:dual_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png",
-		"digtron_plate.png^[transformR180",
+		"clonetron_plate.png",
+		"clonetron_plate.png^[transformR180",
 		{
-			name = "digtron_digger_yb.png",
+			name = "clonetron_digger_yb.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -396,20 +396,20 @@ minetest.register_node("digtron:dual_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_motor.png",
+		"clonetron_plate.png^clonetron_motor.png",
 	},
 
 	-- returns fuel_cost, items_produced
 	execute_dig = function(pos, protected_nodes, nodes_dug, controlling_coordinate, lateral_dig, player)
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
-		local digdown = digtron.find_new_pos_downward(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
+		local digdown = clonetron.find_new_pos_downward(pos, facing)
 
 		local items = {}
 		local cost = 0
 		
 		if protected_nodes:get(digpos.x, digpos.y, digpos.z) ~= true then
-			local forward_cost, forward_items = digtron.mark_diggable(digpos, nodes_dug, player)
+			local forward_cost, forward_items = clonetron.mark_diggable(digpos, nodes_dug, player)
 			if forward_items ~= nil then
 				for _, item in pairs(forward_items) do
 					table.insert(items, item)
@@ -418,7 +418,7 @@ minetest.register_node("digtron:dual_digger", {
 			cost = cost + forward_cost
 		end
 		if protected_nodes:get(digdown.x, digdown.y, digdown.z) ~= true then
-			local down_cost, down_items = digtron.mark_diggable(digdown, nodes_dug, player)
+			local down_cost, down_items = clonetron.mark_diggable(digdown, nodes_dug, player)
 			if down_items ~= nil then
 				for _, item in pairs(down_items) do
 					table.insert(items, item)
@@ -432,19 +432,19 @@ minetest.register_node("digtron:dual_digger", {
 	
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local facing = minetest.get_node(pos).param2
-		digtron.damage_creatures(player, pos, digtron.find_new_pos(pos, facing), damage_hp, items_dropped)
-		digtron.damage_creatures(player, pos, digtron.find_new_pos_downward(pos, facing), damage_hp, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos(pos, facing), damage_hp, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos_downward(pos, facing), damage_hp, items_dropped)
 	end,
 })
 
 -- Digs out soft nodes that are "in front" of the digger head and "below" the digger head (can be rotated).
-minetest.register_node("digtron:dual_soft_digger", {
-	description = S("Digtron Dual Soft Material Digger Head"),
-	_doc_items_longdesc = digtron.doc.dual_soft_digger_longdesc,
-    _doc_items_usagehelp = digtron.doc.dual_soft_digger_usagehelp,
-	groups = {cracky = 3,  oddly_breakable_by_hand=3, digtron = 3},
-	drop = "digtron:dual_soft_digger",
-	sounds = digtron.metal_sounds,
+minetest.register_node("clonetron:dual_soft_digger", {
+	description = S("clonetron Dual Soft Material Digger Head"),
+	_doc_items_longdesc = clonetron.doc.dual_soft_digger_longdesc,
+    _doc_items_usagehelp = clonetron.doc.dual_soft_digger_usagehelp,
+	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
+	drop = "clonetron:dual_soft_digger",
+	sounds = clonetron.metal_sounds,
 	use_texture_alpha = use_texture_alpha,
 	paramtype = "light",
 	paramtype2= "facedir",
@@ -457,9 +457,9 @@ minetest.register_node("digtron:dual_soft_digger", {
 	
 	-- Aims in the +Z and -Y direction by default
 	tiles = {
-		"digtron_plate.png^digtron_motor.png^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^clonetron_motor.png^[colorize:" .. clonetron.soft_digger_colorize,
 		{
-			name = "digtron_digger_yb.png^[colorize:" .. digtron.soft_digger_colorize,
+			name = "clonetron_digger_yb.png^[colorize:" .. clonetron.soft_digger_colorize,
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -467,10 +467,10 @@ minetest.register_node("digtron:dual_soft_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^[colorize:" .. digtron.soft_digger_colorize,
-		"digtron_plate.png^[transformR180^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.soft_digger_colorize,
+		"clonetron_plate.png^[transformR180^[colorize:" .. clonetron.soft_digger_colorize,
 		{
-			name = "digtron_digger_yb.png^[colorize:" .. digtron.soft_digger_colorize,
+			name = "clonetron_digger_yb.png^[colorize:" .. clonetron.soft_digger_colorize,
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -478,20 +478,20 @@ minetest.register_node("digtron:dual_soft_digger", {
 				length = 1.0,
 			},
 		},
-		"digtron_plate.png^digtron_motor.png^[colorize:" .. digtron.soft_digger_colorize,
+		"clonetron_plate.png^clonetron_motor.png^[colorize:" .. clonetron.soft_digger_colorize,
 	},
 
 	-- returns fuel_cost, items_produced
 	execute_dig = function(pos, protected_nodes, nodes_dug, controlling_coordinate, lateral_dig, player)
 		local facing = minetest.get_node(pos).param2
-		local digpos = digtron.find_new_pos(pos, facing)
-		local digdown = digtron.find_new_pos_downward(pos, facing)
+		local digpos = clonetron.find_new_pos(pos, facing)
+		local digdown = clonetron.find_new_pos_downward(pos, facing)
 
 		local items = {}
 		local cost = 0
 		
-		if protected_nodes:get(digpos.x, digpos.y, digpos.z) ~= true and digtron.is_soft_material(digpos) then
-			local forward_cost, forward_items = digtron.mark_diggable(digpos, nodes_dug, player)
+		if protected_nodes:get(digpos.x, digpos.y, digpos.z) ~= true and clonetron.is_soft_material(digpos) then
+			local forward_cost, forward_items = clonetron.mark_diggable(digpos, nodes_dug, player)
 			if forward_items ~= nil then
 				for _, item in pairs(forward_items) do
 					table.insert(items, item)
@@ -499,8 +499,8 @@ minetest.register_node("digtron:dual_soft_digger", {
 			end
 			cost = cost + forward_cost
 		end
-		if protected_nodes:get(digdown.x, digdown.y, digdown.z) ~= true and digtron.is_soft_material(digdown) then
-			local down_cost, down_items = digtron.mark_diggable(digdown, nodes_dug, player)
+		if protected_nodes:get(digdown.x, digdown.y, digdown.z) ~= true and clonetron.is_soft_material(digdown) then
+			local down_cost, down_items = clonetron.mark_diggable(digdown, nodes_dug, player)
 			if down_items ~= nil then
 				for _, item in pairs(down_items) do
 					table.insert(items, item)
@@ -514,7 +514,7 @@ minetest.register_node("digtron:dual_soft_digger", {
 	
 	damage_creatures = function(player, pos, controlling_coordinate, items_dropped)
 		local facing = minetest.get_node(pos).param2
-		digtron.damage_creatures(player, pos, digtron.find_new_pos(pos, facing), damage_hp_half, items_dropped)
-		digtron.damage_creatures(player, pos, digtron.find_new_pos_downward(pos, facing), damage_hp_half, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos(pos, facing), damage_hp_half, items_dropped)
+		clonetron.damage_creatures(player, pos, clonetron.find_new_pos_downward(pos, facing), damage_hp_half, items_dropped)
 	end,
 })

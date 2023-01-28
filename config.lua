@@ -1,6 +1,6 @@
-local CONFIG_FILE_PREFIX = "digtron_"
+local CONFIG_FILE_PREFIX = "clonetron_"
 
-digtron.config = {}
+clonetron.config = {}
 
 local print_settingtypes = false
 
@@ -16,28 +16,28 @@ local function setting(stype, name, default, description)
 	if value == nil then
 		value = default
 	end
-	digtron.config[name] = value
+	clonetron.config[name] = value
 
 	if print_settingtypes then
 		minetest.debug(CONFIG_FILE_PREFIX..name.." ("..description..") "..stype.." "..tostring(default))
 	end
 end
 
-setting("bool", "uses_resources", true, "Digtron uses resources when active")
+setting("bool", "uses_resources", true, "clonetron uses resources when active")
 setting("bool", "lava_impassible", true, "Lava counts as a protected node")
 setting("bool", "damage_creatures", true, "Diggers damage creatures") -- TODO: legacy setting, remove eventually
 setting("int", "damage_hp", 8, "Damage diggers do")
-setting("int", "size_limit", 1000, "Digtron size limit in nodes per moving digtron")
+setting("int", "size_limit", 1000, "clonetron size limit in nodes per moving clonetron")
 
-if digtron.config.damage_creatures == false then digtron.config.damage_hp = 0 end -- TODO: remove when damage_creatures is removed
+if clonetron.config.damage_creatures == false then clonetron.config.damage_hp = 0 end -- TODO: remove when damage_creatures is removed
 
 -- Enables the spray of particles out the back of a digger head and puffs of smoke from the controller
 local particle_effects = minetest.settings:get_bool("enable_particles")
-digtron.config.particle_effects = particle_effects or particle_effects == nil -- default true
+clonetron.config.particle_effects = particle_effects or particle_effects == nil -- default true
 
 
 setting("int", "maximum_extrusion", 25, "Maximum builder extrusion distance")
-setting("float", "cycle_time", 1.0, "Minimum Digtron cycle time")
+setting("float", "cycle_time", 1.0, "Minimum clonetron cycle time")
 setting("float", "traction_factor", 3.0, "Traction factor")
 
 -- fuel costs. For comparison, in the default game:
@@ -66,4 +66,4 @@ setting("int", "power_ratio", 100, "The electrical charge to 1 coal heat unit co
 setting("float", "marker_crate_good_duration", 3.0, "Duration that 'good' crate markers last")
 setting("float", "marker_crate_bad_duration", 9.0, "Duration that 'bad' crate markers last")
 
-setting("bool", "emerge_unloaded_mapblocks", true, "When Digtron encounters unloaded map blocks, emerge them.")
+setting("bool", "emerge_unloaded_mapblocks", true, "When clonetron encounters unloaded map blocks, emerge them.")

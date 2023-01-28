@@ -19,25 +19,25 @@ local node_inventory_table = {type="node"} -- a reusable parameter for get_inven
 
 local use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "opaque" or nil
 
--- Master controller. Most complicated part of the whole system. Determines which direction a digtron moves and triggers all of its component parts.
-minetest.register_node("digtron:controller", {
-	description = S("Digtron Control Module"),
-	_doc_items_longdesc = digtron.doc.controller_longdesc,
-    _doc_items_usagehelp = digtron.doc.controller_usagehelp,
-	groups = {cracky = 3, oddly_breakable_by_hand = 3, digtron = 1},
-	drop = "digtron:controller",
-	sounds = digtron.metal_sounds,
+-- Master controller. Most complicated part of the whole system. Determines which direction a clonetron moves and triggers all of its component parts.
+minetest.register_node("clonetron:controller", {
+	description = S("clonetron Control Module"),
+	_doc_items_longdesc = clonetron.doc.controller_longdesc,
+    _doc_items_usagehelp = clonetron.doc.controller_usagehelp,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, clonetron = 1},
+	drop = "clonetron:controller",
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90",
-		"digtron_plate.png^[transformR270",
-		"digtron_plate.png",
-		"digtron_plate.png^[transformR180",
-		"digtron_plate.png",
-		"digtron_plate.png^digtron_control.png",
+		"clonetron_plate.png^[transformR90",
+		"clonetron_plate.png^[transformR270",
+		"clonetron_plate.png",
+		"clonetron_plate.png^[transformR180",
+		"clonetron_plate.png",
+		"clonetron_plate.png^clonetron_control.png",
 	},
 	
 	drawtype = "nodebox",
@@ -60,8 +60,8 @@ minetest.register_node("digtron:controller", {
 		local last_time = (tonumber(meta:get_string("last_time")) or 0 )
 
 		-- if meta:get_string("waiting") == "true" then
-		if last_time + digtron.config.cycle_time > now then
-		   -- Been too soon since last time the digtron did a cycle.
+		if last_time + clonetron.config.cycle_time > now then
+		   -- Been too soon since last time the clonetron did a cycle.
 		   
 		   -- added for clarity
 		   meta:set_string("infotext", S("repetition delay"))
@@ -69,16 +69,16 @@ minetest.register_node("digtron:controller", {
 		   return
 		end
 	
-		local newpos, status, return_code = digtron.execute_dig_cycle(pos, clicker)
+		local newpos, status, return_code = clonetron.execute_dig_cycle(pos, clicker)
 		
 		meta = minetest.get_meta(newpos)
 		if status ~= nil then
 			meta:set_string("infotext", status)
 		end
 		
-		-- Start the delay before digtron can run again.
+		-- Start the delay before clonetron can run again.
 		minetest.get_meta(newpos):set_string("waiting", "true")
-		-- minetest.get_node_timer(newpos):start(digtron.config.cycle_time)
+		-- minetest.get_node_timer(newpos):start(clonetron.config.cycle_time)
 		-- new delay code
 		meta:set_string("last_time",tostring(minetest.get_gametime()))
 	end,
@@ -103,7 +103,7 @@ local auto_formspec = "size[8,6.2]" ..
 	"button_exit[1.7,0.5;1,0.1;execute;" .. S("Set &\nExecute").. "]" ..
 	"tooltip[execute;" .. S("Begins executing the given number of cycles").. "]" ..
 	"field[0.0,2.0;1,0.1;slope;" .. S("Slope").. ";${slope}]" ..
-	"tooltip[slope;" .. S("For diagonal digging. After moving forward this number of nodes the auto controller\nwill add an additional cycle moving the digtron laterally in the\ndirection of the arrows on the side of this controller.\nSet to 0 for no lateral digging.").. "]" ..
+	"tooltip[slope;" .. S("For diagonal digging. After moving forward this number of nodes the auto controller\nwill add an additional cycle moving the clonetron laterally in the\ndirection of the arrows on the side of this controller.\nSet to 0 for no lateral digging.").. "]" ..
 	"field[1.0,2.0;1,0.1;offset;" .. S("Offset").. ";${offset}]" ..
 	"tooltip[offset;" .. S("Sets the offset of the lateral motion defined in the Slope field.\nNote: this offset is relative to the controller's location.\nThe controller will move laterally when it reaches the indicated point.").. "]" ..
 	"field[2.0,2.0;1,0.1;period;" .. S("Delay").. ";${period}]" ..
@@ -125,7 +125,7 @@ end
 
 local function auto_cycle(pos)
 	local node = minetest.get_node(pos)
-	local controlling_coordinate = digtron.get_controlling_coordinate(pos, node.param2)
+	local controlling_coordinate = clonetron.get_controlling_coordinate(pos, node.param2)
 	local meta = minetest.get_meta(pos)
 	local player = minetest.get_player_by_name(meta:get_string("triggering_player"))
 	if player == nil or meta:get_string("waiting") == "true" then
@@ -137,13 +137,13 @@ local function auto_cycle(pos)
 	
 	if meta:get_string("lateral_done") ~= "true" and slope ~= 0 and (pos[controlling_coordinate] + meta:get_int("offset")) % slope == 0 then
 		--Do a downward dig cycle. Don't update the "cycles" count, these don't count towards that.
-		local newpos, status, return_code = digtron.execute_downward_dig_cycle(pos, player)
+		local newpos, status, return_code = clonetron.execute_downward_dig_cycle(pos, player)
 		
 		if vector.equals(pos, newpos) then
 			status = status .. "\n" .. S("Cycles remaining: @1", cycle) .. "\n" .. S("Halted!")
 			meta:set_string("infotext", status)
 			if return_code == 1 then --return code 1 happens when there's unloaded nodes adjacent, just keep trying.
-				if digtron.config.emerge_unloaded_mapblocks then
+				if clonetron.config.emerge_unloaded_mapblocks then
 					minetest.emerge_area(vector.add(pos, -80), vector.add(pos, 80))
 				end
 				minetest.after(meta:get_int("period"), auto_cycle, newpos)
@@ -159,13 +159,13 @@ local function auto_cycle(pos)
 		return
 	end
 
-	local newpos, status, return_code = digtron.execute_dig_cycle(pos, player)
+	local newpos, status, return_code = clonetron.execute_dig_cycle(pos, player)
 
 	if vector.equals(pos, newpos) then
 		status = status .. "\n" .. S("Cycles remaining: @1", cycle) .. "\n" .. S("Halted!")
 		meta:set_string("infotext", status)
 		if return_code == 1 then --return code 1 happens when there's unloaded nodes adjacent, call emerge and keep trying.
-			if digtron.config.emerge_unloaded_mapblocks then
+			if clonetron.config.emerge_unloaded_mapblocks then
 				minetest.emerge_area(vector.add(pos, -80), vector.add(pos, 80))
 			end
 			minetest.after(meta:get_int("period"), auto_cycle, newpos)
@@ -189,27 +189,27 @@ local function auto_cycle(pos)
 	end
 end
 
-minetest.register_node("digtron:auto_controller", {
-	description = S("Digtron Automatic Control Module"),
-	_doc_items_longdesc = digtron.doc.auto_controller_longdesc,
-    _doc_items_usagehelp = digtron.doc.auto_controller_usagehelp,
-	--Don't set a _digtron_formspec for this node_def.
+minetest.register_node("clonetron:auto_controller", {
+	description = S("clonetron Automatic Control Module"),
+	_doc_items_longdesc = clonetron.doc.auto_controller_longdesc,
+    _doc_items_usagehelp = clonetron.doc.auto_controller_usagehelp,
+	--Don't set a _clonetron_formspec for this node_def.
 	--Auto-controller has special formspec handling, while active it has no formspec and right-clicking interrupts it.
-	groups = {cracky = 3, oddly_breakable_by_hand = 3, digtron = 1},
-	drop = "digtron:auto_controller",
-	sounds = digtron.metal_sounds,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, clonetron = 1},
+	drop = "clonetron:auto_controller",
+	sounds = clonetron.metal_sounds,
 	use_texture_alpha = use_texture_alpha,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90^[colorize:" .. digtron.auto_controller_colorize,
-		"digtron_plate.png^[transformR270^[colorize:" .. digtron.auto_controller_colorize,
-		"digtron_plate.png^digtron_axel_side.png^[transformR270^[colorize:" .. digtron.auto_controller_colorize,
-		"digtron_plate.png^digtron_axel_side.png^[transformR270^[colorize:" .. digtron.auto_controller_colorize,
-		"digtron_plate.png^[colorize:" .. digtron.auto_controller_colorize,
-		"digtron_plate.png^digtron_control.png^[colorize:" .. digtron.auto_controller_colorize,
+		"clonetron_plate.png^[transformR90^[colorize:" .. clonetron.auto_controller_colorize,
+		"clonetron_plate.png^[transformR270^[colorize:" .. clonetron.auto_controller_colorize,
+		"clonetron_plate.png^clonetron_axel_side.png^[transformR270^[colorize:" .. clonetron.auto_controller_colorize,
+		"clonetron_plate.png^clonetron_axel_side.png^[transformR270^[colorize:" .. clonetron.auto_controller_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.auto_controller_colorize,
+		"clonetron_plate.png^clonetron_control.png^[colorize:" .. clonetron.auto_controller_colorize,
 	},
 	
 	drawtype = "nodebox",
@@ -223,8 +223,8 @@ minetest.register_node("digtron:auto_controller", {
 		meta:set_float("fuel_burning", 0.0)
 		meta:set_string("infotext", S("Heat remaining in controller furnace: @1", 0))
 		meta:set_string("formspec", auto_formspec)
-		-- Reusing offset and period to keep the digtron node-moving code simple, and the names still fit well
-		meta:set_int("period", digtron.config.cycle_time)
+		-- Reusing offset and period to keep the clonetron node-moving code simple, and the names still fit well
+		meta:set_int("period", clonetron.config.cycle_time)
 		meta:set_int("offset", 0)
 		meta:set_int("cycles", 0)
 		meta:set_int("slope", 0)
@@ -234,8 +234,8 @@ minetest.register_node("digtron:auto_controller", {
 	end,
 
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		if minetest.get_item_group(stack:get_name(), "digtron") ~= 0 then
-			return 0 -- pointless setting a Digtron node as a stop block
+		if minetest.get_item_group(stack:get_name(), "clonetron") ~= 0 then
+			return 0 -- pointless setting a clonetron node as a stop block
 		end	
 		node_inventory_table.pos = pos
 		local inv = minetest.get_inventory(node_inventory_table)
@@ -258,7 +258,7 @@ minetest.register_node("digtron:auto_controller", {
 		local cycles = tonumber(fields.cycles)
 		
 		if period and period > 0 then
-			meta:set_int("period", math.max(digtron.config.cycle_time, math.floor(period)))
+			meta:set_int("period", math.max(clonetron.config.cycle_time, math.floor(period)))
 		end
 
 		if offset then
@@ -283,26 +283,26 @@ minetest.register_node("digtron:auto_controller", {
 
 		if fields.set and slope and slope > 0 then
 			local node = minetest.get_node(pos)
-			local controlling_coordinate = digtron.get_controlling_coordinate(pos, node.param2)
+			local controlling_coordinate = clonetron.get_controlling_coordinate(pos, node.param2)
 			
 			offset = offset or 0
 			local newpos = pos
 			local markerpos = {x=newpos.x, y=newpos.y, z=newpos.z}
 			local x_pos = math.floor((newpos[controlling_coordinate]+offset)/slope)*slope - offset
 			markerpos[controlling_coordinate] = x_pos
-			minetest.add_entity(markerpos, "digtron:marker_vertical")
+			minetest.add_entity(markerpos, "clonetron:marker_vertical")
 			if x_pos >= newpos[controlling_coordinate] then
 				markerpos[controlling_coordinate] = x_pos - slope
-				minetest.add_entity(markerpos, "digtron:marker_vertical")
+				minetest.add_entity(markerpos, "clonetron:marker_vertical")
 			end
 			if x_pos <= newpos[controlling_coordinate] then
 				markerpos[controlling_coordinate] = x_pos + slope
-				minetest.add_entity(markerpos, "digtron:marker_vertical")
+				minetest.add_entity(markerpos, "clonetron:marker_vertical")
 			end
 		end	
 		
 		if fields.help and minetest.get_modpath("doc") then --check for mod in case someone disabled it after this digger was built
-			minetest.after(0.5, doc.show_entry, sender:get_player_name(), "nodes", "digtron:auto_controller", true)
+			minetest.after(0.5, doc.show_entry, sender:get_player_name(), "nodes", "clonetron:auto_controller", true)
 		end
 	end,	
 	
@@ -316,27 +316,27 @@ minetest.register_node("digtron:auto_controller", {
 
 ---------------------------------------------------------------------------------------------------------------
 
--- A much simplified control unit that only moves the digtron, and doesn't trigger the diggers or builders.
--- Handy for shoving a digtron to the side if it's been built a bit off.
-minetest.register_node("digtron:pusher", {
-	description = S("Digtron Pusher Module"),
-	_doc_items_longdesc = digtron.doc.pusher_longdesc,
-    _doc_items_usagehelp = digtron.doc.pusher_usagehelp,
-	groups = {cracky = 3, oddly_breakable_by_hand=3, digtron = 1},
-	drop = "digtron:pusher",
-	sounds = digtron.metal_sounds,
+-- A much simplified control unit that only moves the clonetron, and doesn't trigger the diggers or builders.
+-- Handy for shoving a clonetron to the side if it's been built a bit off.
+minetest.register_node("clonetron:pusher", {
+	description = S("clonetron Pusher Module"),
+	_doc_items_longdesc = clonetron.doc.pusher_longdesc,
+    _doc_items_usagehelp = clonetron.doc.pusher_usagehelp,
+	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 1},
+	drop = "clonetron:pusher",
+	sounds = clonetron.metal_sounds,
 	use_texture_alpha = use_texture_alpha,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,
 	-- Aims in the +Z direction by default
 	tiles = {
-		"digtron_plate.png^[transformR90^[colorize:" .. digtron.pusher_controller_colorize,
-		"digtron_plate.png^[transformR270^[colorize:" .. digtron.pusher_controller_colorize,
-		"digtron_plate.png^[colorize:" .. digtron.pusher_controller_colorize,
-		"digtron_plate.png^[transformR180^[colorize:" .. digtron.pusher_controller_colorize,
-		"digtron_plate.png^[colorize:" .. digtron.pusher_controller_colorize,
-		"digtron_plate.png^digtron_control.png^[colorize:" .. digtron.pusher_controller_colorize,
+		"clonetron_plate.png^[transformR90^[colorize:" .. clonetron.pusher_controller_colorize,
+		"clonetron_plate.png^[transformR270^[colorize:" .. clonetron.pusher_controller_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.pusher_controller_colorize,
+		"clonetron_plate.png^[transformR180^[colorize:" .. clonetron.pusher_controller_colorize,
+		"clonetron_plate.png^[colorize:" .. clonetron.pusher_controller_colorize,
+		"clonetron_plate.png^clonetron_control.png^[colorize:" .. clonetron.pusher_controller_colorize,
 	},
 	
 	drawtype = "nodebox",
@@ -348,17 +348,17 @@ minetest.register_node("digtron:pusher", {
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)	
 		local meta = minetest.get_meta(pos)
 		if meta:get_string("waiting") == "true" then
-			-- Been too soon since last time the digtron did a cycle.
+			-- Been too soon since last time the clonetron did a cycle.
 			return
 		end
 
-		local newpos, status_text, return_code = digtron.execute_move_cycle(pos, clicker)
+		local newpos, status_text, return_code = clonetron.execute_move_cycle(pos, clicker)
 		meta = minetest.get_meta(newpos)
 		meta:set_string("infotext", status_text)
 		
-		-- Start the delay before digtron can run again.
+		-- Start the delay before clonetron can run again.
 		minetest.get_meta(newpos):set_string("waiting", "true")
-		minetest.get_node_timer(newpos):start(digtron.config.cycle_time)
+		minetest.get_node_timer(newpos):start(clonetron.config.cycle_time)
 	end,
 	
 	on_timer = function(pos, elapsed)

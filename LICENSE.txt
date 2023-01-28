@@ -1,5 +1,5 @@
 Modular Tunnel Boring Machine:
-The Almighty Digtron
+The Almighty clonetron
 ====================
 
 All source code aside from the contents of util_item_place_node.lua and all art are by FaceDeer.
@@ -38,6 +38,6 @@ License for Textures
 
 CC-BY-SA 3.0 UNPORTED. Created by FaceDeer
 
-digtron_digger.png modified to digtron_digger_yb.png by hajo - https://forum.minetest.net/viewtopic.php?f=9&t=16295#p245531
+clonetron_digger.png modified to clonetron_digger_yb.png by hajo - https://forum.minetest.net/viewtopic.php?f=9&t=16295#p245531
 
-digtron_battery.png was added by Hans von Smacker
+clonetron_battery.png was added by Hans von Smacker

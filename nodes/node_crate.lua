@@ -22,31 +22,31 @@ local player_permitted = function(pos, player)
 	end
 end
 
-local store_digtron = function(pos, clicker, loaded_node_name, protected)
-	local layout = DigtronLayout.create(pos, clicker)
+local store_clonetron = function(pos, clicker, loaded_node_name, protected)
+	local layout = clonetronLayout.create(pos, clicker)
 	local protection_prefix = ""
 	local protection_suffix = ""
 	if protected then
-		protection_prefix = S("Digtron Crate") .. "\n" .. S("Owned by @1", clicker:get_player_name() or "")
+		protection_prefix = S("clonetron Crate") .. "\n" .. S("Owned by @1", clicker:get_player_name() or "")
 		protection_suffix = S("Owned by @1", clicker:get_player_name() or "")
 	end
 	
 	if layout.contains_protected_node then
 		local meta = minetest.get_meta(pos)
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		meta:set_string("infotext", protection_prefix .. "\n" .. S("Digtron can't be packaged, it contains protected blocks"))
-		-- no stealing other peoples' digtrons
+		meta:set_string("infotext", protection_prefix .. "\n" .. S("clonetron can't be packaged, it contains protected blocks"))
+		-- no stealing other peoples' clonetrons
 		return
 	end
 	
 	if #layout.all == 1 then
 		local meta = minetest.get_meta(pos)
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		meta:set_string("infotext", protection_prefix .. "\n" .. S("No Digtron components adjacent to package"))
+		meta:set_string("infotext", protection_prefix .. "\n" .. S("No clonetron components adjacent to package"))
 		return
 	end
 
-	digtron.award_crate(layout, clicker:get_player_name())
+	clonetron.award_crate(layout, clicker:get_player_name())
 	
 	local layout_string = layout:serialize()
 	
@@ -83,20 +83,20 @@ local store_digtron = function(pos, clicker, loaded_node_name, protected)
 		meta:set_string("owner", clicker:get_player_name() or "")
 	end
 
-	local titlestring = S("Crated @1-block Digtron", tostring(#layout.all-1))
+	local titlestring = S("Crated @1-block clonetron", tostring(#layout.all-1))
 	meta:set_string("title", titlestring )
 	meta:set_string("infotext", titlestring .. "\n" .. protection_suffix)
 end
 
 local use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "opaque" or nil
 
-minetest.register_node("digtron:empty_crate", {
-	description = S("Digtron Crate (Empty)"),
-	_doc_items_longdesc = digtron.doc.empty_crate_longdesc,
-    _doc_items_usagehelp = digtron.doc.empty_crate_usagehelp,
+minetest.register_node("clonetron:empty_crate", {
+	description = S("clonetron Crate (Empty)"),
+	_doc_items_longdesc = clonetron.doc.empty_crate_longdesc,
+    _doc_items_usagehelp = clonetron.doc.empty_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
 	sounds = default.node_sound_wood_defaults(),
-	tiles = {"digtron_crate.png"},
+	tiles = {"clonetron_crate.png"},
 	use_texture_alpha = use_texture_alpha,
 	is_ground_content = false,
 	drawtype = "nodebox",
@@ -113,17 +113,17 @@ minetest.register_node("digtron:empty_crate", {
 	end,
 
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		store_digtron(pos, clicker, "digtron:loaded_crate")
+		store_clonetron(pos, clicker, "clonetron:loaded_crate")
 	end
 })
 
-minetest.register_node("digtron:empty_locked_crate", {
-	description = S("Digtron Locked Crate (Empty)"),
-	_doc_items_longdesc = digtron.doc.empty_locked_crate_longdesc,
-    _doc_items_usagehelp = digtron.doc.empty_locked_crate_usagehelp,
+minetest.register_node("clonetron:empty_locked_crate", {
+	description = S("clonetron Locked Crate (Empty)"),
+	_doc_items_longdesc = clonetron.doc.empty_locked_crate_longdesc,
+    _doc_items_usagehelp = clonetron.doc.empty_locked_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
 	sounds = default.node_sound_wood_defaults(),
-	tiles = {"digtron_crate.png","digtron_crate.png","digtron_crate.png^digtron_lock.png","digtron_crate.png^digtron_lock.png","digtron_crate.png^digtron_lock.png","digtron_crate.png^digtron_lock.png"},
+	tiles = {"clonetron_crate.png","clonetron_crate.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png"},
 	use_texture_alpha = use_texture_alpha,
 	is_ground_content = false,
 	drawtype = "nodebox",
@@ -142,14 +142,14 @@ minetest.register_node("digtron:empty_locked_crate", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name() or "")
-		meta:set_string("infotext", S("Digtron Crate") .. "\n" .. S("Owned by @1", placer:get_player_name() or ""))
+		meta:set_string("infotext", S("clonetron Crate") .. "\n" .. S("Owned by @1", placer:get_player_name() or ""))
 	end,
 	can_dig = function(pos,player)
 		return player and not minetest.is_protected(pos, player:get_player_name()) and player_permitted(pos, player)
 	end,
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		if player_permitted(pos,clicker) then
-			store_digtron(pos, clicker, "digtron:loaded_locked_crate", true)
+			store_clonetron(pos, clicker, "clonetron:loaded_locked_crate", true)
 		end
 	end,
 })
@@ -162,13 +162,13 @@ if modpath_doc then
 	default.gui_bg ..
 	default.gui_bg_img ..
 	default.gui_slots ..
-	"field[0.3,0.5;4,0.5;title;" .. S("Digtron Name") .. ";${title}]" ..
+	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
 	"button_exit[0.0,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
-	"tooltip[save;" .. S("Saves the title of this Digtron") .. "]" ..
+	"tooltip[save;" .. S("Saves the title of this clonetron") .. "]" ..
 	"button_exit[1.0,1.2;1,0.1;show;" .. S("Show\nBlocks") .. "]" ..
-	"tooltip[show;" .. S("Shows which blocks the packed Digtron will occupy if unpacked") .. "]" ..
+	"tooltip[show;" .. S("Shows which blocks the packed clonetron will occupy if unpacked") .. "]" ..
 	"button_exit[2.0,1.2;1,0.1;unpack;" .. S("Unpack") .. "]" ..
-	"tooltip[unpack;" .. S("Attempts to unpack the Digtron on this location") .. "]" ..
+	"tooltip[unpack;" .. S("Attempts to unpack the clonetron on this location") .. "]" ..
 	"button_exit[3.0,1.2;1,0.1;help;" .. S("Help") .. "]" ..
 	"tooltip[help;" .. S("Show documentation about this block") .. "]"
 else
@@ -177,13 +177,13 @@ else
 	default.gui_bg ..
 	default.gui_bg_img ..
 	default.gui_slots ..
-	"field[0.3,0.5;4,0.5;title;" .. S("Digtron Name") .. ";${title}]" ..
+	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
 	"button_exit[0.5,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
-	"tooltip[show;" .. S("Saves the title of this Digtron") .. "]" ..
+	"tooltip[show;" .. S("Saves the title of this clonetron") .. "]" ..
 	"button_exit[1.5,1.2;1,0.1;show;" .. S("Show\nBlocks") .. "]" ..
-	"tooltip[save;" .. S("Shows which blocks the packed Digtron will occupy if unpacked") .. "]" ..
+	"tooltip[save;" .. S("Shows which blocks the packed clonetron will occupy if unpacked") .. "]" ..
 	"button_exit[2.5,1.2;1,0.1;unpack;" .. S("Unpack") .. "]" ..
-	"tooltip[unpack;" .. S("Attempts to unpack the Digtron on this location") .. "]"
+	"tooltip[unpack;" .. S("Attempts to unpack the clonetron on this location") .. "]"
 end
 
 local loaded_formspec = function(pos, meta)
@@ -207,7 +207,7 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 	meta:set_string("infotext", infotext)
 	
 	if fields.help and minetest.get_modpath("doc") then --check for mod in case someone disabled it after this digger was built
-		minetest.after(0.5, doc.show_entry, sender:get_player_name(), "nodes", "digtron:loaded_crate", true)
+		minetest.after(0.5, doc.show_entry, sender:get_player_name(), "nodes", "clonetron:loaded_crate", true)
 	end
 
 	if not (fields.unpack or fields.show) then
@@ -215,10 +215,10 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 	end
 	
 	local layout_string = meta:get_string("crated_layout")
-	local layout = DigtronLayout.deserialize(layout_string)
+	local layout = clonetronLayout.deserialize(layout_string)
 
 	if layout == nil then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to read layout from crate metadata, regrettably this Digtron may be corrupted."))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to read layout from crate metadata, regrettably this clonetron may be corrupted."))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})			
 		-- Something went horribly wrong
 		return
@@ -234,12 +234,12 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 		if not vector.equals(pos, node_image.pos) then
 			if minetest.is_protected(node_image.pos, sender:get_player_name()) and not minetest.check_player_privs(sender, "protection_bypass") then
 				protected_node = true
-				minetest.add_entity(node_image.pos, "digtron:marker_crate_bad")
+				minetest.add_entity(node_image.pos, "clonetron:marker_crate_bad")
 			elseif not minetest.registered_nodes[minetest.get_node(node_image.pos).name].buildable_to then
 				obstructed_node = true
-				minetest.add_entity(node_image.pos, "digtron:marker_crate_bad")
+				minetest.add_entity(node_image.pos, "clonetron:marker_crate_bad")
 			else
-				minetest.add_entity(node_image.pos, "digtron:marker_crate_good")
+				minetest.add_entity(node_image.pos, "clonetron:marker_crate_good")
 			end
 		end
 	end
@@ -249,18 +249,18 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 	end
 	
 	if protected_node then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy Digtron due to protected blocks in target area"))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy clonetron due to protected blocks in target area"))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
 		return
 	end
 	
 	if obstructed_node then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy Digtron due to obstruction in target area"))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy clonetron due to obstruction in target area"))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
 		return
 	end
 	
-	-- build digtron. Since the empty crate was included in the layout, that will overwrite this loaded crate and destroy it.
+	-- build clonetron. Since the empty crate was included in the layout, that will overwrite this loaded crate and destroy it.
 	minetest.sound_play("machine2", {gain=1.0, pos=pos})
 	layout:write_layout_image(sender)
 end
@@ -285,7 +285,7 @@ end
 
 local loaded_after_place = function(pos, itemstack)
 
-	-- Older versions of Digtron used this deprecated method for saving layout data on items.
+	-- Older versions of clonetron used this deprecated method for saving layout data on items.
 	-- Maintain backward compatibility here.
 	local deprecated_metadata = itemstack:get_metadata()
 	if deprecated_metadata ~= "" then
@@ -310,15 +310,15 @@ local loaded_after_place = function(pos, itemstack)
 	end
 end
 
-minetest.register_node("digtron:loaded_crate", {
-	description = S("Digtron Crate (Loaded)"),
-	_doc_items_longdesc = digtron.doc.loaded_crate_longdesc,
-    _doc_items_usagehelp = digtron.doc.loaded_crate_usagehelp,
-	_digtron_formspec = loaded_formspec,
-	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, digtron_protected=1},
+minetest.register_node("clonetron:loaded_crate", {
+	description = S("clonetron Crate (Loaded)"),
+	_doc_items_longdesc = clonetron.doc.loaded_crate_longdesc,
+    _doc_items_usagehelp = clonetron.doc.loaded_crate_usagehelp,
+	_clonetron_formspec = loaded_formspec,
+	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, clonetron_protected=1},
 	stack_max = 1,
 	sounds = default.node_sound_wood_defaults(),
-	tiles = {"digtron_plate.png^digtron_crate.png"},
+	tiles = {"clonetron_plate.png^clonetron_crate.png"},
 	is_ground_content = false,
 	
 	on_construct = function(pos)
@@ -332,24 +332,24 @@ minetest.register_node("digtron:loaded_crate", {
 
 	on_dig = function(pos, node, player)
 		if player and not minetest.is_protected(pos, player:get_player_name()) then
-			return loaded_on_dig(pos, player, "digtron:loaded_crate")
+			return loaded_on_dig(pos, player, "clonetron:loaded_crate")
 		end
 	end,
 	
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		loaded_after_place(pos, itemstack)
 	end,
-	on_drop = function(a, b, c) end -- prevent dropping loaded digtrons, causing server to crash (see #44)
+	on_drop = function(a, b, c) end -- prevent dropping loaded clonetrons, causing server to crash (see #44)
 })
 
-minetest.register_node("digtron:loaded_locked_crate", {
-	description = S("Digtron Locked Crate (Loaded)"),
-	_doc_items_longdesc = digtron.doc.loaded_locked_crate_longdesc,
-    _doc_items_usagehelp = digtron.doc.loaded_locked_crate_usagehelp,
-	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, digtron_protected=1},
+minetest.register_node("clonetron:loaded_locked_crate", {
+	description = S("clonetron Locked Crate (Loaded)"),
+	_doc_items_longdesc = clonetron.doc.loaded_locked_crate_longdesc,
+    _doc_items_usagehelp = clonetron.doc.loaded_locked_crate_usagehelp,
+	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, clonetron_protected=1},
 	stack_max = 1,
 	sounds = default.node_sound_wood_defaults(),
-	tiles = {"digtron_plate.png^digtron_crate.png","digtron_plate.png^digtron_crate.png","digtron_plate.png^digtron_crate.png^digtron_lock.png","digtron_plate.png^digtron_crate.png^digtron_lock.png","digtron_plate.png^digtron_crate.png^digtron_lock.png","digtron_plate.png^digtron_crate.png^digtron_lock.png"},
+	tiles = {"clonetron_plate.png^clonetron_crate.png","clonetron_plate.png^clonetron_crate.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png"},
 	is_ground_content = false,
 	
 	on_construct = function(pos)
@@ -361,7 +361,7 @@ minetest.register_node("digtron:loaded_locked_crate", {
 --	end,
 	on_dig = function(pos, node, player)
 		if player and not minetest.is_protected(pos, player:get_player_name()) and player_permitted(pos,player) then
-			return loaded_on_dig(pos, player, "digtron:loaded_locked_crate")
+			return loaded_on_dig(pos, player, "clonetron:loaded_locked_crate")
 		else
 			return false
 		end
@@ -379,15 +379,15 @@ minetest.register_node("digtron:loaded_locked_crate", {
 			local meta = minetest.get_meta(pos)
 			minetest.show_formspec(
 				clicker:get_player_name(),
-				"digtron:loaded_locked_crate"..minetest.pos_to_string(pos),
+				"clonetron:loaded_locked_crate"..minetest.pos_to_string(pos),
 				loaded_formspec_string:gsub("${title}", meta:get_string("title"), 1))
 		end
 	end,
-	on_drop = function(a, b, c) end -- prevent dropping loaded digtrons, causing server to crash
+	on_drop = function(a, b, c) end -- prevent dropping loaded clonetrons, causing server to crash
 })
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname:sub(1, 27) == "digtron:loaded_locked_crate" then
+	if formname:sub(1, 27) == "clonetron:loaded_locked_crate" then
 		local pos = minetest.string_to_pos(formname:sub(28, -1))
 		loaded_on_recieve(pos, fields, player, true)
 		return true
