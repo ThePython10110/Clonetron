@@ -13,7 +13,7 @@ minetest.register_craft({
 	output = "clonetron:clonetron_core",
 	recipe = {
 			{"","mcl_core:iron_ingot",""},
-			{"mcl_core:iron_ingot","default:mese_crystal_fragment","mcl_core:iron_ingot"},
+			{"mcl_core:iron_ingot","mesecons:redstone","mcl_core:iron_ingot"},
 			{"","mcl_core:iron_ingot",""}
 			}
 })
@@ -21,34 +21,34 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "clonetron:controller",
 	recipe = {
-			{"","default:mese_crystal",""},
-			{"default:mese_crystal","clonetron:clonetron_core","default:mese_crystal"},
-			{"","default:mese_crystal",""}
+			{"","mesecons_torch:redstoneblock",""},
+			{"mesecons_torch:redstoneblock","clonetron:clonetron_core","mesecons_torch:redstoneblock"},
+			{"","mesecons_torch:redstoneblock",""}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:auto_controller",
 	recipe = {
-			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"},
-			{"default:mese_crystal","clonetron:clonetron_core","default:mese_crystal"},
-			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"}
+			{"mesecons_torch:redstoneblock","mesecons_torch:redstoneblock","mesecons_torch:redstoneblock"},
+			{"mesecons_torch:redstoneblock","clonetron:clonetron_core","mesecons_torch:redstoneblock"},
+			{"mesecons_torch:redstoneblock","mesecons_torch:redstoneblock","mesecons_torch:redstoneblock"}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:builder",
 	recipe = {
-			{"","default:mese_crystal_fragment",""},
-			{"default:mese_crystal_fragment","clonetron:clonetron_core","default:mese_crystal_fragment"},
-			{"","default:mese_crystal_fragment",""}
+			{"","mesecons:redstone",""},
+			{"mesecons:redstone","clonetron:clonetron_core","mesecons:redstone"},
+			{"","mesecons:redstone",""}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:light",
 	recipe = {
-			{"","default:torch",""},
+			{"","mcl_torches:torch",""},
 			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
@@ -57,9 +57,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "clonetron:digger",
 	recipe = {
-			{"","default:diamond",""},
-			{"default:diamond","clonetron:clonetron_core","default:diamond"},
-			{"","default:diamond",""}
+			{"","mcl_core:diamond",""},
+			{"mcl_core:diamond","clonetron:clonetron_core","mcl_core:diamond"},
+			{"","mcl_core:diamond",""}
 			}
 })
 
@@ -75,7 +75,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "clonetron:inventory",
 	recipe = {
-			{"","default:chest",""},
+			{"","mcl_chests:chest",""},
 			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
@@ -84,7 +84,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "clonetron:fuelstore",
 	recipe = {
-			{"","default:furnace",""},
+			{"","mcl_furnaces:furnace",""},
 			{"","clonetron:clonetron_core",""},
 			{"","",""}
 			}
@@ -95,7 +95,7 @@ if minetest.get_modpath("technic") then
 	minetest.register_craft({
 		output = "clonetron:battery_holder",
 		recipe = {
-				{"","default:chest",""},
+				{"","mcl_chests:chest",""},
 				{"","clonetron:clonetron_core",""},
 				{"","mcl_core:iron_ingot",""}
 				}
@@ -114,36 +114,36 @@ end
 minetest.register_craft({
 	output = "clonetron:combined_storage",
 	recipe = {
-			{"","default:furnace",""},
+			{"","mcl_furnaces:furnace",""},
 			{"","clonetron:clonetron_core",""},
-			{"","default:chest",""}
+			{"","mcl_chests:chest",""}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:pusher",
 	recipe = {
-			{"","default:coal_lump",""},
-			{"default:coal_lump","clonetron:clonetron_core","default:coal_lump"},
-			{"","default:coal_lump",""}
+			{"","mcl_core:coal_lump",""},
+			{"mcl_core:coal_lump","clonetron:clonetron_core","mcl_core:coal_lump"},
+			{"","mcl_core:coal_lump",""}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:axle",
 	recipe = {
-			{"default:coal_lump","default:coal_lump","default:coal_lump"},
-			{"default:coal_lump","clonetron:clonetron_core","default:coal_lump"},
-			{"default:coal_lump","default:coal_lump","default:coal_lump"}
+			{"mcl_core:coal_lump","mcl_core:coal_lump","mcl_core:coal_lump"},
+			{"mcl_core:coal_lump","clonetron:clonetron_core","mcl_core:coal_lump"},
+			{"mcl_core:coal_lump","mcl_core:coal_lump","mcl_core:coal_lump"}
 			}
 })
 
 minetest.register_craft({
 	output = "clonetron:empty_crate",
 	recipe = {
-			{"","default:chest",""},
+			{"","mcl_chests:chest",""},
 			{"","clonetron:clonetron_core",""},
-			{"","default:mese_crystal",""}
+			{"","mesecons_torch:redstoneblock",""}
 			}
 })
 
@@ -162,9 +162,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "clonetron:duplicator",
 	recipe = {
-			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"},
-			{"default:chest","clonetron:clonetron_core","default:chest"},
-			{"default:mese_crystal","default:mese_crystal","default:mese_crystal"}
+			{"mesecons_torch:redstoneblock","mesecons_torch:redstoneblock","mesecons_torch:redstoneblock"},
+			{"mcl_chests:chest","clonetron:clonetron_core","mcl_chests:chest"},
+			{"mesecons_torch:redstoneblock","mesecons_torch:redstoneblock","mesecons_torch:redstoneblock"}
 			}
 })
 

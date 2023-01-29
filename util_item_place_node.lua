@@ -1,5 +1,5 @@
 -- The default minetest.item_place_node from item.lua was hard to work with given some of the details
--- of how it handled pointed_thing. It also didn't work right with default:torch and seeds. It was simpler to
+-- of how it handled pointed_thing. It also didn't work right with mcl_torches:torch and seeds. It was simpler to
 -- just copy it here and chop out the special cases that were causing problems, and add some special handling.
 -- for nodes that define on_place
 

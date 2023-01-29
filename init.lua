@@ -6,16 +6,16 @@ clonetron.soft_digger_colorize = "#88880030"
 
 -- A global dictionary is used here so that other substitutions can be added easily by other mods, if necessary
 clonetron.builder_read_item_substitutions = {
-	["default:torch_ceiling"] = "default:torch",
-	["default:torch_wall"] = "default:torch",
-	["default:dirt_with_grass"] = "default:dirt",
-	["default:dirt_with_grass_footsteps"] = "default:dirt",
-	["default:dirt_with_dry_grass"] = "default:dirt",
-	["default:dirt_with_rainforest_litter"] = "default:dirt",
-	["default:dirt_with_snow"] = "default:dirt",
-	["default:furnace_active"] = "default:furnace",
-	["farming:soil"] = "default:dirt",
-	["farming:soil_wet"] = "default:dirt",
+	["mcl_torches:torch_ceiling"] = "mcl_torches:torch",
+	["mcl_torches:torch_wall"] = "mcl_torches:torch",
+	["mcl_core:dirt_with_grass"] = "mcl_core:dirt",
+	["mcl_core:dirt_with_grass_footsteps"] = "mcl_core:dirt",
+	["mcl_core:dirt_with_dry_grass"] = "mcl_core:dirt",
+	["mcl_core:dirt_with_rainforest_litter"] = "mcl_core:dirt",
+	["mcl_core:dirt_with_snow"] = "mcl_core:dirt",
+	["mcl_furnaces:furnace_active"] = "mcl_furnaces:furnace",
+	["farming:soil"] = "mcl_core:dirt",
+	["farming:soil_wet"] = "mcl_core:dirt",
 	["farming:desert_sand_soil"] = "default:desert_sand",
 	["farming:desert_sand_soil_wet"] = "default:desert_sand",
 }
@@ -26,7 +26,7 @@ clonetron.builder_read_item_substitutions = {
 
 --first exact matches are tested, and the value given in this global table is returned
 clonetron.builder_on_place_items = {
-	["default:torch"] = true,
+	["mcl_torches:torch"] = true,
 }
 
 -- Then a string prefix is checked, returning this value. Useful for enabling on_placed on a mod-wide basis.

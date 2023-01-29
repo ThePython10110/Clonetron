@@ -4,7 +4,7 @@ if not minetest.get_modpath("doc") then
 	return
 end
 
-local coal_fuel = minetest.get_craft_result({method="fuel", width=1, items={"default:coal_lump"}}).time
+local coal_fuel = minetest.get_craft_result({method="fuel", width=1, items={"mcl_core:coal_lump"}}).time
 local dig_stone_count = coal_fuel/clonetron.config.dig_cost_cracky
 local dig_dirt_count = coal_fuel/clonetron.config.dig_cost_crumbly
 local dig_wood_count = coal_fuel/clonetron.config.dig_cost_choppy
