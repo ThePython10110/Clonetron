@@ -3,7 +3,7 @@
 
 This mod (if I ever complete it) will be a port of Digtron, but for Mineclone. I had no part in the development of Digtron, so I have no idea how hard it will be to port. I'll  just start by finding/replacing all refrences to `default` items with `mcl` items, and hopefully that will be enough. Of course, it probably won't, and I'll be chasing down errors for days, and maybe have to learn how the whole Minetest API works. But it will (probably) be finished (enough) at some (very unknown) point in the (possibly distant) future.
 
-Anyway, here is the description for Digtron.
+Anyway, here is the description for Digtron (but I replaced everything with Clonetron and am too lazy to change it back).
 
 
 # Modular Tunnel Boring Machine
