@@ -1,31 +1,31 @@
-#This can cause clonetrons to operate without consuming fuel or building materials,
+#This can cause Clonetrons to operate without consuming fuel or building materials,
 #though they still check whether they have enough in inventory.
 #It's a separate setting from regular creative mode.
-clonetron_uses_resources (clonetron uses resources) bool true
+clonetron_uses_resources (Clonetron uses resources) bool true
 
 #When true, lava counts as protected blocks.
-clonetron_lava_impassible (Lava is impassible to clonetrons) bool true
+clonetron_lava_impassible (Lava is impassible to Clonetrons) bool true
 
 #Sets how much HP damage a digger does. Soft material diggers do half this.
 #Set to 0 to disable damage entirely.
 clonetron_damage_hp (Diggers damage this many hp) int 8
 
-#How many seconds a clonetron waits between cycles.
+#How many seconds a Clonetron waits between cycles.
 #Auto-controllers can make this wait longer, but cannot make it shorter.
-clonetron_cycle_time (Minimum clonetron cycle time in seconds) float 1.0 0.0 60.0
+clonetron_cycle_time (Minimum Clonetron cycle time in seconds) float 1.0 0.0 60.0
 
-#How many clonetron blocks can be moved for each adjacent
-#solid block that the clonetron has traction against
-clonetron_traction_factor (clonetron traction factor) float 3.0 0.0 1000.0
+#How many Clonetron blocks can be moved for each adjacent
+#solid block that the Clonetron has traction against
+clonetron_traction_factor (Clonetron traction factor) float 3.0 0.0 1000.0
 
-#The maximum extrusion setting permitted for a clonetron builder module.
-clonetron_maximum_extrusion (clonetron maximum extrusion) int 25 1 100
+#The maximum extrusion setting permitted for a Clonetron builder module.
+clonetron_maximum_extrusion (Clonetron maximum extrusion) int 25 1 100
 
 clonetron_marker_crate_good_duration (Duration that 'good' crate markers last) float 3.0 0.0 100.0
 clonetron_marker_crate_bad_duration (Duration that 'bad' crate markers last) float 9.0 0.0 100.0
 
-#When a clonetron encounters unloaded map blocks, cause them to load
-#so that the clonetron can continue moving.
+#When a Clonetron encounters unloaded map blocks, cause them to load
+#so that the Clonetron can continue moving.
 clonetron_emerge_unloaded_mapblocks (Emerge unloaded map blocks) bool true
 
 [Fuel costs]
@@ -45,7 +45,7 @@ clonetron_dig_cost_default (Fuel cost for digging other block types) float 0.5 0
 #How much fuel is required to build a block
 clonetron_build_cost (Fuel cost to build one block) float 1.0 0.0 100.0
 
-#If the [technic] mod is installed clonetron can draw power from technic batteries.
+#If the [technic] mod is installed Clonetron can draw power from technic batteries.
 #A full battery holds 10000 electrical units. This is divided by the power ratio
 #setting to convert it into fuel units.
 clonetron_power_ratio (Electrical charge to coal heat conversion ratio) int 1 1000 100

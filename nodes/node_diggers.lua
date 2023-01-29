@@ -103,7 +103,7 @@ end)
 
 -- Digs out nodes that are "in front" of the digger head.
 minetest.register_node("clonetron:digger", {
-	description = S("clonetron Digger Head"),
+	description = S("Clonetron Digger Head"),
 	_doc_items_longdesc = clonetron.doc.digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.digger_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
@@ -156,7 +156,7 @@ minetest.register_node("clonetron:digger", {
 
 -- Digs out nodes that are "in front" of the digger head.
 minetest.register_node("clonetron:intermittent_digger", {
-	description = S("clonetron Intermittent Digger Head"),
+	description = S("Clonetron Intermittent Digger Head"),
 	_doc_items_longdesc = clonetron.doc.intermittent_digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.intermittent_digger_usagehelp,
 	_clonetron_formspec = intermittent_formspec,
@@ -227,7 +227,7 @@ minetest.register_node("clonetron:intermittent_digger", {
 
 -- A special-purpose digger to deal with stuff like sand and gravel in the ceiling. It always digs (no periodicity or offset), but it only digs falling_block nodes
 minetest.register_node("clonetron:soft_digger", {
-	description = S("clonetron Soft Material Digger Head"),
+	description = S("Clonetron Soft Material Digger Head"),
 	_doc_items_longdesc = clonetron.doc.soft_digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.soft_digger_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
@@ -283,7 +283,7 @@ minetest.register_node("clonetron:soft_digger", {
 })
 
 minetest.register_node("clonetron:intermittent_soft_digger", {
-	description = S("clonetron Intermittent Soft Material Digger Head"),
+	description = S("Clonetron Intermittent Soft Material Digger Head"),
 	_doc_items_longdesc = clonetron.doc.intermittent_soft_digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.intermittent_soft_digger_usagehelp,
 	_clonetron_formspec = intermittent_formspec,
@@ -358,7 +358,7 @@ minetest.register_node("clonetron:intermittent_soft_digger", {
 
 -- Digs out nodes that are "in front" of the digger head and "below" the digger head (can be rotated).
 minetest.register_node("clonetron:dual_digger", {
-	description = S("clonetron Dual Digger Head"),
+	description = S("Clonetron Dual Digger Head"),
 	_doc_items_longdesc = clonetron.doc.dual_digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.dual_digger_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},
@@ -439,7 +439,7 @@ minetest.register_node("clonetron:dual_digger", {
 
 -- Digs out soft nodes that are "in front" of the digger head and "below" the digger head (can be rotated).
 minetest.register_node("clonetron:dual_soft_digger", {
-	description = S("clonetron Dual Soft Material Digger Head"),
+	description = S("Clonetron Dual Soft Material Digger Head"),
 	_doc_items_longdesc = clonetron.doc.dual_soft_digger_longdesc,
     _doc_items_usagehelp = clonetron.doc.dual_soft_digger_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 3},

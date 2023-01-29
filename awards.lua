@@ -15,8 +15,8 @@ local S, NS = dofile(MP.."/intllib.lua")
 awards.register_trigger("clonetron_dig", {
 	type = "counted_key",
 	progress = "@1/@2 excavated",
-	auto_description = {"Excavate 1 @2 using a clonetron.", "Excavate @1 @2 using a clonetron."},
-	auto_description_total = {"Excavate @1 block using a clonetron.", "Excavate @1 blocks using a clonetron."},
+	auto_description = {"Excavate 1 @2 using a Clonetron.", "Excavate @1 @2 using a Clonetron."},
+	auto_description_total = {"Excavate @1 block using a Clonetron.", "Excavate @1 blocks using a Clonetron."},
 	get_key = function(self, def)
 		return minetest.registered_aliases[def.trigger.node] or def.trigger.node
 	end,
@@ -35,8 +35,8 @@ end
 awards.register_trigger("clonetron_build", {
 	type = "counted_key",
 	progress = "@1/@2 built",
-	auto_description = {"Build 1 @2 using a clonetron.", "Build @1 @2 using a clonetron."},
-	auto_description_total = {"Build @1 block using a clonetron.", "Build @1 blocks using a clonetron."},
+	auto_description = {"Build 1 @2 using a Clonetron.", "Build @1 @2 using a Clonetron."},
+	auto_description_total = {"Build @1 block using a Clonetron.", "Build @1 blocks using a Clonetron."},
 	get_key = function(self, def)
 		return minetest.registered_aliases[def.trigger.node] or def.trigger.node
 	end,
@@ -105,50 +105,50 @@ clonetron.award_crate = function(layout, name)
 end
 
 awards.register_achievement("clonetron_water",{
-	title = S("Deep Blue clonetron"),
-	description = S("Encounter water while operating a clonetron."),
+	title = S("Deep Blue Clonetron"),
+	description = S("Encounter water while operating a Clonetron."),
 	background = "awards_bg_mining.png",
 	icon = "bucket_water.png^clonetron_digger_yb_frame.png",
 })
 
 awards.register_achievement("clonetron_lava",{
-	title = S("clonetrons of Fire"),
-	description = S("Encounter lava while operating a clonetron."),
+	title = S("Clonetrons of Fire"),
+	description = S("Encounter lava while operating a Clonetron."),
 	background = "awards_bg_mining.png",
 	icon = "bucket_lava.png^clonetron_digger_yb_frame.png",
 })
 
 awards.register_achievement("clonetron_size10",{
 	title = S("Bigtron"),
-	description = S("Operate a clonetron with 10 or more component blocks."),
+	description = S("Operate a Clonetron with 10 or more component blocks."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_crate.png",
 })
 
 awards.register_achievement("clonetron_size100",{
 	title = S("Really Bigtron"),
-	description = S("Operate a clonetron with 100 or more component blocks."),
+	description = S("Operate a Clonetron with 100 or more component blocks."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_crate.png", -- TODO: Visually distinguish this from Bigtron
 })
 
 awards.register_achievement("clonetron_builder25",{
 	title = S("Buildtron"),
-	description = S("Operate a clonetron with 25 or more builder modules."),
+	description = S("Operate a Clonetron with 25 or more builder modules."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_builder.png^clonetron_crate.png",
 })
 
 awards.register_achievement("clonetron_digger25",{
 	title = S("Digging Leviathan"),
-	description = S("Operate a clonetron with 25 or more digger heads."),
+	description = S("Operate a Clonetron with 25 or more digger heads."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_motor.png^clonetron_crate.png",
 })
 
 awards.register_achievement("clonetron_height1000",{
-	title = S("clonetron In The Sky"),
-	description = S("Operate a clonetron above 1000m elevation"),
+	title = S("Clonetron In The Sky"),
+	description = S("Operate a Clonetron above 1000m elevation"),
 	background = "awards_bg_mining.png",
 	icon = "[transformR180^clonetron_digger_yb_frame.png",
 	--icon = "default_river_water.png^default_snow_side.png^[transformR180^clonetron_digger_yb_frame.png",
@@ -158,8 +158,8 @@ awards.register_achievement("clonetron_height1000",{
 })
 
 awards.register_achievement("clonetron_height100",{
-	title = S("clonetron High"),
-	description = S("Operate a clonetron above 100m elevation"),
+	title = S("Clonetron High"),
+	description = S("Operate a Clonetron above 100m elevation"),
 	background = "awards_bg_mining.png",
 	icon = "[transformR180^clonetron_digger_yb_frame.png",
 	--icon = "default_river_water.png^default_snow_side.png^clonetron_digger_yb_frame.png",
@@ -212,7 +212,7 @@ awards.register_achievement("clonetron_500lapis_dug",{
 
 awards.register_achievement("clonetron_100diamond_dug",{
 	title = S("Diamond Vs. Diamond"),
-	description = S("Mine 100 diamonds with a clonetron"),
+	description = S("Mine 100 diamonds with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_diamond.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -248,7 +248,7 @@ awards.register_achievement("clonetron_100debris_dug",{
 
 awards.register_achievement("clonetron_1000dirt_dug",{
 	title = S("Strip Mining"),
-	description = S("Excavate 1000 units of dirt with a clonetron"),
+	description = S("Excavate 1000 units of dirt with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "default_dirt.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -259,8 +259,8 @@ awards.register_achievement("clonetron_1000dirt_dug",{
 })
 
 awards.register_achievement("clonetron_1000_dug",{
-	title = S("clonetron Miner"),
-	description = S("Excavate 1000 blocks using a clonetron"),
+	title = S("Clonetron Miner"),
+	description = S("Excavate 1000 blocks using a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_tool_stonepick.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -270,8 +270,8 @@ awards.register_achievement("clonetron_1000_dug",{
 })
 
 awards.register_achievement("clonetron_10000_dug",{
-	title = S("clonetron Expert Miner"),
-	description = S("Excavate 10,000 blocks using a clonetron"),
+	title = S("Clonetron Expert Miner"),
+	description = S("Excavate 10,000 blocks using a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_tool_ironpick.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -281,10 +281,10 @@ awards.register_achievement("clonetron_10000_dug",{
 })
 
 awards.register_achievement("clonetron_100000_dug",{
-	title = S("clonetron Master Miner"),
-	description = S("Excavate 100,000 blocks using a clonetron"),
+	title = S("Clonetron Master Miner"),
+	description = S("Excavate 100,000 blocks using a Clonetron"),
 	background = "awards_bg_mining.png",
-	icon = "clonetron_plate.png^default_tool_diamondpick.png^clonetron_digger_yb_frame.png",
+	icon = "Clonetron_plate.png^default_tool_diamondpick.png^clonetron_digger_yb_frame.png",
 	trigger = {
 		type = "clonetron_dig",
 		target = 100000,
@@ -292,8 +292,8 @@ awards.register_achievement("clonetron_100000_dug",{
 })
 
 awards.register_achievement("clonetron_1000000_dug",{
-	title = S("clonetron MEGAMINER"),
-	description = S("Excavate over a million blocks using a clonetron!"),
+	title = S("Clonetron MEGAMINER"),
+	description = S("Excavate over a million blocks using a Clonetron!"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_tool_netheritepick.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -304,7 +304,7 @@ awards.register_achievement("clonetron_1000000_dug",{
 
 awards.register_achievement("clonetron_1000wood_dug",{
 	title = S("Clear Cutting"),
-	description = S("Chop down 1000 units of tree with a clonetron"),
+	description = S("Chop down 1000 units of tree with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_sapling.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -315,8 +315,8 @@ awards.register_achievement("clonetron_1000wood_dug",{
 })
 
 awards.register_achievement("clonetron_10000wood_dug",{
-	title = S("clonetron Deforestation"),
-	description = S("Chop down 10,000 units of tree with a clonetron"),
+	title = S("Clonetron Deforestation"),
+	description = S("Chop down 10,000 units of tree with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_sapling.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -328,7 +328,7 @@ awards.register_achievement("clonetron_10000wood_dug",{
 
 awards.register_achievement("clonetron_1000grass_dug",{
 	title = S("Lawnmower"),
-	description = S("Harvest 1000 units of grass with a clonetron"),
+	description = S("Harvest 1000 units of grass with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_grass_5.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -339,8 +339,8 @@ awards.register_achievement("clonetron_1000grass_dug",{
 })
 
 awards.register_achievement("clonetron_1000iron_dug",{
-	title = S("Iron clonetron"),
-	description = S("Excavate 1000 units of iron ore with a clonetron"),
+	title = S("Iron Clonetron"),
+	description = S("Excavate 1000 units of iron ore with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_steel_ingot.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -351,8 +351,8 @@ awards.register_achievement("clonetron_1000iron_dug",{
 })
 
 awards.register_achievement("clonetron_1000copper_dug",{
-	title = S("Copper clonetron"),
-	description = S("Excavate 1000 units of copper ore with a clonetron"),
+	title = S("Copper Clonetron"),
+	description = S("Excavate 1000 units of copper ore with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_copper_ingot.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -363,8 +363,8 @@ awards.register_achievement("clonetron_1000copper_dug",{
 })
 
 awards.register_achievement("clonetron_1000coal_dug",{
-	title = S("Coal clonetron"),
-	description = S("Excavate 1,000 units if coal with a clonetron"),
+	title = S("Coal Clonetron"),
+	description = S("Excavate 1,000 units if coal with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_coal_lump.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -376,7 +376,7 @@ awards.register_achievement("clonetron_1000coal_dug",{
 
 awards.register_achievement("clonetron_10000coal_dug",{
 	title = S("Bagger 288"),
-	description = S("Excavate 10,000 units of coal with a clonetron"),
+	description = S("Excavate 10,000 units of coal with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_coal_block.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -388,7 +388,7 @@ awards.register_achievement("clonetron_10000coal_dug",{
 
 awards.register_achievement("clonetron_100gold_dug",{
 	title = S("clonetron 49er"),
-	description = S("Excavate 100 units of gold with a clonetron"),
+	description = S("Excavate 100 units of gold with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^default_gold_ingot.png^clonetron_digger_yb_frame.png",
 	trigger = {
@@ -400,7 +400,7 @@ awards.register_achievement("clonetron_100gold_dug",{
 
 awards.register_achievement("clonetron_1000_built",{
 	title = S("Constructive Digging"),
-	description = S("Build 1,000 blocks with a clonetron"),
+	description = S("Build 1,000 blocks with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_builder.png",
 	trigger = {
@@ -411,7 +411,7 @@ awards.register_achievement("clonetron_1000_built",{
 
 awards.register_achievement("clonetron_10000_built",{
 	title = S("Highly Constructive Digging"),
-	description = S("Build 10,000 blocks with a clonetron"),
+	description = S("Build 10,000 blocks with a Clonetron"),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_axel_side.png^[transformR90^clonetron_builder.png",
 	trigger = {
@@ -421,15 +421,15 @@ awards.register_achievement("clonetron_10000_built",{
 })
 
 awards.register_achievement("clonetron_crate10",{
-	title = S("clonetron Packrat"),
-	description = S("Stored 10 or more clonetron blocks in one crate."),
+	title = S("Clonetron Packrat"),
+	description = S("Stored 10 or more Clonetron blocks in one crate."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_crate.png", -- TODO: Visually distinguish this from Bigtron
 })
 
 awards.register_achievement("clonetron_crate100",{
-	title = S("clonetron Hoarder"),
-	description = S("Stored 100 or more clonetron blocks in one crate."),
+	title = S("Clonetron Hoarder"),
+	description = S("Stored 100 or more Clonetron blocks in one crate."),
 	background = "awards_bg_mining.png",
 	icon = "clonetron_plate.png^clonetron_crate.png", -- TODO: Visually distinguish this from Bigtron
 })

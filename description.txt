@@ -1,5 +1,6 @@
-clonetron - a modular tunnel boring/building machine for minetest, v0.7.6 - 2017-01-22
+Clonetron - a port of Digtron (a modular tunnel boring/building machine for minetest, v0.7.6 - 2017-01-22) for MineClone 2
 
-Forum : https://forum.minetest.net/viewtopic.php?t=16295
-Github: https://github.com/FaceDeer/clonetron/
-Wiki: http://wiki.minetest.net/Mods/clonetron
+Clonetron Github: https://github.com/ThePython10110/Clonetron/
+Digtron Forum topic: https://forum.minetest.net/viewtopic.php?t=16295
+Digtron Github: https://github.com/FaceDeer/Digtron/
+Digtron Wiki: http://wiki.minetest.net/Mods/Digtron

@@ -38,13 +38,13 @@ end
 clonetron.mark_diggable = function(pos, nodes_dug, player)
 	-- mark the node as dug, if the player provided would have been able to dig it.
 	-- Don't *actually* dig the node yet, though, because if we dig a node with sand over it the sand will start falling
-	-- and then destroy whatever node we place there subsequently (either by a builder head or by moving a clonetron node)
+	-- and then destroy whatever node we place there subsequently (either by a builder head or by moving a Clonetron node)
 	-- I don't like sand. It's coarse and rough and irritating and it gets everywhere. And it necessitates complicated dig routines.
 	-- returns fuel cost and what will be dropped by digging these nodes.
 
 	local target = minetest.get_node(pos)
 	
-	-- prevent clonetrons from being marked for digging.
+	-- prevent Clonetrons from being marked for digging.
 	if minetest.get_item_group(target.name, "clonetron") ~= 0 or
 		minetest.get_item_group(target.name, "clonetron_protected") ~= 0 or
 		minetest.get_item_group(target.name, "immortal") ~= 0 then
@@ -101,7 +101,7 @@ clonetron.can_build_to = function(pos, protected_nodes, dug_nodes)
 end
 
 clonetron.can_move_to = function(pos, protected_nodes, dug_nodes)
-	-- Same as can_build_to, but also checks if the current node is part of the clonetron.
+	-- Same as can_build_to, but also checks if the current node is part of the Clonetron.
 	-- this allows us to disregard obstructions that *will* move out of the way.
 	if clonetron.can_build_to(pos, protected_nodes, dug_nodes) == true or
 	   minetest.get_item_group(minetest.get_node(pos).name, "clonetron") ~= 0 then
@@ -158,7 +158,7 @@ clonetron.take_from_inventory = function(itemname, inventory_positions)
 	return nil
 end
 
--- Used to determine which coordinate is being checked for periodicity. eg, if the clonetron is moving in the z direction, then periodicity is checked for every n nodes in the z axis.
+-- Used to determine which coordinate is being checked for periodicity. eg, if the Clonetron is moving in the z direction, then periodicity is checked for every n nodes in the z axis.
 clonetron.get_controlling_coordinate = function(pos, facedir)
 	-- used for determining builder period and offset
 	local dir = clonetron.facedir_to_dir_map[facedir]

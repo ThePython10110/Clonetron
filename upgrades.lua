@@ -1,4 +1,4 @@
--- re-applies the "_clonetron_formspec" property from all clonetron node defs to the clonetron node's metadata.
+-- re-applies the "_clonetron_formspec" property from all Clonetron node defs to the Clonetron node's metadata.
 minetest.register_lbm({
 	name = "clonetron:generic_formspec_sanitizer",
 	nodenames = {"group:clonetron"},

@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: awards.lua:122
-msgid "Deep Blue clonetron"
+msgid "Deep Blue Clonetron"
 msgstr ""
 
 #: awards.lua:123
-msgid "Encounter water while operating a clonetron."
+msgid "Encounter water while operating a Clonetron."
 msgstr ""
 
 #: awards.lua:129
-msgid "clonetrons of Fire"
+msgid "Clonetrons of Fire"
 msgstr ""
 
 #: awards.lua:130
-msgid "Encounter lava while operating a clonetron."
+msgid "Encounter lava while operating a Clonetron."
 msgstr ""
 
 #: awards.lua:136
@@ -38,7 +38,7 @@ msgid "Bigtron"
 msgstr ""
 
 #: awards.lua:137
-msgid "Operate a clonetron with 10 or more component blocks."
+msgid "Operate a Clonetron with 10 or more component blocks."
 msgstr ""
 
 #: awards.lua:143
@@ -46,7 +46,7 @@ msgid "Really Bigtron"
 msgstr ""
 
 #: awards.lua:144
-msgid "Operate a clonetron with 100 or more component blocks."
+msgid "Operate a Clonetron with 100 or more component blocks."
 msgstr ""
 
 #: awards.lua:150
@@ -54,7 +54,7 @@ msgid "Buildtron"
 msgstr ""
 
 #: awards.lua:151
-msgid "Operate a clonetron with 25 or more builder modules."
+msgid "Operate a Clonetron with 25 or more builder modules."
 msgstr ""
 
 #: awards.lua:157
@@ -62,7 +62,7 @@ msgid "Digging Leviathan"
 msgstr ""
 
 #: awards.lua:158
-msgid "Operate a clonetron with 25 or more digger heads."
+msgid "Operate a Clonetron with 25 or more digger heads."
 msgstr ""
 
 #: awards.lua:164
@@ -70,7 +70,7 @@ msgid "clonetron In The Sky"
 msgstr ""
 
 #: awards.lua:165
-msgid "Operate a clonetron above 1000m elevation"
+msgid "Operate a Clonetron above 1000m elevation"
 msgstr ""
 
 #: awards.lua:171
@@ -78,7 +78,7 @@ msgid "clonetron High"
 msgstr ""
 
 #: awards.lua:172
-msgid "Operate a clonetron above 100m elevation"
+msgid "Operate a Clonetron above 100m elevation"
 msgstr ""
 
 #: awards.lua:178
@@ -86,7 +86,7 @@ msgid "Scratching the Surface"
 msgstr ""
 
 #: awards.lua:179
-msgid "Operate a clonetron 100m underground"
+msgid "Operate a Clonetron 100m underground"
 msgstr ""
 
 #: awards.lua:185
@@ -94,7 +94,7 @@ msgid "Digging Deeper"
 msgstr ""
 
 #: awards.lua:186
-msgid "Operate a clonetron 1,000m underground"
+msgid "Operate a Clonetron 1,000m underground"
 msgstr ""
 
 #: awards.lua:192
@@ -102,7 +102,7 @@ msgid "More Than a Mile"
 msgstr ""
 
 #: awards.lua:193
-msgid "Operate a clonetron 2,000m underground"
+msgid "Operate a Clonetron 2,000m underground"
 msgstr ""
 
 #: awards.lua:199
@@ -111,7 +111,7 @@ msgstr ""
 
 #: awards.lua:200
 msgid ""
-"The deepest mine in the world is only 3.9 km deep, you operated a clonetron "
+"The deepest mine in the world is only 3.9 km deep, you operated a Clonetron "
 "below 4km"
 msgstr ""
 
@@ -120,7 +120,7 @@ msgid "Double Depth"
 msgstr ""
 
 #: awards.lua:207
-msgid "Operate a clonetron 8,000m underground"
+msgid "Operate a Clonetron 8,000m underground"
 msgstr ""
 
 #: awards.lua:213
@@ -128,7 +128,7 @@ msgid "Halfway to the Core"
 msgstr ""
 
 #: awards.lua:214
-msgid "Operate a clonetron 16,000m underground"
+msgid "Operate a Clonetron 16,000m underground"
 msgstr ""
 
 #: awards.lua:220
@@ -136,7 +136,7 @@ msgid "Nowhere To Go But Up"
 msgstr ""
 
 #: awards.lua:221
-msgid "Operate a clonetron 30,000m underground"
+msgid "Operate a Clonetron 30,000m underground"
 msgstr ""
 
 #: awards.lua:227
@@ -144,7 +144,7 @@ msgid "Mese Master"
 msgstr ""
 
 #: awards.lua:228
-msgid "Mine 100 Mese crystals with a clonetron"
+msgid "Mine 100 Mese crystals with a Clonetron"
 msgstr ""
 
 #: awards.lua:239
@@ -152,7 +152,7 @@ msgid "Diamond Vs. Diamond"
 msgstr ""
 
 #: awards.lua:240
-msgid "Mine 100 diamonds with a clonetron"
+msgid "Mine 100 diamonds with a Clonetron"
 msgstr ""
 
 #: awards.lua:251
@@ -160,7 +160,7 @@ msgid "Strip Mining"
 msgstr ""
 
 #: awards.lua:252
-msgid "Excavate 1000 units of dirt with a clonetron"
+msgid "Excavate 1000 units of dirt with a Clonetron"
 msgstr ""
 
 #: awards.lua:263
@@ -168,7 +168,7 @@ msgid "clonetron Miner"
 msgstr ""
 
 #: awards.lua:264
-msgid "Excavate 1000 blocks using a clonetron"
+msgid "Excavate 1000 blocks using a Clonetron"
 msgstr ""
 
 #: awards.lua:274
@@ -176,7 +176,7 @@ msgid "clonetron Expert Miner"
 msgstr ""
 
 #: awards.lua:275
-msgid "Excavate 10,000 blocks using a clonetron"
+msgid "Excavate 10,000 blocks using a Clonetron"
 msgstr ""
 
 #: awards.lua:285
@@ -184,7 +184,7 @@ msgid "clonetron Master Miner"
 msgstr ""
 
 #: awards.lua:286
-msgid "Excavate 100,000 blocks using a clonetron"
+msgid "Excavate 100,000 blocks using a Clonetron"
 msgstr ""
 
 #: awards.lua:296
@@ -192,7 +192,7 @@ msgid "clonetron MEGAMINER"
 msgstr ""
 
 #: awards.lua:297
-msgid "Excavate over a million blocks using a clonetron!"
+msgid "Excavate over a million blocks using a Clonetron!"
 msgstr ""
 
 #: awards.lua:307
@@ -200,7 +200,7 @@ msgid "Clear Cutting"
 msgstr ""
 
 #: awards.lua:308
-msgid "Chop down 1000 units of tree with a clonetron"
+msgid "Chop down 1000 units of tree with a Clonetron"
 msgstr ""
 
 #: awards.lua:319
@@ -208,7 +208,7 @@ msgid "clonetron Deforestation"
 msgstr ""
 
 #: awards.lua:320
-msgid "Chop down 10,000 units of tree with a clonetron"
+msgid "Chop down 10,000 units of tree with a Clonetron"
 msgstr ""
 
 #: awards.lua:331
@@ -216,7 +216,7 @@ msgid "Lawnmower"
 msgstr ""
 
 #: awards.lua:332
-msgid "Harvest 1000 units of grass with a clonetron"
+msgid "Harvest 1000 units of grass with a Clonetron"
 msgstr ""
 
 #: awards.lua:343
@@ -224,7 +224,7 @@ msgid "Iron clonetron"
 msgstr ""
 
 #: awards.lua:344
-msgid "Excavate 1000 units of iron ore with a clonetron"
+msgid "Excavate 1000 units of iron ore with a Clonetron"
 msgstr ""
 
 #: awards.lua:355
@@ -232,7 +232,7 @@ msgid "Copper clonetron"
 msgstr ""
 
 #: awards.lua:356
-msgid "Excavate 1000 units of copper ore with a clonetron"
+msgid "Excavate 1000 units of copper ore with a Clonetron"
 msgstr ""
 
 #: awards.lua:367
@@ -240,7 +240,7 @@ msgid "Coal clonetron"
 msgstr ""
 
 #: awards.lua:368
-msgid "Excavate 1,000 units if coal with a clonetron"
+msgid "Excavate 1,000 units if coal with a Clonetron"
 msgstr ""
 
 #: awards.lua:379
@@ -248,7 +248,7 @@ msgid "Bagger 288"
 msgstr ""
 
 #: awards.lua:380
-msgid "Excavate 10,000 units of coal with a clonetron"
+msgid "Excavate 10,000 units of coal with a Clonetron"
 msgstr ""
 
 #: awards.lua:391
@@ -256,7 +256,7 @@ msgid "clonetron 49er"
 msgstr ""
 
 #: awards.lua:392
-msgid "Excavate 100 units of gold with a clonetron"
+msgid "Excavate 100 units of gold with a Clonetron"
 msgstr ""
 
 #: awards.lua:403
@@ -264,7 +264,7 @@ msgid "Constructive Digging"
 msgstr ""
 
 #: awards.lua:404
-msgid "Build 1,000 blocks with a clonetron"
+msgid "Build 1,000 blocks with a Clonetron"
 msgstr ""
 
 #: awards.lua:414
@@ -272,7 +272,7 @@ msgid "Highly Constructive Digging"
 msgstr ""
 
 #: awards.lua:415
-msgid "Build 10,000 blocks with a clonetron"
+msgid "Build 10,000 blocks with a Clonetron"
 msgstr ""
 
 #: awards.lua:425
@@ -305,8 +305,8 @@ msgstr ""
 
 #: doc.lua:27
 msgid ""
-"A 'builder' module for a clonetron. By itself it does nothing, but as part of "
-"a clonetron it is used to construct user-defined blocks."
+"A 'builder' module for a Clonetron. By itself it does nothing, but as part of "
+"a Clonetron it is used to construct user-defined blocks."
 msgstr ""
 
 #: doc.lua:28
@@ -372,12 +372,12 @@ msgid ""
 "clonetron inventory modules are compatible with hoppers, adjacent hoppers will "
 "add to or take from their inventories. Hoppers are not part of the clonetron "
 "and will not move with it, however. They may be useful for creating a "
-"\"docking station\" for a clonetron."
+"\"docking station\" for a Clonetron."
 msgstr ""
 
 #: doc.lua:59
 msgid ""
-"Inventory modules are compatible with Pipeworks blocks. When a clonetron moves "
+"Inventory modules are compatible with Pipeworks blocks. When a Clonetron moves "
 "one of the inventory modules adjacent to a pipe it will automatically hook "
 "up to it, and disconnect again when it moves on."
 msgstr ""
@@ -393,7 +393,7 @@ msgid ""
 "store, none will be wasted (unless you dig away a control unit with some "
 "heat remaining in it, that heat does get wasted).\n"
 "\n"
-"By using one lump of coal as fuel a clonetron can:\n"
+"By using one lump of coal as fuel a Clonetron can:\n"
 "\tBuild @1 blocks\n"
 "\tDig @2 stone blocks\n"
 "\tDig @3 wood blocks\n"
@@ -401,7 +401,7 @@ msgid ""
 msgstr ""
 
 #: doc.lua:71
-msgid "Stores fuel to run a clonetron"
+msgid "Stores fuel to run a Clonetron"
 msgstr ""
 
 #: doc.lua:72
@@ -416,19 +416,19 @@ msgid ""
 "clonetron fuel store modules are compatible with hoppers, adjacent hoppers "
 "will add to or take from their inventories. Hoppers are not part of the "
 "clonetron and will not move with it, however. They may be useful for creating "
-"a \"docking station\" for a clonetron."
+"a \"docking station\" for a Clonetron."
 msgstr ""
 
 #: doc.lua:84
 #: doc.lua:103
 msgid ""
-"Fuel modules are compatible with Pipeworks blocks. When a clonetron moves one "
+"Fuel modules are compatible with Pipeworks blocks. When a Clonetron moves one "
 "of the inventory modules adjacent to a pipe it will automatically hook up to "
 "it, and disconnect again when it moves on."
 msgstr ""
 
 #: doc.lua:89
-msgid "Holds RE batteries to run a clonetron"
+msgid "Holds RE batteries to run a Clonetron"
 msgstr ""
 
 #: doc.lua:90
@@ -456,7 +456,7 @@ msgstr ""
 
 #: doc.lua:107
 msgid ""
-"Stores fuel for a clonetron and also has an inventory for building materials"
+"Stores fuel for a Clonetron and also has an inventory for building materials"
 msgstr ""
 
 #: doc.lua:108
@@ -476,12 +476,12 @@ msgid ""
 "will insert items into its fuel inventory, and a hopper on the bottom of a "
 "combined inventory module will take items from its general inventory. "
 "Hoppers are not part of the clonetron and will not move with it, however. They "
-"may be useful for creating a \"docking station\" for a clonetron."
+"may be useful for creating a \"docking station\" for a Clonetron."
 msgstr ""
 
 #: doc.lua:119
 msgid ""
-"Combination modules are compatible with Pipeworks blocks. When a clonetron "
+"Combination modules are compatible with Pipeworks blocks. When a Clonetron "
 "moves one of the inventory modules adjacent to a pipe it will automatically "
 "hook up to it, and disconnect again when it moves on. Items are extracted "
 "from the \"main\" inventory, and items coming into the combination module "
@@ -497,7 +497,7 @@ msgid ""
 msgstr ""
 
 #: doc.lua:126
-msgid "An empty crate that a clonetron can be stored in"
+msgid "An empty crate that a Clonetron can be stored in"
 msgstr ""
 
 #: doc.lua:127
@@ -507,7 +507,7 @@ msgid ""
 "digger is a kilometer down under a shaft filled with stairs, how to get it "
 "back to the surface to run another pass?\n"
 "\n"
-"Place an empty clonetron crate next to a clonetron and right-click it to pack "
+"Place an empty clonetron crate next to a Clonetron and right-click it to pack "
 "the clonetron (and all its inventory and settings) into the crate. You can "
 "then collect the crate, bring it somewhere else, build the crate, and then "
 "unpack the clonetron from it again. The clonetron will appear in the same "
@@ -516,12 +516,12 @@ msgid ""
 msgstr ""
 
 #: doc.lua:131
-msgid "A crate containing a clonetron array"
+msgid "A crate containing a Clonetron array"
 msgstr ""
 
 #: doc.lua:132
 msgid ""
-"This crate contains a clonetron assembly that was stored in it earlier. Place "
+"This crate contains a Clonetron assembly that was stored in it earlier. Place "
 "it somewhere and right-click on it to access the label text that was applied "
 "to it. There's also a button that causes it to display the shape the "
 "deployed clonetron would take if you unpacked the crate, marking unbuildable "
@@ -531,7 +531,7 @@ msgid ""
 msgstr ""
 
 #: doc.lua:142
-msgid "A basic controller to make a clonetron array move and operate."
+msgid "A basic controller to make a Clonetron array move and operate."
 msgstr ""
 
 #: doc.lua:143
@@ -574,7 +574,7 @@ msgid ""
 "\n"
 "The \"Stop block\" inventory slot in an auto-controller allows you to "
 "program an auto-controller to treat certain block types as impenetrable "
-"obstructions. This can allow you to fence a clonetron in with something so you "
+"obstructions. This can allow you to fence a Clonetron in with something so you "
 "don't have to carefully count exactly how many steps it should take, for "
 "example.\n"
 "\n"
@@ -588,7 +588,7 @@ msgstr ""
 
 #: doc.lua:160
 msgid ""
-"A simplified controller that merely moves a clonetron around without "
+"A simplified controller that merely moves a Clonetron around without "
 "triggering its builder or digger modules"
 msgstr ""
 
@@ -610,7 +610,7 @@ msgstr ""
 
 #: doc.lua:166
 msgid ""
-"This magical module can rotate a clonetron array in place around itself. Right-"
+"This magical module can rotate a Clonetron array in place around itself. Right-"
 "clicking on it will rotate the clonetron 90 degrees in the direction the "
 "orange arrows on its sides indicate (widdershins around the Y axis by "
 "default, use the screwdriver to change this) assuming there's space for the "
@@ -636,7 +636,7 @@ msgstr ""
 
 #: doc.lua:174
 msgid ""
-"This digger head is mainly of use when you want to build a clonetron capable "
+"This digger head is mainly of use when you want to build a Clonetron capable "
 "of digging diagonal paths. A normal one-direction dig head would be unable "
 "to clear blocks in both of the directions it would be called upon to move, "
 "resulting in a stuck clonetron.\n"
@@ -653,7 +653,7 @@ msgstr ""
 
 #: doc.lua:179
 msgid ""
-"This digger head is mainly of use when you want to build a clonetron capable "
+"This digger head is mainly of use when you want to build a Clonetron capable "
 "of digging diagonal paths. A normal one-direction dig head would be unable "
 "to clear blocks in both of the directions it would be called upon to move, "
 "resulting in a stuck clonetron.\n"
@@ -690,7 +690,7 @@ msgid ""
 msgstr ""
 
 #: doc.lua:191
-msgid "A clonetron digger head that only excavates soft materials"
+msgid "a Clonetron digger head that only excavates soft materials"
 msgstr ""
 
 #: doc.lua:192
@@ -710,7 +710,7 @@ msgstr ""
 
 #: doc.lua:200
 msgid ""
-"High-voltage power connector allowing a clonetron to be powered from a Technic "
+"High-voltage power connector allowing a Clonetron to be powered from a Technic "
 "power network."
 msgstr ""
 
@@ -733,7 +733,7 @@ msgstr ""
 
 #: doc.lua:207
 msgid ""
-"An outlet that can be used to eject accumulated detritus from a clonetron's "
+"An outlet that can be used to eject accumulated detritus from a Clonetron's "
 "inventory."
 msgstr ""
 
@@ -758,7 +758,7 @@ msgstr ""
 
 #: doc.lua:219
 msgid ""
-"Place the duplicator block adjacent to a clonetron, and then fill the "
+"Place the duplicator block adjacent to a Clonetron, and then fill the "
 "duplicator's inventory with enough parts to recreate the adjacent clonetron. "
 "Then place an empty clonetron crate at the duplicator's output (the side with "
 "the black \"+\") and click the \"Duplicate\" button in the duplicator's "
@@ -768,7 +768,7 @@ msgid ""
 msgstr ""
 
 #: doc.lua:223
-msgid "Structural component for a clonetron array"
+msgid "Structural component for a Clonetron array"
 msgstr ""
 
 #: doc.lua:224
@@ -804,7 +804,7 @@ msgstr ""
 
 #: doc.lua:234
 msgid ""
-"A structural panel that can be made part of a clonetron to provide shelter for "
+"A structural panel that can be made part of a Clonetron to provide shelter for "
 "an operator, keep sand out of the clonetron's innards, or just to look cool."
 msgstr ""
 
@@ -814,7 +814,7 @@ msgstr ""
 
 #: doc.lua:237
 msgid ""
-"A pair of structural panels that can be made part of a clonetron to provide "
+"A pair of structural panels that can be made part of a Clonetron to provide "
 "shelter for an operator, keep sand out of the clonetron's innards, or just to "
 "look cool."
 msgstr ""
@@ -825,7 +825,7 @@ msgstr ""
 
 #: doc.lua:240
 msgid ""
-"A trio of structural panels that can be made part of a clonetron to provide "
+"A trio of structural panels that can be made part of a Clonetron to provide "
 "shelter for an operator, keep sand out of the clonetron's innards, or just to "
 "look cool."
 msgstr ""
@@ -904,7 +904,7 @@ msgid ""
 "\n"
 "Traction - clonetrons cannot fly. By default, they need to be touching one "
 "block of solid ground for every three blocks of clonetron in order to move. "
-"clonetrons can fall, though - traction is never needed when a clonetron is "
+"clonetrons can fall, though - traction is never needed when a Clonetron is "
 "moving downward. \"Pusher\" controllers can ignore the need for traction "
 "when moving in any direction."
 msgstr ""
@@ -965,7 +965,7 @@ msgstr ""
 
 #: doc.lua:304
 msgid ""
-"To more easily visualize the operation of a clonetron, imagine that its cycle "
+"To more easily visualize the operation of a Clonetron, imagine that its cycle "
 "of operation follows these steps in order:\n"
 "\n"
 "* Dig\n"

@@ -43,12 +43,12 @@ local burn_smoke = function(pos, amount)
 	}
 end
 
---Performs various tests on a layout to play warning noises and see if clonetron can move at all.
+--Performs various tests on a layout to play warning noises and see if Clonetron can move at all.
 local function neighbour_test(layout, status_text, dir)
 	if layout.ignore_touching == true then
-		-- if the clonetron array touches unloaded nodes, too dangerous to do anything in that situation. Abort.
+		-- if the Clonetron array touches unloaded nodes, too dangerous to do anything in that situation. Abort.
 		minetest.sound_play("buzzer", {gain=0.25, pos=layout.controller})
-		return S("clonetron is adjacent to unloaded nodes.") .. "\n" .. status_text, 1
+		return S("Clonetron is adjacent to unloaded nodes.") .. "\n" .. status_text, 1
 	end
 	
 	if layout.water_touching == true then
@@ -60,9 +60,9 @@ local function neighbour_test(layout, status_text, dir)
 	end	
 	
 	if dir and dir.y ~= -1 and layout.traction * clonetron.config.traction_factor < table.getn(layout.all) then
-		-- clonetrons can't fly, though they can fall
+		-- Clonetrons can't fly, though they can fall
 		minetest.sound_play("squeal", {gain=1.0, pos=layout.controller})
-		return S("clonetron has @1 blocks but only enough traction to move @2 blocks.\n", table.getn(layout.all), layout.traction * clonetron.config.traction_factor)
+		return S("Clonetron has @1 blocks but only enough traction to move @2 blocks.\n", table.getn(layout.all), layout.traction * clonetron.config.traction_factor)
 			 .. status_text, 2
 	end
 
@@ -119,7 +119,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 	local status_text = S("Heat remaining in controller furnace: @1", math.floor(math.max(0, fuel_burning)))
 	local exhaust = meta:get_int("on_coal")
 	
-	local layout = clonetronLayout.create(pos, clicker)
+	local layout = ClonetronLayout.create(pos, clicker)
 
 	local status_text, return_code = neighbour_test(layout, status_text, dir)
 	if return_code ~= 0 then
@@ -166,7 +166,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 	
 	----------------------------------------------------------------------------------------------------------------------
 	
-	-- test if any clonetrons are obstructed by non-clonetron nodes that haven't been marked
+	-- test if any Clonetrons are obstructed by non-Clonetron nodes that haven't been marked
 	-- as having been dug.
 	local can_move = true
 	for _, location in pairs(layout.all) do
@@ -186,7 +186,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 		minetest.get_node_timer(pos):start(clonetron.config.cycle_time)
 		minetest.sound_play("squeal", {gain=1.0, pos=pos})
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		return pos, S("clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
+		return pos, S("Clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
 	end
 
 	----------------------------------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 	
 	if test_fuel_needed > fuel_burning + test_fuel_burned then
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		return pos, S("clonetron needs more fuel."), 4 -- abort, don't dig and don't build.
+		return pos, S("Clonetron needs more fuel."), 4 -- abort, don't dig and don't build.
 	end
 	
 	if not can_build then
@@ -284,11 +284,11 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 		local return_code = 5
 		if test_build_return_code == 3 then
 			minetest.sound_play("honk", {gain=0.5, pos=pos}) -- A builder is not configured
-			return_string = S("clonetron connected to at least one builder with no output material assigned.") .. "\n"
+			return_string = S("Clonetron connected to at least one builder with no output material assigned.") .. "\n"
 			return_code = 6
 		elseif test_build_return_code == 2 then
 			minetest.sound_play("dingding", {gain=1.0, pos=pos}) -- Insufficient inventory
-			return_string = S("clonetron has insufficient building materials. Needed: @1", failed_to_find:get_name()) .. "\n"
+			return_string = S("Clonetron has insufficient building materials. Needed: @1", failed_to_find:get_name()) .. "\n"
 			return_code = 7
 		end
 		return pos, return_string .. status_text, return_code --Abort, don't dig and don't build.
@@ -333,7 +333,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 	
 	local building_fuel_cost = 0
 	local strange_failure = false
-	-- execute_build on all clonetron components that have one
+	-- execute_build on all Clonetron components that have one
 	if layout.builders ~= nil then
 		for k, location in pairs(layout.builders) do
 			local target = minetest.get_node(location.pos)
@@ -373,7 +373,7 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 		-- We weren't able to detect this build failure ahead of time, so make a big noise now. This is strange, shouldn't happen.
 		minetest.sound_play("dingding", {gain=1.0, pos=pos})
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		status_text = S("clonetron unexpectedly failed to execute one or more build operations, likely due to an inventory error.") .. "\n"
+		status_text = S("Clonetron unexpectedly failed to execute one or more build operations, likely due to an inventory error.") .. "\n"
 	end
 	
 	local total_fuel_cost = math.max(digging_fuel_cost + building_fuel_cost - power_from_cables, 0)
@@ -402,15 +402,15 @@ clonetron.execute_dig_cycle = function(pos, clicker)
 	end
 	
 	-- finally, dig out any nodes remaining to be dug. Some of these will have had their flag revoked because
-	-- a builder put something there or because they're another clonetron node.
+	-- a builder put something there or because they're another Clonetron node.
 	local node_to_dig, whether_to_dig = layout.nodes_dug:pop()
 	while node_to_dig ~= nil do
 		if whether_to_dig == true then
-			minetest.log("action", string.format("%s uses clonetron to dig %s at (%d, %d, %d)", clicker:get_player_name(), minetest.get_node(node_to_dig).name, node_to_dig.x, node_to_dig.y, node_to_dig.z))
+			minetest.log("action", string.format("%s uses Clonetron to dig %s at (%d, %d, %d)", clicker:get_player_name(), minetest.get_node(node_to_dig).name, node_to_dig.x, node_to_dig.y, node_to_dig.z))
 			minetest.remove_node(node_to_dig)
 		end
-		-- all of the clonetron's nodes wind up in nodes_dug, so this is an ideal place to stick
-		-- a check to make sand fall after the clonetron has passed.
+		-- all of the Clonetron's nodes wind up in nodes_dug, so this is an ideal place to stick
+		-- a check to make sand fall after the Clonetron has passed.
 		minetest.check_for_falling({x=node_to_dig.x, y=node_to_dig.y+1, z=node_to_dig.z})
 		node_to_dig, whether_to_dig = layout.nodes_dug:pop()
 	end
@@ -421,7 +421,7 @@ end
 -- Simplified version of the above method that only moves, and doesn't execute diggers or builders.
 clonetron.execute_move_cycle = function(pos, clicker)
 	local meta = minetest.get_meta(pos)
-	local layout = clonetronLayout.create(pos, clicker)
+	local layout = ClonetronLayout.create(pos, clicker)
 
 	local status_text = ""
 	local status_text, return_code = neighbour_test(layout, status_text, nil) -- skip traction check for pusher by passing nil for direction
@@ -441,15 +441,15 @@ clonetron.execute_move_cycle = function(pos, clicker)
 	-- if the player is standing within the array or next to it, move him too.
 	local move_player = move_player_test(layout, clicker)
 	
-	-- test if any clonetrons are obstructed by non-clonetron nodes
+	-- test if any Clonetrons are obstructed by non-Clonetron nodes
 	layout:move_layout_image(dir)
 	if not layout:can_write_layout_image() then
-		-- mark this node as waiting, will clear this flag in clonetron.config.cycle_time seconds
+		-- mark this node as waiting, will clear this flag in Clonetron.config.cycle_time seconds
 		minetest.get_meta(pos):set_string("waiting", "true")
 		minetest.get_node_timer(pos):start(clonetron.config.cycle_time)
 		minetest.sound_play("squeal", {gain=1.0, pos=pos})
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		return pos, S("clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
+		return pos, S("Clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
 	end
 
 	minetest.sound_play("truck", {gain=1.0, pos=pos})
@@ -482,7 +482,7 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 	local status_text = S("Heat remaining in controller furnace: @1", math.floor(math.max(0, fuel_burning)))
 	local exhaust = meta:get_int("on_coal")
 	                                        
-	local layout = clonetronLayout.create(pos, clicker)
+	local layout = ClonetronLayout.create(pos, clicker)
 
 	local status_text, return_code = neighbour_test(layout, status_text, dir)
 	if return_code ~= 0 then
@@ -503,10 +503,10 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 	local digging_fuel_cost = 0
 	local particle_systems = {}
 	
-	-- execute the execute_dig method on all clonetron components that have one
+	-- execute the execute_dig method on all Clonetron components that have one
 	-- This builds a set of nodes that will be dug and returns a list of products that will be generated
 	-- but doesn't actually dig the nodes yet. That comes later.
-	-- If we dug them now, sand would fall and some clonetron nodes would die.
+	-- If we dug them now, sand would fall and some Clonetron nodes would die.
 	if layout.diggers ~= nil then
 		for k, location in pairs(layout.diggers) do
 			local target = minetest.get_node(location.pos)
@@ -517,7 +517,7 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 					for _, itemname in pairs(dropped) do
 						table.insert(items_dropped, itemname)
 					end
-					if clonetron.config.particle_effects then
+					if Clonetron.config.particle_effects then
 						table.insert(particle_systems, dig_dust(vector.add(location.pos, dir), target.param2))
 					end
 				end
@@ -530,7 +530,7 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 	
 	----------------------------------------------------------------------------------------------------------------------
 	
-	-- test if any clonetrons are obstructed by non-clonetron nodes that haven't been marked
+	-- test if any Clonetrons are obstructed by non-Clonetron nodes that haven't been marked
 	-- as having been dug.
 	local can_move = true
 	for _, location in pairs(layout.all) do
@@ -550,7 +550,7 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 		minetest.get_node_timer(pos):start(clonetron.config.cycle_time)
 		minetest.sound_play("squeal", {gain=1.0, pos=pos})
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		return pos, S("clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
+		return pos, S("Clonetron is obstructed.") .. "\n" .. status_text, 3 --Abort, don't dig and don't build.
 	end
 
 	----------------------------------------------------------------------------------------------------------------------
@@ -616,11 +616,11 @@ clonetron.execute_downward_dig_cycle = function(pos, clicker)
 	end
 	
 	-- finally, dig out any nodes remaining to be dug. Some of these will have had their flag revoked because
-	-- a builder put something there or because they're another clonetron node.
+	-- a builder put something there or because they're another Clonetron node.
 	local node_to_dig, whether_to_dig = layout.nodes_dug:pop()
 	while node_to_dig ~= nil do
 		if whether_to_dig == true then
-			minetest.log("action", string.format("%s uses clonetron to dig %s at (%d, %d, %d)", clicker:get_player_name(), minetest.get_node(node_to_dig).name, node_to_dig.x, node_to_dig.y, node_to_dig.z))
+			minetest.log("action", string.format("%s uses Clonetron to dig %s at (%d, %d, %d)", clicker:get_player_name(), minetest.get_node(node_to_dig).name, node_to_dig.x, node_to_dig.y, node_to_dig.z))
 			minetest.remove_node(node_to_dig)
 		end
 		node_to_dig, whether_to_dig = layout.nodes_dug:pop()

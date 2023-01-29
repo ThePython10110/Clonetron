@@ -19,7 +19,7 @@ local builder_formspec_string =
 	"list[current_name;main;".. tostring(displace_due_to_help_button/2) ..",0;1,1;]" ..
 	"label[" .. tostring(displace_due_to_help_button/2).. ",0.8;" .. S("Block to build") .. "]" ..
 	"field[" .. tostring(displace_due_to_help_button + 1.3) ..",0.8;1,0.1;extrusion;" .. S("Extrusion") .. ";${extrusion}]" ..
-	"tooltip[extrusion;" .. S("Builder will extrude this many blocks in the direction it is facing.\nCan be set from 1 to @1.\nNote that clonetron won't build into unloaded map regions.", clonetron.config.maximum_extrusion) .. "]" ..
+	"tooltip[extrusion;" .. S("Builder will extrude this many blocks in the direction it is facing.\nCan be set from 1 to @1.\nNote that Clonetron won't build into unloaded map regions.", clonetron.config.maximum_extrusion) .. "]" ..
 	"field[" .. tostring(displace_due_to_help_button + 2.3) ..",0.8;1,0.1;period;" .. S("Periodicity") .. ";${period}]" ..
 	"tooltip[period;" .. S("Builder will build once every n steps.\nThese steps are globally aligned, so all builders with the\nsame period and offset will build on the same location.") .. "]" ..
 	"field[" .. tostring(displace_due_to_help_button + 3.3) ..",0.8;1,0.1;offset;" .. S("Offset") .. ";${offset}]" ..
@@ -134,7 +134,7 @@ end)
 
 -- Builds objects in the targeted node. This is a complicated beastie.
 minetest.register_node("clonetron:builder", {
-	description = S("clonetron Builder Module"),
+	description = S("Clonetron Builder Module"),
 	_doc_items_longdesc = clonetron.doc.builder_longdesc,
     _doc_items_usagehelp = clonetron.doc.builder_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 4},
@@ -198,7 +198,7 @@ minetest.register_node("clonetron:builder", {
 		local stack_name = stack:get_name()
 	
 		if minetest.get_item_group(stack_name, "clonetron") ~= 0 then
-			return 0 -- don't allow builders to be set to build clonetron nodes, they'll just clog the output.
+			return 0 -- don't allow builders to be set to build Clonetron nodes, they'll just clog the output.
 		end	
 		
 		local stack_def = minetest.registered_nodes[stack_name]
@@ -266,12 +266,12 @@ minetest.register_node("clonetron:builder", {
 			if not clonetron.can_move_to(buildpos, protected_nodes, nodes_dug) then
 				--using "can_move_to" instead of "can_build_to" test case in case the builder is pointed "backward", and will thus
 				--be building into the space that it's currently in and will be vacating after moving, or in case the builder is aimed
-				--sideways and a fellow clonetron node was ahead of it (will also be moving out of the way).
+				--sideways and a fellow Clonetron node was ahead of it (will also be moving out of the way).
 				
-				--If the player has built his clonetron stupid (eg has another clonetron node in the place the builder wants to build) this
+				--If the player has built his Clonetron stupid (eg has another Clonetron node in the place the builder wants to build) this
 				--assumption is wrong, but I can't hold the player's hand through *every* possible bad design decision. Worst case,
-				--the clonetron will think its inventory can't handle the next build step and abort the build when it actually could have
-				--managed one more cycle. That's not a bad outcome for a clonetron array that was built stupidly to begin with.
+				--the Clonetron will think its inventory can't handle the next build step and abort the build when it actually could have
+				--managed one more cycle. That's not a bad outcome for a Clonetron array that was built stupidly to begin with.
 				return 1, return_items
 			end
 			
@@ -322,7 +322,7 @@ minetest.register_node("clonetron:builder", {
 			if not clonetron.config.uses_resources then
 				local returned_stack, success = clonetron.item_place_node(item_stack, player, buildpos, build_facing)
 				if success == true then
-					minetest.log("action", string.format("%s uses clonetron to build %s at (%d, %d, %d), displacing %s", player:get_player_name(), item_stack:get_name(), buildpos.x, buildpos.y, buildpos.z, oldnode.name))
+					minetest.log("action", string.format("%s uses Clonetron to build %s at (%d, %d, %d), displacing %s", player:get_player_name(), item_stack:get_name(), buildpos.x, buildpos.y, buildpos.z, oldnode.name))
 					nodes_dug:set(buildpos.x, buildpos.y, buildpos.z, false)
 					built_count = built_count + 1
 				else
@@ -337,7 +337,7 @@ minetest.register_node("clonetron:builder", {
 			end
 			local returned_stack, success = clonetron.item_place_node(ItemStack(item_stack), player, buildpos, build_facing)
 			if success == true then
-				minetest.log("action", string.format("%s uses clonetron to build %s at (%d, %d, %d), displacing %s", player:get_player_name(), item_stack:get_name(), buildpos.x, buildpos.y, buildpos.z, oldnode.name))
+				minetest.log("action", string.format("%s uses Clonetron to build %s at (%d, %d, %d), displacing %s", player:get_player_name(), item_stack:get_name(), buildpos.x, buildpos.y, buildpos.z, oldnode.name))
 				--flag this node as *not* to be dug.
 				nodes_dug:set(buildpos.x, buildpos.y, buildpos.z, false)
 				clonetron.award_item_built(item_stack:get_name(), player)

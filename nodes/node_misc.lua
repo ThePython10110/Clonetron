@@ -2,9 +2,9 @@
 local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP.."/intllib.lua")
 
--- A do-nothing "structural" node, to ensure all clonetron nodes that are supposed to be connected to each other can be connected to each other.
+-- A do-nothing "structural" node, to ensure all Clonetron nodes that are supposed to be connected to each other can be connected to each other.
 minetest.register_node("clonetron:structure", {
-	description = S("clonetron Structure"),
+	description = S("Clonetron Structure"),
 	_doc_items_longdesc = clonetron.doc.structure_longdesc,
     _doc_items_usagehelp = clonetron.doc.structure_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 1},
@@ -35,9 +35,9 @@ minetest.register_node("clonetron:structure", {
 	},
 })
 
--- A modest light source that will move with the clonetron, handy for working in a tunnel you aren't bothering to install permanent lights in.
-minetest.register_node("clonetron:light", {
-	description = S("clonetron Light"),
+-- A modest light source that will move with the Clonetron, handy for working in a tunnel you aren't bothering to install permanent lights in.
+minetest.register_node("Clonetron:light", {
+	description = S("Clonetron Light"),
 	_doc_items_longdesc = clonetron.doc.light_longdesc,
     _doc_items_usagehelp = clonetron.doc.light_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 1},
@@ -59,7 +59,7 @@ minetest.register_node("clonetron:light", {
 
 -- A simple structural panel
 minetest.register_node("clonetron:panel", {
-	description = S("clonetron Panel"),
+	description = S("Clonetron Panel"),
 	_doc_items_longdesc = clonetron.doc.panel_longdesc,
     _doc_items_usagehelp = clonetron.doc.panel_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 1},
@@ -82,7 +82,7 @@ minetest.register_node("clonetron:panel", {
 
 -- A simple structural panel
 minetest.register_node("clonetron:edge_panel", {
-	description = S("clonetron Edge Panel"),
+	description = S("Clonetron Edge Panel"),
 	_doc_items_longdesc = clonetron.doc.edge_panel_longdesc,
     _doc_items_usagehelp = clonetron.doc.edge_panel_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 1},
@@ -111,7 +111,7 @@ minetest.register_node("clonetron:edge_panel", {
 })
 
 minetest.register_node("clonetron:corner_panel", {
-	description = S("clonetron Corner Panel"),
+	description = S("Clonetron Corner Panel"),
 	_doc_items_longdesc = clonetron.doc.corner_panel_longdesc,
     _doc_items_usagehelp = clonetron.doc.corner_panel_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3, clonetron = 1},

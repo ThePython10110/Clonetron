@@ -4,7 +4,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 
 -- Battery storage. Controller node draws electrical power from here.
--- Note that batttery boxes are clonetron group 7.
+-- Note that batttery boxes are Clonetron group 7.
 
 local battery_holder_formspec_string = "size[8,9.3]" ..
 	mcl_vars.gui_bg ..
@@ -30,7 +30,7 @@ if not minetest.get_modpath("technic") then
 end
 	
 minetest.register_node("clonetron:battery_holder", {
-	description = S("clonetron Battery Holder"),
+	description = S("Clonetron Battery Holder"),
 	_doc_items_longdesc = clonetron.doc.battery_holder_longdesc,
 	_doc_items_usagehelp = clonetron.doc.battery_holder_usagehelp,
 	_clonetron_formspec = battery_holder_formspec,

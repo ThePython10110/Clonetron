@@ -24,7 +24,7 @@ if not minetest.get_modpath("technic") then
 end
 
 minetest.register_node("clonetron:power_connector", {
-	description = S("clonetron HV Power Connector"),
+	description = S("Clonetron HV Power Connector"),
 	_doc_items_longdesc = clonetron.doc.power_connector_longdesc,
     _doc_items_usagehelp = clonetron.doc.power_connector_usagehelp,
 	groups = connector_groups,
@@ -67,7 +67,7 @@ minetest.register_node("clonetron:power_connector", {
 	end,
 	
 	on_receive_fields = function(pos, formname, fields, sender)
-		local layout = clonetronLayout.create(pos, sender)
+		local layout = ClonetronLayout.create(pos, sender)
 		local max_cost = 0
 		if layout.builders ~= nil then
 			for _, node_image in pairs(layout.builders) do

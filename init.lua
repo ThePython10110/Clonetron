@@ -49,7 +49,7 @@ local clonetron_modpath = minetest.get_modpath( "clonetron" )
 
 dofile( clonetron_modpath .. "/class_fakeplayer.lua")
 
-clonetron.fake_player = clonetronFakePlayer.create({x=0,y=0,z=0}, "fake_player") -- since we only need one fake player at a time and it doesn't retain useful state, create a global one and just update it as needed.
+clonetron.fake_player = ClonetronFakePlayer.create({x=0,y=0,z=0}, "fake_player") -- since we only need one fake player at a time and it doesn't retain useful state, create a global one and just update it as needed.
 
 dofile( clonetron_modpath .. "/config.lua" )
 dofile( clonetron_modpath .. "/util.lua" )
@@ -64,9 +64,9 @@ dofile( clonetron_modpath .. "/nodes/node_diggers.lua" ) -- contains all diggers
 dofile( clonetron_modpath .. "/nodes/node_builders.lua" ) -- contains all builders (there's just one currently)
 dofile( clonetron_modpath .. "/nodes/node_controllers.lua" ) -- controllers
 dofile( clonetron_modpath .. "/nodes/node_axle.lua" ) -- Rotation controller
-dofile( clonetron_modpath .. "/nodes/node_crate.lua" ) -- clonetron portability support
+dofile( clonetron_modpath .. "/nodes/node_crate.lua" ) -- Clonetron portability support
 dofile( clonetron_modpath .. "/nodes/node_item_ejector.lua" ) -- ejects non-building, non-fuel items from inventories
-dofile( clonetron_modpath .. "/nodes/node_duplicator.lua" ) -- constructs copies of existing clonetrons
+dofile( clonetron_modpath .. "/nodes/node_duplicator.lua" ) -- constructs copies of existing Clonetrons
 
 --Technic
 dofile( clonetron_modpath .. "/nodes/node_battery_holder.lua" ) -- holds rechargeable batteries from the technic mod
@@ -74,21 +74,21 @@ dofile( clonetron_modpath .. "/nodes/node_power_connector.lua")
 
 dofile( clonetron_modpath .. "/nodes/recipes.lua" )
 
-dofile( clonetron_modpath .. "/upgrades.lua" ) -- various LBMs for upgrading older versions of clonetron.
+dofile( clonetron_modpath .. "/upgrades.lua" ) -- various LBMs for upgrading older versions of Clonetron.
 
--- clonetron group numbers:
--- 1 - generic clonetron node, nothing special is done with these. They're just dragged along.
--- 2 - inventory-holding clonetron, has a "main" inventory that the clonetron can add to and take from.
+-- Clonetron group numbers:
+-- 1 - generic Clonetron node, nothing special is done with these. They're just dragged along.
+-- 2 - inventory-holding Clonetron, has a "main" inventory that the Clonetron can add to and take from.
 -- 3 - digger head, has an "execute_dig" method in its definition
 -- 4 - builder head, has a "test_build" and "execute_build" method in its definition
--- 5 - fuel-holding clonetron, has a "fuel" invetory that the control node can draw fuel items from. Separate from general inventory, nothing gets put here automatically.
+-- 5 - fuel-holding Clonetron, has a "fuel" invetory that the control node can draw fuel items from. Separate from general inventory, nothing gets put here automatically.
 -- 6 - holds both fuel and main inventories
 -- 7 - holds batteries (RE Battery from technic) to provide clean renewable power
 -- 8 - connects to adjacent HV technic cable
 -- 9 - connects to pipeworks, auto-ejects mined items
 
 -- This code was added for use with FaceDeer's fork of the [catacomb] mod. Paramat's version doesn't support customized protected nodes, which causes
--- it to "eat" clonetrons sometimes.
+-- it to "eat" Clonetrons sometimes.
 if minetest.get_modpath("catacomb") and catacomb ~= nil and catacomb.chamber_protected_nodes ~= nil and catacomb.passage_protected_nodes ~= nil then
 	local clonetron_nodes = {
 		minetest.get_content_id("clonetron:inventory"),

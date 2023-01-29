@@ -28,7 +28,7 @@ local ejector_formspec = function(pos, meta)
 			"tooltip[nonpipe;" .. S("When checked, will eject items even if there's no pipe to accept it") .. "]"
 	end
 	return return_string .. "checkbox[0,0;autoeject;"..S("Automatic")..";"..meta:get_string("autoeject").."]" ..
-		"tooltip[autoeject;" .. S("When checked, will eject items automatically with every clonetron cycle.\nItem ejectors can always be operated manually by punching them.") .. "]"
+		"tooltip[autoeject;" .. S("When checked, will eject items automatically with every Clonetron cycle.\nItem ejectors can always be operated manually by punching them.") .. "]"
 end
 
 local function eject_items(pos, node, player, eject_even_without_pipeworks, layout)
@@ -55,7 +55,7 @@ local function eject_items(pos, node, player, eject_even_without_pipeworks, layo
 	end	
 
 	if layout == nil then
-		layout = clonetronLayout.create(pos, player)
+		layout = ClonetronLayout.create(pos, player)
 	end
 
 	-- Build a list of all the items that builder nodes want to use.
@@ -110,7 +110,7 @@ local function eject_items(pos, node, player, eject_even_without_pipeworks, layo
 end
 
 minetest.register_node("clonetron:inventory_ejector", {
-	description = S("clonetron Inventory Ejector"),
+	description = S("Clonetron Inventory Ejector"),
 	_doc_items_longdesc = clonetron.doc.inventory_ejector_longdesc,
     _doc_items_usagehelp = clonetron.doc.inventory_ejector_usagehelp,
 	_clonetron_formspec = ejector_formspec,

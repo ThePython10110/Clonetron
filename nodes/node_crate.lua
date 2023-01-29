@@ -23,26 +23,26 @@ local player_permitted = function(pos, player)
 end
 
 local store_clonetron = function(pos, clicker, loaded_node_name, protected)
-	local layout = clonetronLayout.create(pos, clicker)
+	local layout = ClonetronLayout.create(pos, clicker)
 	local protection_prefix = ""
 	local protection_suffix = ""
 	if protected then
-		protection_prefix = S("clonetron Crate") .. "\n" .. S("Owned by @1", clicker:get_player_name() or "")
+		protection_prefix = S("Clonetron Crate") .. "\n" .. S("Owned by @1", clicker:get_player_name() or "")
 		protection_suffix = S("Owned by @1", clicker:get_player_name() or "")
 	end
 	
 	if layout.contains_protected_node then
 		local meta = minetest.get_meta(pos)
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		meta:set_string("infotext", protection_prefix .. "\n" .. S("clonetron can't be packaged, it contains protected blocks"))
-		-- no stealing other peoples' clonetrons
+		meta:set_string("infotext", protection_prefix .. "\n" .. S("Clonetron can't be packaged, it contains protected blocks"))
+		-- no stealing other peoples' Clonetrons
 		return
 	end
 	
 	if #layout.all == 1 then
 		local meta = minetest.get_meta(pos)
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-		meta:set_string("infotext", protection_prefix .. "\n" .. S("No clonetron components adjacent to package"))
+		meta:set_string("infotext", protection_prefix .. "\n" .. S("No Clonetron components adjacent to package"))
 		return
 	end
 
@@ -83,7 +83,7 @@ local store_clonetron = function(pos, clicker, loaded_node_name, protected)
 		meta:set_string("owner", clicker:get_player_name() or "")
 	end
 
-	local titlestring = S("Crated @1-block clonetron", tostring(#layout.all-1))
+	local titlestring = S("Crated @1-block Clonetron", tostring(#layout.all-1))
 	meta:set_string("title", titlestring )
 	meta:set_string("infotext", titlestring .. "\n" .. protection_suffix)
 end
@@ -91,7 +91,7 @@ end
 local use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "opaque" or nil
 
 minetest.register_node("clonetron:empty_crate", {
-	description = S("clonetron Crate (Empty)"),
+	description = S("Clonetron Crate (Empty)"),
 	_doc_items_longdesc = clonetron.doc.empty_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.empty_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
@@ -117,8 +117,8 @@ minetest.register_node("clonetron:empty_crate", {
 	end
 })
 
-minetest.register_node("clonetron:empty_locked_crate", {
-	description = S("clonetron Locked Crate (Empty)"),
+minetest.register_node("Clonetron:empty_locked_crate", {
+	description = S("Clonetron Locked Crate (Empty)"),
 	_doc_items_longdesc = clonetron.doc.empty_locked_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.empty_locked_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
@@ -142,7 +142,7 @@ minetest.register_node("clonetron:empty_locked_crate", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner", placer:get_player_name() or "")
-		meta:set_string("infotext", S("clonetron Crate") .. "\n" .. S("Owned by @1", placer:get_player_name() or ""))
+		meta:set_string("infotext", S("Clonetron Crate") .. "\n" .. S("Owned by @1", placer:get_player_name() or ""))
 	end,
 	can_dig = function(pos,player)
 		return player and not minetest.is_protected(pos, player:get_player_name()) and player_permitted(pos, player)
@@ -162,13 +162,13 @@ if modpath_doc then
 	mcl_vars.gui_bg ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
-	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
+	"field[0.3,0.5;4,0.5;title;" .. S("Clonetron Name") .. ";${title}]" ..
 	"button_exit[0.0,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
-	"tooltip[save;" .. S("Saves the title of this clonetron") .. "]" ..
+	"tooltip[save;" .. S("Saves the title of this Clonetron") .. "]" ..
 	"button_exit[1.0,1.2;1,0.1;show;" .. S("Show\nBlocks") .. "]" ..
-	"tooltip[show;" .. S("Shows which blocks the packed clonetron will occupy if unpacked") .. "]" ..
+	"tooltip[show;" .. S("Shows which blocks the packed Clonetron will occupy if unpacked") .. "]" ..
 	"button_exit[2.0,1.2;1,0.1;unpack;" .. S("Unpack") .. "]" ..
-	"tooltip[unpack;" .. S("Attempts to unpack the clonetron on this location") .. "]" ..
+	"tooltip[unpack;" .. S("Attempts to unpack the Clonetron on this location") .. "]" ..
 	"button_exit[3.0,1.2;1,0.1;help;" .. S("Help") .. "]" ..
 	"tooltip[help;" .. S("Show documentation about this block") .. "]"
 else
@@ -177,13 +177,13 @@ else
 	mcl_vars.gui_bg ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
-	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
+	"field[0.3,0.5;4,0.5;title;" .. S("Clonetron Name") .. ";${title}]" ..
 	"button_exit[0.5,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
-	"tooltip[show;" .. S("Saves the title of this clonetron") .. "]" ..
+	"tooltip[show;" .. S("Saves the title of this Clonetron") .. "]" ..
 	"button_exit[1.5,1.2;1,0.1;show;" .. S("Show\nBlocks") .. "]" ..
-	"tooltip[save;" .. S("Shows which blocks the packed clonetron will occupy if unpacked") .. "]" ..
+	"tooltip[save;" .. S("Shows which blocks the packed Clonetron will occupy if unpacked") .. "]" ..
 	"button_exit[2.5,1.2;1,0.1;unpack;" .. S("Unpack") .. "]" ..
-	"tooltip[unpack;" .. S("Attempts to unpack the clonetron on this location") .. "]"
+	"tooltip[unpack;" .. S("Attempts to unpack the Clonetron on this location") .. "]"
 end
 
 local loaded_formspec = function(pos, meta)
@@ -215,10 +215,10 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 	end
 	
 	local layout_string = meta:get_string("crated_layout")
-	local layout = clonetronLayout.deserialize(layout_string)
+	local layout = ClonetronLayout.deserialize(layout_string)
 
 	if layout == nil then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to read layout from crate metadata, regrettably this clonetron may be corrupted."))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to read layout from crate metadata, regrettably this Clonetron may be corrupted."))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})			
 		-- Something went horribly wrong
 		return
@@ -249,18 +249,18 @@ local loaded_on_recieve = function(pos, fields, sender, protected)
 	end
 	
 	if protected_node then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy clonetron due to protected blocks in target area"))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy Clonetron due to protected blocks in target area"))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
 		return
 	end
 	
 	if obstructed_node then
-		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy clonetron due to obstruction in target area"))
+		meta:set_string("infotext", infotext .. "\n" .. S("Unable to deploy Clonetron due to obstruction in target area"))
 		minetest.sound_play("buzzer", {gain=0.5, pos=pos})
 		return
 	end
 	
-	-- build clonetron. Since the empty crate was included in the layout, that will overwrite this loaded crate and destroy it.
+	-- build Clonetron. Since the empty crate was included in the layout, that will overwrite this loaded crate and destroy it.
 	minetest.sound_play("machine2", {gain=1.0, pos=pos})
 	layout:write_layout_image(sender)
 end
@@ -285,7 +285,7 @@ end
 
 local loaded_after_place = function(pos, itemstack)
 
-	-- Older versions of clonetron used this deprecated method for saving layout data on items.
+	-- Older versions of Clonetron used this deprecated method for saving layout data on items.
 	-- Maintain backward compatibility here.
 	local deprecated_metadata = itemstack:get_metadata()
 	if deprecated_metadata ~= "" then
@@ -311,7 +311,7 @@ local loaded_after_place = function(pos, itemstack)
 end
 
 minetest.register_node("clonetron:loaded_crate", {
-	description = S("clonetron Crate (Loaded)"),
+	description = S("Clonetron Crate (Loaded)"),
 	_doc_items_longdesc = clonetron.doc.loaded_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.loaded_crate_usagehelp,
 	_clonetron_formspec = loaded_formspec,
@@ -339,11 +339,11 @@ minetest.register_node("clonetron:loaded_crate", {
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		loaded_after_place(pos, itemstack)
 	end,
-	on_drop = function(a, b, c) end -- prevent dropping loaded clonetrons, causing server to crash (see #44)
+	on_drop = function(a, b, c) end -- prevent dropping loaded Clonetrons, causing server to crash (see #44)
 })
 
 minetest.register_node("clonetron:loaded_locked_crate", {
-	description = S("clonetron Locked Crate (Loaded)"),
+	description = S("Clonetron Locked Crate (Loaded)"),
 	_doc_items_longdesc = clonetron.doc.loaded_locked_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.loaded_locked_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, clonetron_protected=1},
@@ -383,7 +383,7 @@ minetest.register_node("clonetron:loaded_locked_crate", {
 				loaded_formspec_string:gsub("${title}", meta:get_string("title"), 1))
 		end
 	end,
-	on_drop = function(a, b, c) end -- prevent dropping loaded clonetrons, causing server to crash
+	on_drop = function(a, b, c) end -- prevent dropping loaded Clonetrons, causing server to crash
 })
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)

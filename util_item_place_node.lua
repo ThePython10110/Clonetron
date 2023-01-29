@@ -96,13 +96,13 @@ clonetron.item_place_node = function(itemstack, placer, place_to, param2)
 		end
 	
 		-- pass a copy of the item stack parameter because on_place might modify it directly and then we can't tell if we succeeded or not
-		-- though note that some mods do "creative_mode" handling within their own on_place methods, which makes it impossible for clonetron
-		-- to know what to do in that case - if you're in creative_mode clonetron will place such items but it will think it failed and not
-		-- deduct them from inventory no matter what clonetron's settings are. Unfortunate, but not very harmful and I have no workaround.
+		-- though note that some mods do "creative_mode" handling within their own on_place methods, which makes it impossible for Clonetron
+		-- to know what to do in that case - if you're in creative_mode Clonetron will place such items but it will think it failed and not
+		-- deduct them from inventory no matter what Clonetron's settings are. Unfortunate, but not very harmful and I have no workaround.
 		local returnstack, success = def.on_place(ItemStack(itemstack), placer, pointed_thing)
 		if returnstack and returnstack:get_count() < itemstack:get_count() then success = true end -- some mods neglect to return a success condition
 		if success then
-			-- Override the param2 value to force it to be what clonetron wants
+			-- Override the param2 value to force it to be what Clonetron wants
 			local placed_node = minetest.get_node(place_to)
 			placed_node.param2 = param2
 			minetest.set_node(place_to, placed_node)
@@ -121,11 +121,11 @@ clonetron.item_place_node = function(itemstack, placer, place_to, param2)
 	
 	local oldnode = minetest.get_node_or_nil(place_to)
 
-	--this should never happen, clonetron is testing for adjacent unloaded nodes before getting here.
+	--this should never happen, Clonetron is testing for adjacent unloaded nodes before getting here.
 	if not oldnode then
 		minetest.log("info", placer:get_player_name() .. " tried to place"
 			.. " node in unloaded position " .. minetest.pos_to_string(place_to)
-			.. " using a clonetron.")
+			.. " using a Clonetron.")
 		return itemstack, false
 	end
 
@@ -159,8 +159,8 @@ clonetron.item_place_node = function(itemstack, placer, place_to, param2)
 	end
 
 	-- Run script hook, using fake_player to take the blame.
-	-- Note that fake_player:update is called in the clonetronLayout class's "create" function,
-	-- which is called before clonetron does any of this building stuff, so it's not necessary
+	-- Note that fake_player:update is called in the ClonetronLayout class's "create" function,
+	-- which is called before Clonetron does any of this building stuff, so it's not necessary
 	-- to update it here.
 	local _, callback
 	for _, callback in ipairs(minetest.registered_on_placenodes) do

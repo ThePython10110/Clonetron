@@ -3,12 +3,12 @@ local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP.."/intllib.lua")
 
 minetest.register_node("clonetron:axle", {
-	description = S("clonetron Rotation Axle"),
+	description = S("Clonetron Rotation Axle"),
 	_doc_items_longdesc = clonetron.doc.axle_longdesc,
     _doc_items_usagehelp = clonetron.doc.axle_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 1},
 	drop = "clonetron:axle",
-	sounds = clonetron.metal_sounds,
+	sounds = Clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,
@@ -46,7 +46,7 @@ minetest.register_node("clonetron:axle", {
 		local last_time = tonumber(meta:get_string("last_time")) or 0
 		-- if meta:get_string("waiting") == "true" then
 		if last_time + clonetron.config.cycle_time*2 > now then
-			-- Been too soon since last time the clonetron rotated.
+			-- Been too soon since last time the Clonetron rotated.
 
 		        -- added for clarity
 		        meta:set_string("infotext", S("repetition delay"))
@@ -54,7 +54,7 @@ minetest.register_node("clonetron:axle", {
 			return
 		end
 
-		local image = clonetronLayout.create(pos, clicker)
+		local image = ClonetronLayout.create(pos, clicker)
 		if image:rotate_layout_image(node.param2) == false then
 			-- This should be impossible, but if self-validation fails abort.
 			return
@@ -73,7 +73,7 @@ minetest.register_node("clonetron:axle", {
 			end
 		else
 			minetest.sound_play("buzzer", {gain=1.0, pos=pos})
-			meta:set_string("infotext", S("clonetron is obstructed."))
+			meta:set_string("infotext", S("Clonetron is obstructed."))
 		end
 	end,
 	

@@ -1,5 +1,5 @@
-clonetronLayout = {}
-clonetronLayout.__index = clonetronLayout
+ClonetronLayout = {}
+ClonetronLayout.__index = ClonetronLayout
 
 local modpath_awards = minetest.get_modpath("awards")
 
@@ -13,17 +13,17 @@ local get_node_image = function(pos, node)
 	local meta = minetest.get_meta(pos)
 	node_image.meta = meta:to_table()
 	if node_image.meta ~= nil and node_def._clonetron_formspec ~= nil then
-		node_image.meta.fields.formspec = node_def._clonetron_formspec(pos, meta) -- causes formspec to be automatically upgraded whenever clonetron moves
+		node_image.meta.fields.formspec = node_def._clonetron_formspec(pos, meta) -- causes formspec to be automatically upgraded whenever Clonetron moves
 	end
 	
 	local group = minetest.get_item_group(node.name, "clonetron")
 	-- group 1 has no special metadata
 	if group > 1 and group < 10 then
-		assert(node_image ~= nil and node_image.meta ~= nil, "[clonetron] clonetron failed to get a metadata table for a clonetron node in group "
+		assert(node_image ~= nil and node_image.meta ~= nil, "[Clonetron] Clonetron failed to get a metadata table for a Clonetron node in group "
 			.. tostring(group) .. ". This error should not be possible. Please see https://github.com/minetest/minetest/issues/8067")
 		-- These groups have inventories
 		if group == 2 or (group > 3 and group < 8) then
-			assert(node_image.meta.inventory ~= nil, "[clonetron] clonetron failed to get a metadata inventory table for a clonetron node in group "
+			assert(node_image.meta.inventory ~= nil, "[Clonetron] Clonetron failed to get a metadata inventory table for a Clonetron node in group "
 			.. tostring(group) .. ". This error should not be possible. Please see https://github.com/minetest/minetest/issues/8067")
 		end
 	end
@@ -48,19 +48,19 @@ end
 local to_test = Pointset.create()
 local tested = Pointset.create()
 
-function clonetronLayout.create(pos, player)
+function ClonetronLayout.create(pos, player)
 	local self = {}
-	setmetatable(self, clonetronLayout)
+	setmetatable(self, ClonetronLayout)
 
-	--initialize. We're assuming that the start position is a controller clonetron, should be a safe assumption since only the controller node should call this
+	--initialize. We're assuming that the start position is a controller Clonetron, should be a safe assumption since only the controller node should call this
 	self.traction = 0
 	self.all = {}
 	self.water_touching = false
 	self.lava_touching = false
 	self.protected = Pointset.create() -- if any nodes we look at are protected, make note of that. That way we don't need to keep re-testing protection state later.
-	self.old_pos_pointset = Pointset.create() -- For tracking original location of nodes if we do transformations on the clonetron
+	self.old_pos_pointset = Pointset.create() -- For tracking original location of nodes if we do transformations on the Clonetron
 	self.nodes_dug = Pointset.create() -- For tracking adjacent nodes that will have been dug by digger heads in future
-	self.contains_protected_node = false -- used to indicate if at least one node in this clonetron array is protected from the player.
+	self.contains_protected_node = false -- used to indicate if at least one node in this Clonetron array is protected from the player.
 	self.controller = {x=pos.x, y=pos.y, z=pos.z} 	--Make a deep copy of the pos parameter just in case the calling code wants to play silly buggers with it
 
 	table.insert(self.all, get_node_image(pos, minetest.get_node(pos))) -- We never visit the source node, so insert it into the all table a priori. Revisit this design decision if a controller node is created that contains fuel or inventory or whatever.
@@ -85,7 +85,7 @@ function clonetronLayout.create(pos, player)
 		self.contains_protected_node = true
 	end
 	
-	-- Do a loop on to_test positions, adding new to_test positions as we find clonetron nodes. This is a flood fill operation
+	-- Do a loop on to_test positions, adding new to_test positions as we find Clonetron nodes. This is a flood fill operation
 	-- that follows node faces (no diagonals)
 	local testpos, _ = to_test:pop()
 	while testpos ~= nil do
@@ -93,7 +93,7 @@ function clonetronLayout.create(pos, player)
 		local node = minetest.get_node(testpos)
 
 		if node.name == "ignore" then
-			--clonetron array is next to unloaded nodes, too dangerous to do anything. Abort.
+			--Clonetron array is next to unloaded nodes, too dangerous to do anything. Abort.
 			self.ignore_touching = true
 		end
 		
@@ -114,7 +114,7 @@ function clonetronLayout.create(pos, player)
 		
 		local group_number = minetest.get_item_group(node.name, "clonetron")
 		if group_number > 0 then
-			--found one. Add it to the clonetrons output
+			--found one. Add it to the Clonetrons output
 			local node_image = get_node_image(testpos, node)
 			
 			table.insert(self.all, node_image)
@@ -168,7 +168,7 @@ function clonetronLayout.create(pos, player)
 			to_test:set_if_not_in(tested, testpos.x, testpos.y, testpos.z + 1, true)
 			to_test:set_if_not_in(tested, testpos.x, testpos.y, testpos.z - 1, true)
 		elseif not minetest.registered_nodes[node.name] or minetest.registered_nodes[node.name].buildable_to ~= true then
-			-- Tracks whether the clonetron is hovering in mid-air. If any part of the clonetron array touches something solid it gains traction.
+			-- Tracks whether the Clonetron is hovering in mid-air. If any part of the Clonetron array touches something solid it gains traction.
 			-- Allowing unknown nodes to provide traction, since they're not buildable_to either
 			self.traction = self.traction + 1
 		end
@@ -176,7 +176,7 @@ function clonetronLayout.create(pos, player)
 		testpos, _ = to_test:pop()
 	end
 	
-	clonetron.award_layout(self, player) -- hook for achievements mod
+	Clonetron.award_layout(self, player) -- hook for achievements mod
 	
 	to_test:clear()
 	tested:clear()
@@ -311,7 +311,7 @@ local top = {
 	{axis="y", dir=1},
 }
 -- Rotates 90 degrees widdershins around the axis defined by facedir (which in this case is pointing out the front of the node, so it needs to be converted into an upward-pointing axis internally)
-function clonetronLayout.rotate_layout_image(self, facedir)
+function ClonetronLayout.rotate_layout_image(self, facedir)
 
 	if self == nil or self.all == nil or self.controller == nil or self.old_pos_pointset == nil then
 		-- this should not be possible, but if it is then abort.
@@ -337,7 +337,7 @@ end
 -----------------------------------------------------------------------------------------------
 -- Translation
 
-function clonetronLayout.move_layout_image(self, dir)
+function ClonetronLayout.move_layout_image(self, dir)
 	self.extents_max_x = self.extents_max_x + dir.x
 	self.extents_min_x = self.extents_min_x + dir.x
 	self.extents_max_y = self.extents_max_y + dir.y
@@ -348,20 +348,20 @@ function clonetronLayout.move_layout_image(self, dir)
 	for k, node_image in pairs(self.all) do
 		self.old_pos_pointset:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, true)
 		node_image.pos = add_in_place(node_image.pos, dir)
-		self.nodes_dug:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, false) -- we've moved a clonetron node into this space, mark it so that we don't dig it.
+		self.nodes_dug:set(node_image.pos.x, node_image.pos.y, node_image.pos.z, false) -- we've moved a Clonetron node into this space, mark it so that we don't dig it.
 	end
 end
 
 -----------------------------------------------------------------------------------------------
 -- Writing to world
 
-function clonetronLayout.can_write_layout_image(self)
+function ClonetronLayout.can_write_layout_image(self)
 	for k, node_image in pairs(self.all) do
 		--check if we're moving into a protected node
 		if self.protected:get(node_image.pos.x, node_image.pos.y, node_image.pos.z) then
 			return false
 		end
-		-- check if the target node is buildable_to or is marked as part of the clonetron that's moving
+		-- check if the target node is buildable_to or is marked as part of the Clonetron that's moving
 		if not (
 			self.old_pos_pointset:get(node_image.pos.x, node_image.pos.y, node_image.pos.z)
 			or minetest.registered_nodes[minetest.get_node(node_image.pos).name].buildable_to
@@ -373,9 +373,9 @@ function clonetronLayout.can_write_layout_image(self)
 end
 
 -- We need to call on_dignode and on_placenode for dug and placed nodes,
--- but that triggers falling nodes (sand and whatnot) and destroys clonetrons
+-- but that triggers falling nodes (sand and whatnot) and destroys Clonetrons
 -- if done during mid-write. So we need to defer the calls until after the
--- clonetron has been fully written.
+-- Clonetron has been fully written.
 
 -- using local counters and shared tables like this allows us to avoid some needless allocating and garbage-collecting of tables
 local dug_nodes_count = 0
@@ -452,15 +452,15 @@ local set_meta_with_retry = function(meta, meta_table)
 end
 
 local air_node = {name="air"}
-function clonetronLayout.write_layout_image(self, player)
-	-- destroy the old clonetron
+function ClonetronLayout.write_layout_image(self, player)
+	-- destroy the old Clonetron
 	local oldpos, _ = self.old_pos_pointset:pop()
 	while oldpos ~= nil do
 		local old_node = minetest.get_node(oldpos)
 		local old_meta = minetest.get_meta(oldpos):to_table()
 
 		if not set_node_with_retry(oldpos, air_node) then
-			minetest.log("error", "clonetronLayout.write_layout_image failed to destroy old clonetron node, aborting write.")
+			minetest.log("error", "ClonetronLayout.write_layout_image failed to destroy old Clonetron node, aborting write.")
 			return false
 		end
 
@@ -478,7 +478,7 @@ function clonetronLayout.write_layout_image(self, player)
 		local old_node = minetest.get_node(new_pos)
 
 		if not (set_node_with_retry(new_pos, new_node) and set_meta_with_retry(minetest.get_meta(new_pos), node_image.meta)) then
-			minetest.log("error", "clonetronLayout.write_layout_image failed to write a clonetron node, aborting write.")
+			minetest.log("error", "ClonetronLayout.write_layout_image failed to write a Clonetron node, aborting write.")
 			return false
 		end
 		
@@ -489,7 +489,7 @@ function clonetronLayout.write_layout_image(self, player)
 	end
 	
 	-- fake_player will be passed to callbacks to prevent actual player from "taking the blame" for this action.
-	-- For example, the hunger mod shouldn't be making the player hungry when he moves clonetron.
+	-- For example, the hunger mod shouldn't be making the player hungry when he moves Clonetron.
 	clonetron.fake_player:update(self.controller, player:get_player_name())
 	-- note that the actual player is still passed to the per-node after_place_node and after_dig_node, should they exist.
 	node_callbacks(player)
@@ -502,7 +502,7 @@ end
 ---------------------------------------------------------------------------------------------
 -- Serialization. Currently only serializes the data that is needed by the crate, upgrade this function if more is needed
 
-function clonetronLayout.serialize(self)
+function ClonetronLayout.serialize(self)
 	-- serialize can't handle ItemStack objects, convert them to strings.
 	for _, node_image in pairs(self.all) do
 		for k, inv in pairs(node_image.meta.inventory) do
@@ -515,9 +515,9 @@ function clonetronLayout.serialize(self)
 	return minetest.serialize({controller=self.controller, all=self.all})
 end
 
-function clonetronLayout.deserialize(layout_string)
+function ClonetronLayout.deserialize(layout_string)
 	local self = {}
-	setmetatable(self, clonetronLayout)
+	setmetatable(self, ClonetronLayout)
 	
 	if not layout_string or layout_string == "" then
 		return nil

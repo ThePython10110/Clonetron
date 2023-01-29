@@ -7,7 +7,7 @@ local inventory_formspec_string =
 	mcl_vars.gui_bg ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
-	"label[0,0;" .. S("clonetron components") .. "]" ..
+	"label[0,0;" .. S("Clonetron components") .. "]" ..
 	"list[current_name;main;0,0.6;8,4;]" ..
 	"list[current_player;main;0,5.15;8,1;]" ..
 	"list[current_player;main;0,6.38;8,3;8]" ..
@@ -15,7 +15,7 @@ local inventory_formspec_string =
 	"listring[current_player;main]" ..
 	clonetron.get_hotbar_bg(0,5.15)..
 	"button_exit[8,3.5;1,1;duplicate;"..S("Duplicate").."]" ..
-	"tooltip[duplicate;" .. S("Puts a copy of the adjacent clonetron into an empty crate\nlocated at the output side of the duplicator,\nusing components from the duplicator's inventory.") .. "]"
+	"tooltip[duplicate;" .. S("Puts a copy of the adjacent Clonetron into an empty crate\nlocated at the output side of the duplicator,\nusing components from the duplicator's inventory.") .. "]"
 
 if minetest.get_modpath("doc") then
 	inventory_formspec_string = inventory_formspec_string ..
@@ -24,7 +24,7 @@ if minetest.get_modpath("doc") then
 end
 
 minetest.register_node("clonetron:duplicator", {
-	description = S("clonetron Duplicator"),
+	description = S("Clonetron Duplicator"),
 	_doc_items_longdesc = clonetron.doc.duplicator_longdesc,
     _doc_items_usagehelp = clonetron.doc.duplicator_usagehelp,
 	groups = {cracky = 3,  oddly_breakable_by_hand=3},
@@ -113,17 +113,17 @@ minetest.register_node("clonetron:duplicator", {
 				return
 			end
 
-			local layout = clonetronLayout.create(pos, sender)
+			local layout = ClonetronLayout.create(pos, sender)
 
 			if layout.contains_protected_node then
 				minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-				meta:set_string("infotext", S("clonetron can't be duplicated, it contains protected blocks"))
+				meta:set_string("infotext", S("Clonetron can't be duplicated, it contains protected blocks"))
 				return
 			end
 
 			if #layout.all == 1 then
 				minetest.sound_play("buzzer", {gain=0.5, pos=pos})
-				meta:set_string("infotext", S("No clonetron components adjacent to duplicate"))
+				meta:set_string("infotext", S("No Clonetron components adjacent to duplicate"))
 				return
 			end
 
@@ -192,7 +192,7 @@ minetest.register_node("clonetron:duplicator", {
 			local target_meta = minetest.get_meta(target_pos)
 			target_meta:set_string("crated_layout", layout_string)
 
-			local titlestring = S("Crated @1-block clonetron", tostring(#layout.all-1))
+			local titlestring = S("Crated @1-block Clonetron", tostring(#layout.all-1))
 			target_meta:set_string("title", titlestring)
 			if target_name == "clonetron:loaded_locked_crate" then
 				target_meta:set_string("owner", player_name)

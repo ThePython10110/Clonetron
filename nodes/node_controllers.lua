@@ -19,9 +19,9 @@ local node_inventory_table = {type="node"} -- a reusable parameter for get_inven
 
 local use_texture_alpha = minetest.features.use_texture_alpha_string_modes and "opaque" or nil
 
--- Master controller. Most complicated part of the whole system. Determines which direction a clonetron moves and triggers all of its component parts.
+-- Master controller. Most complicated part of the whole system. Determines which direction a Clonetron moves and triggers all of its component parts.
 minetest.register_node("clonetron:controller", {
-	description = S("clonetron Control Module"),
+	description = S("Clonetron Control Module"),
 	_doc_items_longdesc = clonetron.doc.controller_longdesc,
     _doc_items_usagehelp = clonetron.doc.controller_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3, clonetron = 1},
@@ -61,7 +61,7 @@ minetest.register_node("clonetron:controller", {
 
 		-- if meta:get_string("waiting") == "true" then
 		if last_time + clonetron.config.cycle_time > now then
-		   -- Been too soon since last time the clonetron did a cycle.
+		   -- Been too soon since last time the Clonetron did a cycle.
 		   
 		   -- added for clarity
 		   meta:set_string("infotext", S("repetition delay"))
@@ -76,7 +76,7 @@ minetest.register_node("clonetron:controller", {
 			meta:set_string("infotext", status)
 		end
 		
-		-- Start the delay before clonetron can run again.
+		-- Start the delay before Clonetron can run again.
 		minetest.get_meta(newpos):set_string("waiting", "true")
 		-- minetest.get_node_timer(newpos):start(clonetron.config.cycle_time)
 		-- new delay code
@@ -190,7 +190,7 @@ local function auto_cycle(pos)
 end
 
 minetest.register_node("clonetron:auto_controller", {
-	description = S("clonetron Automatic Control Module"),
+	description = S("Clonetron Automatic Control Module"),
 	_doc_items_longdesc = clonetron.doc.auto_controller_longdesc,
     _doc_items_usagehelp = clonetron.doc.auto_controller_usagehelp,
 	--Don't set a _clonetron_formspec for this node_def.
@@ -235,7 +235,7 @@ minetest.register_node("clonetron:auto_controller", {
 
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		if minetest.get_item_group(stack:get_name(), "clonetron") ~= 0 then
-			return 0 -- pointless setting a clonetron node as a stop block
+			return 0 -- pointless setting a Clonetron node as a stop block
 		end	
 		node_inventory_table.pos = pos
 		local inv = minetest.get_inventory(node_inventory_table)
@@ -316,10 +316,10 @@ minetest.register_node("clonetron:auto_controller", {
 
 ---------------------------------------------------------------------------------------------------------------
 
--- A much simplified control unit that only moves the clonetron, and doesn't trigger the diggers or builders.
--- Handy for shoving a clonetron to the side if it's been built a bit off.
+-- A much simplified control unit that only moves the Clonetron, and doesn't trigger the diggers or builders.
+-- Handy for shoving a Clonetron to the side if it's been built a bit off.
 minetest.register_node("clonetron:pusher", {
-	description = S("clonetron Pusher Module"),
+	description = S("Clonetron Pusher Module"),
 	_doc_items_longdesc = clonetron.doc.pusher_longdesc,
     _doc_items_usagehelp = clonetron.doc.pusher_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 1},
@@ -348,7 +348,7 @@ minetest.register_node("clonetron:pusher", {
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)	
 		local meta = minetest.get_meta(pos)
 		if meta:get_string("waiting") == "true" then
-			-- Been too soon since last time the clonetron did a cycle.
+			-- Been too soon since last time the Clonetron did a cycle.
 			return
 		end
 
@@ -356,7 +356,7 @@ minetest.register_node("clonetron:pusher", {
 		meta = minetest.get_meta(newpos)
 		meta:set_string("infotext", status_text)
 		
-		-- Start the delay before clonetron can run again.
+		-- Start the delay before Clonetron can run again.
 		minetest.get_meta(newpos):set_string("waiting", "true")
 		minetest.get_node_timer(newpos):start(clonetron.config.cycle_time)
 	end,

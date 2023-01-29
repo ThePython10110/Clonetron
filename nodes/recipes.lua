@@ -264,7 +264,7 @@ minetest.register_craft({
 			}
 })
 
--- And some recycling reactions to get clonetron cores out of the "cheap" parts:
+-- And some recycling reactions to get Clonetron cores out of the "cheap" parts:
 
 minetest.register_craft({
 	output = "clonetron:clonetron_core",
