@@ -47,7 +47,7 @@ minetest.register_node("clonetron:light", {
 	paramtype = "light",
 	is_ground_content = false,
 	light_source = 10,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = mcl_sounds.node_sound_glass_defaults(),
 	paramtype2 = "wallmounted",
 	node_box = {
 		type = "wallmounted",

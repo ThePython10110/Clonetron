@@ -4,16 +4,16 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 local inventory_formspec_string =
 	"size[9,9.3]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("clonetron components") .. "]" ..
 	"list[current_name;main;0,0.6;8,4;]" ..
 	"list[current_player;main;0,5.15;8,1;]" ..
 	"list[current_player;main;0,6.38;8,3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0,5.15)..
+	clonetron.get_hotbar_bg(0,5.15)..
 	"button_exit[8,3.5;1,1;duplicate;"..S("Duplicate").."]" ..
 	"tooltip[duplicate;" .. S("Puts a copy of the adjacent clonetron into an empty crate\nlocated at the output side of the duplicator,\nusing components from the duplicator's inventory.") .. "]"
 

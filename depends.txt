@@ -1,4 +1,10 @@
-default
+mcl_core
+mcl_chests
+mcl_furnaces
+mcl_nether?
+mcl_raw_ores
+mcl_torches
+mcl_end
 pipeworks?
 doc?
 hopper?

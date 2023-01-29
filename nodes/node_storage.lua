@@ -6,16 +6,16 @@ local pipeworks_path = minetest.get_modpath("pipeworks")
 
 local inventory_formspec_string = 
 	"size[8,9.3]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Inventory items") .. "]" ..
 	"list[current_name;main;0,0.6;8,4;]" ..
 	"list[current_player;main;0,5.15;8,1;]" ..
 	"list[current_player;main;0,6.38;8,3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0,5.15)
+	clonetron.get_hotbar_bg(0,5.15)
 
 local inventory_formspec = function(pos, meta)
 	return inventory_formspec_string
@@ -87,16 +87,16 @@ minetest.register_node("clonetron:inventory", {
 
 local fuelstore_formspec_string = 
 	"size[8,9.3]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Fuel items") .. "]" ..
 	"list[current_name;fuel;0,0.6;8,4;]" ..
 	"list[current_player;main;0,5.15;8,1;]" ..
 	"list[current_player;main;0,6.38;8,3;8]" ..
 	"listring[current_name;fuel]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0,5.15)
+	clonetron.get_hotbar_bg(0,5.15)
 
 local fuelstore_formspec = function(pos, meta)
 	return fuelstore_formspec_string
@@ -186,9 +186,9 @@ minetest.register_node("clonetron:fuelstore", {
 
 local combined_storage_formspec_string =
 	"size[8,9.9]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Inventory items") .. "]" ..
 	"list[current_name;main;0,0.6;8,3;]" ..
 	"label[0,3.5;" .. S("Fuel items") .. "]" ..
@@ -197,7 +197,7 @@ local combined_storage_formspec_string =
 	"list[current_player;main;0,6.98;8,3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0,5.75)
+	clonetron.get_hotbar_bg(0,5.75)
 
 local combined_storage_formspec = function(pos, meta)
 	return combined_storage_formspec_string

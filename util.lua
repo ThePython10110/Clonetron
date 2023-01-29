@@ -6,10 +6,10 @@ dofile( minetest.get_modpath( "clonetron" ) .. "/util_execute_cycle.lua" ) -- se
 local node_inventory_table = {type="node"} -- a reusable parameter for get_inventory calls, set the pos parameter before using.
 
 -- Apparently node_sound_metal_defaults is a newer thing, I ran into games using an older version of the default mod without it.
-if default.node_sound_metal_defaults ~= nil then
-	clonetron.metal_sounds = default.node_sound_metal_defaults()
+if mcl_sounds.node_sound_metal_defaults ~= nil then
+	clonetron.metal_sounds = mcl_sounds.node_sound_metal_defaults()
 else
-	clonetron.metal_sounds = default.node_sound_stone_defaults()
+	clonetron.metal_sounds = mcl_sounds.node_sound_stone_defaults()
 end
 
 

@@ -95,7 +95,7 @@ minetest.register_node("clonetron:empty_crate", {
 	_doc_items_longdesc = clonetron.doc.empty_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.empty_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = mcl_sounds.node_sound_wood_defaults(),
 	tiles = {"clonetron_crate.png"},
 	use_texture_alpha = use_texture_alpha,
 	is_ground_content = false,
@@ -122,7 +122,7 @@ minetest.register_node("clonetron:empty_locked_crate", {
 	_doc_items_longdesc = clonetron.doc.empty_locked_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.empty_locked_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = mcl_sounds.node_sound_wood_defaults(),
 	tiles = {"clonetron_crate.png","clonetron_crate.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png","clonetron_crate.png^clonetron_lock.png"},
 	use_texture_alpha = use_texture_alpha,
 	is_ground_content = false,
@@ -159,9 +159,9 @@ local loaded_formspec_string
 if modpath_doc then
 	loaded_formspec_string =
 	"size[4.1,1.5]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
 	"button_exit[0.0,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
 	"tooltip[save;" .. S("Saves the title of this clonetron") .. "]" ..
@@ -174,9 +174,9 @@ if modpath_doc then
 else
 	loaded_formspec_string =
 	"size[4,1.5]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"field[0.3,0.5;4,0.5;title;" .. S("clonetron Name") .. ";${title}]" ..
 	"button_exit[0.5,1.2;1,0.1;save;" .. S("Save\nTitle") .. "]" ..
 	"tooltip[show;" .. S("Saves the title of this clonetron") .. "]" ..
@@ -317,7 +317,7 @@ minetest.register_node("clonetron:loaded_crate", {
 	_clonetron_formspec = loaded_formspec,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, clonetron_protected=1},
 	stack_max = 1,
-	sounds = default.node_sound_wood_defaults(),
+	sounds = mcl_sounds.node_sound_wood_defaults(),
 	tiles = {"clonetron_plate.png^clonetron_crate.png"},
 	is_ground_content = false,
 	
@@ -348,7 +348,7 @@ minetest.register_node("clonetron:loaded_locked_crate", {
     _doc_items_usagehelp = clonetron.doc.loaded_locked_crate_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, not_in_creative_inventory=1, clonetron_protected=1},
 	stack_max = 1,
-	sounds = default.node_sound_wood_defaults(),
+	sounds = mcl_sounds.node_sound_wood_defaults(),
 	tiles = {"clonetron_plate.png^clonetron_crate.png","clonetron_plate.png^clonetron_crate.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png","clonetron_plate.png^clonetron_crate.png^clonetron_lock.png"},
 	is_ground_content = false,
 	

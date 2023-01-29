@@ -8,9 +8,9 @@ local doc_path = minetest.get_modpath("doc")
 local formspec_width = 1.5
 
 local ejector_formspec_string = 
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots
+	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots
 
 if doc_path then
 	ejector_formspec_string = ejector_formspec_string ..

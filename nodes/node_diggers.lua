@@ -30,9 +30,9 @@ local dual_digger_nodebox = {
 
 local modpath_doc = minetest.get_modpath("doc")
 
-local intermittent_formspec_string = default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+local intermittent_formspec_string = mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_img ..
+	mcl_vars.gui_slots ..
 	"field[0.5,0.8;1,0.1;period;" .. S("Periodicity") .. ";${period}]" ..
 	"tooltip[period;" .. S("Digger will dig once every n steps.\nThese steps are globally aligned, all diggers with\nthe same period and offset will dig on the same location.") .. "]" ..
 	"field[1.5,0.8;1,0.1;offset;" .. S("Offset") .. ";${offset}]" ..

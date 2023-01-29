@@ -16,9 +16,16 @@ clonetron.builder_read_item_substitutions = {
 	["mcl_furnaces:furnace_active"] = "mcl_furnaces:furnace",
 	["farming:soil"] = "mcl_core:dirt",
 	["farming:soil_wet"] = "mcl_core:dirt",
-	["farming:desert_sand_soil"] = "default:desert_sand",
-	["farming:desert_sand_soil_wet"] = "default:desert_sand",
 }
+
+-- MineClone doesn't have clonetron.get_hotbar_bg. I have no clue what it does, but I just copied it from the default mod.
+function clonetron.get_hotbar_bg(x,y)
+	local out = ""
+	for i=0,7,1 do
+		out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+	end
+	return out
+end
 
 -- Sometimes we want builder heads to call an item's "on_place" method, other times we
 -- don't want them to. There's no way to tell which situation is best programmatically

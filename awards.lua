@@ -150,16 +150,19 @@ awards.register_achievement("clonetron_height1000",{
 	title = S("clonetron In The Sky"),
 	description = S("Operate a clonetron above 1000m elevation"),
 	background = "awards_bg_mining.png",
-	icon = "default_river_water.png^default_snow_side.png^[transformR180^clonetron_digger_yb_frame.png",
+	icon = "[transformR180^clonetron_digger_yb_frame.png",
+	--icon = "default_river_water.png^default_snow_side.png^[transformR180^clonetron_digger_yb_frame.png",
 	--Wow, originally, this just put the snow texture on top of the river water texture... cool.
 	--Unfortunately, doesn't work with MineClone, since it doesn't have the same kind of snow.
+	--I could just add in a texture, but I'm too lazy for that.
 })
 
 awards.register_achievement("clonetron_height100",{
 	title = S("clonetron High"),
 	description = S("Operate a clonetron above 100m elevation"),
 	background = "awards_bg_mining.png",
-	icon = "default_river_water.png^default_snow_side.png^clonetron_digger_yb_frame.png",
+	icon = "[transformR180^clonetron_digger_yb_frame.png",
+	--icon = "default_river_water.png^default_snow_side.png^clonetron_digger_yb_frame.png",
 })
 
 awards.register_achievement("clonetron_depth40",{
@@ -259,7 +262,7 @@ awards.register_achievement("clonetron_1000_dug",{
 	title = S("clonetron Miner"),
 	description = S("Excavate 1000 blocks using a clonetron"),
 	background = "awards_bg_mining.png",
-	icon = "clonetron_plate.png^default_tool_bronzepick.png^clonetron_digger_yb_frame.png",
+	icon = "clonetron_plate.png^default_tool_stonepick.png^clonetron_digger_yb_frame.png",
 	trigger = {
 		type = "clonetron_dig",
 		target = 1000,
@@ -270,7 +273,7 @@ awards.register_achievement("clonetron_10000_dug",{
 	title = S("clonetron Expert Miner"),
 	description = S("Excavate 10,000 blocks using a clonetron"),
 	background = "awards_bg_mining.png",
-	icon = "clonetron_plate.png^default_tool_steelpick.png^clonetron_digger_yb_frame.png",
+	icon = "clonetron_plate.png^default_tool_ironpick.png^clonetron_digger_yb_frame.png",
 	trigger = {
 		type = "clonetron_dig",
 		target = 10000,
@@ -292,7 +295,7 @@ awards.register_achievement("clonetron_1000000_dug",{
 	title = S("clonetron MEGAMINER"),
 	description = S("Excavate over a million blocks using a clonetron!"),
 	background = "awards_bg_mining.png",
-	icon = "clonetron_plate.png^default_tool_mesepick.png^clonetron_digger_yb_frame.png",
+	icon = "clonetron_plate.png^default_tool_netheritepick.png^clonetron_digger_yb_frame.png",
 	trigger = {
 		type = "clonetron_dig",
 		target = 1000000,
