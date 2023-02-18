@@ -204,7 +204,7 @@ clonetron.burn = function(fuelstore_positions, target, test)
 						itemstack:get_count() -- how many we have at most.
 					)
 				if test ~= true then
-					-- don't bother recording the items if we're just testing, nothing is actually being removed.
+					-- don't bother reding the items if we're just testing, nothing is actually being removed.
 					itemstack:set_count(itemstack:get_count() - actual_burned)
 				end
 				current_burned = current_burned + actual_burned * fuel_per_item
@@ -312,7 +312,7 @@ clonetron.damage_creatures = function(player, source_pos, target_pos, amount, it
 	if type(player) ~= 'userdata' then
 		return
 	end
-	local objects = minetest.env:get_objects_inside_radius(target_pos, 1.0)
+	local objects = minetest.get_objects_inside_radius(target_pos, 1.0)
 	if objects ~= nil then
 		damage_def.damage_groups.fleshy = amount
 		local velocity = {
