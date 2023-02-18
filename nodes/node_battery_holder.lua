@@ -7,7 +7,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 -- Note that batttery boxes are Clonetron group 7.
 
 local battery_holder_formspec_string = "size[8,9.3]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Batteries") .. "]" ..

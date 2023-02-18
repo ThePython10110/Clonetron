@@ -13,7 +13,7 @@ end
 
 local builder_formspec_string =
 	"size[8,5.2]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"list[current_name;main;".. tostring(displace_due_to_help_button/2) ..",0;1,1;]" ..

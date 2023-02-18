@@ -8,7 +8,7 @@ minetest.register_node("clonetron:axle", {
     _doc_items_usagehelp = clonetron.doc.axle_usagehelp,
 	groups = {cracky = 3, oddly_breakable_by_hand=3, clonetron = 1},
 	drop = "clonetron:axle",
-	sounds = Clonetron.metal_sounds,
+	sounds = clonetron.metal_sounds,
 	paramtype = "light",
 	paramtype2= "facedir",
 	is_ground_content = false,

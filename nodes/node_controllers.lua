@@ -92,7 +92,7 @@ minetest.register_node("clonetron:controller", {
 ---------------------------------------------------------------------------------------------------------------
 
 local auto_formspec = "size[8,6.2]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"container[2.0,0]" ..

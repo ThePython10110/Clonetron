@@ -6,7 +6,7 @@ local pipeworks_path = minetest.get_modpath("pipeworks")
 
 local inventory_formspec_string = 
 	"size[8,9.3]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Inventory items") .. "]" ..
@@ -87,7 +87,7 @@ minetest.register_node("clonetron:inventory", {
 
 local fuelstore_formspec_string = 
 	"size[8,9.3]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Fuel items") .. "]" ..
@@ -186,7 +186,7 @@ minetest.register_node("clonetron:fuelstore", {
 
 local combined_storage_formspec_string =
 	"size[8,9.9]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Inventory items") .. "]" ..

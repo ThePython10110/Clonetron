@@ -8,7 +8,7 @@ local max_dig_cost = math.max(clonetron.config.dig_cost_cracky, clonetron.config
 
 local get_formspec_string = function(current_val, current_max)
 	return "size[4.5,0.6]" ..
-		mcl_vars.gui_bg ..
+		mcl_vars.gui_bg_color ..
 		mcl_vars.gui_bg_img ..
 		mcl_vars.gui_slots ..
 		"field[0.2,0.3;1,1;value;;".. current_val .. "]" ..

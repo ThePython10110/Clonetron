@@ -30,7 +30,7 @@ local dual_digger_nodebox = {
 
 local modpath_doc = minetest.get_modpath("doc")
 
-local intermittent_formspec_string = mcl_vars.gui_bg ..
+local intermittent_formspec_string = mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"field[0.5,0.8;1,0.1;period;" .. S("Periodicity") .. ";${period}]" ..

@@ -176,7 +176,7 @@ function ClonetronLayout.create(pos, player)
 		testpos, _ = to_test:pop()
 	end
 	
-	Clonetron.award_layout(self, player) -- hook for achievements mod
+	clonetron.award_layout(self, player) -- hook for achievements mod
 	
 	to_test:clear()
 	tested:clear()
@@ -433,6 +433,8 @@ end
 
 local set_node_with_retry = function(pos, node)
 	local start_time = minetest.get_us_time()
+	--minetest.log("debug", pos)
+	--minetest.log("debug", node)
 	while not minetest.set_node(pos, node) do
 		if minetest.get_us_time() - start_time > 1000000 then -- 1 second in useconds
 			return false

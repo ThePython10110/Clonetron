@@ -8,7 +8,7 @@ local doc_path = minetest.get_modpath("doc")
 local formspec_width = 1.5
 
 local ejector_formspec_string = 
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots
 

@@ -36,7 +36,7 @@ minetest.register_node("clonetron:structure", {
 })
 
 -- A modest light source that will move with the Clonetron, handy for working in a tunnel you aren't bothering to install permanent lights in.
-minetest.register_node("Clonetron:light", {
+minetest.register_node("clonetron:light", {
 	description = S("Clonetron Light"),
 	_doc_items_longdesc = clonetron.doc.light_longdesc,
     _doc_items_usagehelp = clonetron.doc.light_usagehelp,

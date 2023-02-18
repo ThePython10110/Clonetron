@@ -117,7 +117,7 @@ minetest.register_node("clonetron:empty_crate", {
 	end
 })
 
-minetest.register_node("Clonetron:empty_locked_crate", {
+minetest.register_node("clonetron:empty_locked_crate", {
 	description = S("Clonetron Locked Crate (Empty)"),
 	_doc_items_longdesc = clonetron.doc.empty_locked_crate_longdesc,
     _doc_items_usagehelp = clonetron.doc.empty_locked_crate_usagehelp,
@@ -159,7 +159,7 @@ local loaded_formspec_string
 if modpath_doc then
 	loaded_formspec_string =
 	"size[4.1,1.5]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"field[0.3,0.5;4,0.5;title;" .. S("Clonetron Name") .. ";${title}]" ..
@@ -174,7 +174,7 @@ if modpath_doc then
 else
 	loaded_formspec_string =
 	"size[4,1.5]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"field[0.3,0.5;4,0.5;title;" .. S("Clonetron Name") .. ";${title}]" ..

@@ -1,4 +1,4 @@
-if not minetest.get_modpath("awards") then
+if true then --not minetest.get_modpath("awards") (just doing this until the rest works)
 	clonetron.award_item_dug = function (items, name, count) end
 	clonetron.award_layout = function (layout, name) end
 	clonetron.award_item_built = function(item_name, name) end
@@ -170,21 +170,21 @@ awards.register_achievement("clonetron_depth40",{
 	description = S("Operate a Clonetron 40m underground"),
 	background = "awards_bg_mining.png",
 	icon = "default_cobble.png^[colorize:#0008^clonetron_digger_yb_frame.png^awards_level5.png",
-}
+})
 
 awards.register_achievement("clonetron_nether",{
 	title = S("Interdimensional Clonetron"),
 	description = S("Operate a Clonetron in the Nether"),
 	background = "awards_bg_mining.png",
 	icon = "mcl_nether_netherrack.png^[colorize:#0008^clonetron_digger_yb_frame.png^awards_level5.png",
-}
+})
 
 awards.register_achievement("clonetron_end",{
 	title = S("End stone lover"),
 	description = S("Operate a Clonetron in the End"),
 	background = "awards_bg_mining.png",
 	icon = "mcl_end_end_stone.png^[colorize:#0008^clonetron_digger_yb_frame.png^awards_level5.png",
-}
+})
 
 awards.register_achievement("clonetron_500redstone_dug",{
 	title = S("Machine Master"),

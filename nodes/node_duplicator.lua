@@ -4,7 +4,7 @@ local S, NS = dofile(MP.."/intllib.lua")
 
 local inventory_formspec_string =
 	"size[9,9.3]" ..
-	mcl_vars.gui_bg ..
+	mcl_vars.gui_bg_color ..
 	mcl_vars.gui_bg_img ..
 	mcl_vars.gui_slots ..
 	"label[0,0;" .. S("Clonetron components") .. "]" ..
